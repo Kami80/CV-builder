@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Fill in your academic CV and download a Markdown file for professional formatting.">
+  <title>Academic CV Studio · Guided CV Builder</title>
+  <style>
+    :root { --ink:#192943; --text:#36455c; --muted:#718096; --bg:#f6f8fa; --paper:#ffffff; --line:#e2e8ef; --brand:#235d70; --brand-dark:#174655; --brand-soft:#e7f2f2; --gold:#c19b60; --danger:#b44545; --shadow:0 12px 35px rgba(29,51,74,.055); --radius:16px; }
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.56 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer} a{color:var(--brand)}
+    .topbar{height:80px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:0 max(26px,calc((100vw - 1460px)/2));gap:16px}
+    .brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--ink)}.brand-mark{height:43px;width:43px;display:grid;place-items:center;background:var(--ink);border-radius:12px;color:white;font-weight:800;letter-spacing:-.6px;font-family:Georgia,serif;font-size:21px}.brand-name{font-size:15px;line-height:1.2;font-weight:800;letter-spacing:-.025em}.brand-sub{color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-top:4px}.top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+    .saved{display:flex;align-items:center;gap:7px;color:#63816b;font-size:12px;font-weight:650;margin-right:11px;white-space:nowrap}.saved-dot{width:7px;height:7px;border-radius:50%;background:#54a276;display:inline-block}.saved.warning{color:var(--danger)}.saved.warning .saved-dot{background:var(--danger)}
+    .btn{border:1px solid var(--line);border-radius:10px;min-height:40px;padding:9px 14px;background:white;color:var(--ink);font-size:13px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;transition:background .15s,border .15s,transform .15s}.btn:hover{background:#f5f8fa;border-color:#c9d6dd}.btn:active{transform:translateY(1px)}.btn:focus-visible,.nav-link:focus-visible,.icon-btn:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #93c5d0;outline-offset:2px}.btn.primary{background:var(--brand);border-color:var(--brand);color:white}.btn.primary:hover{background:var(--brand-dark);border-color:var(--brand-dark)}.btn.soft{background:var(--brand-soft);border-color:transparent;color:var(--brand-dark)}.btn.danger{color:var(--danger)}.btn.small{min-height:33px;padding:7px 11px;font-size:12px}.btn svg,.icon-btn svg{height:16px;width:16px;flex:none}.only-mobile{display:none}
+    .app{max-width:1460px;margin:0 auto;padding:36px 26px 70px;display:grid;grid-template-columns:238px minmax(0,1fr);align-items:start;gap:42px}
+    .sidebar{position:sticky;top:107px;max-height:calc(100vh - 125px);overflow:auto;padding-right:5px;scrollbar-width:thin}.sidebar-title{text-transform:uppercase;color:#92a0b0;letter-spacing:.16em;font-size:11px;font-weight:800;margin:19px 0 9px 13px}.sidebar-title:first-child{margin-top:4px}.nav-link{display:flex;align-items:center;width:100%;text-align:left;gap:12px;padding:10px 12px;margin:2px 0;background:transparent;border:0;border-radius:10px;color:#5e6b7d;font-size:13px;font-weight:650}.nav-link:hover{background:#eaf0f3;color:var(--ink)}.nav-link.active{background:var(--brand-soft);color:var(--brand-dark);font-weight:800}.nav-icon{width:27px;height:27px;display:grid;place-items:center;border:1px solid #e1e8ed;border-radius:8px;background:#fff;font-size:14px;flex:none}.nav-link.active .nav-icon{background:var(--brand);border-color:var(--brand);color:white}.nav-count{font-size:10px;border-radius:99px;color:#7b8899;background:#e7ebf0;padding:1px 6px;margin-left:auto;min-width:23px;text-align:center}.nav-link.active .nav-count{background:#d3e6e6;color:var(--brand-dark)}
+    .privacy-mini{margin:25px 6px 0;padding:17px;border-radius:14px;border:1px solid #e5e9eb;background:#fff;color:#687887;font-size:12px}.privacy-mini strong{color:var(--ink);font-size:12px;display:block;margin-bottom:5px}
+    .workspace{min-width:0}.intro{margin-bottom:26px}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--brand);font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:800;margin:2px 0 12px}.eyebrow:before{content:"";width:24px;height:2px;background:var(--gold)}h1{font:normal 39px/1.18 Georgia,"Times New Roman",serif;letter-spacing:-.04em;margin:0 0 11px;max-width:820px} .intro p{font-size:15px;color:#6e7e8f;max-width:730px;margin:0}
+    .status-row{display:flex;align-items:center;gap:18px;margin:25px 0 23px}.progress{flex:1;max-width:440px;height:7px;border-radius:99px;background:#e5ecf0;overflow:hidden}.progress-fill{height:100%;background:var(--brand);width:0;transition:width .25s}.progress-label{color:#657789;font-weight:700;font-size:12px;white-space:nowrap}.view-switch{display:inline-flex;background:#e9edf1;border-radius:11px;padding:4px;margin-left:auto;gap:2px}.view-btn{border:0;background:transparent;padding:8px 14px;border-radius:8px;color:#6a7889;font-size:13px;font-weight:750}.view-btn.active{background:#fff;color:var(--ink);box-shadow:0 2px 5px rgba(15,40,65,.08)}
+    .form-panel,.preview-panel,.markdown-panel,.submit-panel{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--radius);overflow:hidden}.panel-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:28px 32px 25px;border-bottom:1px solid var(--line)}.step-label{color:var(--brand);font-size:11px;text-transform:uppercase;font-weight:800;letter-spacing:.13em;margin-bottom:7px}.panel-header h2{font:normal 27px/1.25 Georgia,serif;letter-spacing:-.025em;margin:0 0 6px}.panel-header p{margin:0;color:#788797;font-size:13px;max-width:620px}.panel-body{padding:29px 32px 30px}
+    .section-kicker{display:flex;align-items:center;gap:8px;margin:3px 0 18px;color:#2c5064;font-size:12px;letter-spacing:.06em;font-weight:800;text-transform:uppercase}.section-kicker:after{content:"";background:var(--line);height:1px;flex:1}
+    .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 18px}.field.full{grid-column:1/-1}.field label{display:block;font-weight:730;font-size:12px;color:#35465b;margin-bottom:7px}.field label .optional{font-weight:400;color:#a0acb9}.field input,.field textarea,.field select{width:100%;display:block;border:1px solid #dce4eb;border-radius:9px;background:#fff;padding:11px 12px;color:var(--ink);min-height:44px;transition:border .16s,box-shadow .16s;font-size:13px;outline:none}.field textarea{min-height:98px;line-height:1.6;resize:vertical}.field input:focus,.field textarea:focus{border-color:#7eaeb5;box-shadow:0 0 0 3px #e0f0f1}.field input::placeholder,.field textarea::placeholder{color:#a4afbd}.field .hint{font-size:11px;color:#99a5b2;margin-top:5px}
+    .entry{border:1px solid #e3e9ee;border-radius:13px;padding:20px;margin-bottom:16px;background:#fdfefe}.entry-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}.entry-num{height:30px;width:30px;border-radius:9px;background:#e7f1f1;color:var(--brand);font-size:12px;font-weight:850;display:grid;place-items:center}.entry-title{font-weight:800;font-size:13px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.entry-buttons{display:flex;gap:6px}.icon-btn{height:30px;width:30px;border-radius:8px;border:1px solid #e3e8ee;color:#65758a;background:white;display:grid;place-items:center;font-size:15px;font-weight:700}.icon-btn:hover{border-color:#b5cbd1;background:#eff7f7}.icon-btn:disabled{opacity:.32;cursor:default}.icon-btn.remove:hover{background:#fff0f0;border-color:#edc2c2;color:#b44545}.empty{text-align:center;border:1px dashed #cbd8e0;background:#fbfcfd;border-radius:13px;padding:37px 20px;margin-bottom:17px}.empty-icon{margin:auto auto 11px;width:45px;height:45px;border-radius:14px;background:#eaf1f3;display:grid;place-items:center;font-size:20px}.empty strong{font-size:14px}.empty p{margin:4px auto 0;max-width:380px;color:#8191a0;font-size:12px}
+    .section-actions{display:flex;align-items:center;gap:12px;margin:9px 0 0}.section-actions .subtle{color:#9aa5b2;font-size:12px}.footer-actions{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding:19px 32px;background:#fafbfc;gap:12px}.footer-actions .footer-right{display:flex;gap:10px;margin-left:auto}
+    .tip{border:1px solid #daeaed;background:#f2f8f8;border-radius:12px;padding:14px 17px;font-size:12px;color:#52717c;line-height:1.6;margin-top:21px}.tip strong{color:#235d70}
+    .paper-container{padding:28px;background:#edf1f3}.paper{max-width:790px;min-height:840px;background:white;margin:auto;padding:55px 58px;box-shadow:0 12px 35px rgba(25,44,62,.09);color:#2d3a4a;font-family:Georgia,serif;overflow-wrap:anywhere}.paper h1{font:normal 33px/1.15 Georgia,serif;margin:0 0 10px}.paper .cv-tagline{font:14px/1.5 ui-sans-serif,"Segoe UI",sans-serif;color:#637482;margin:0 0 10px}.paper .cv-contact{font:11px/1.7 ui-sans-serif,"Segoe UI",sans-serif;color:#64798b;display:flex;flex-wrap:wrap;gap:0 13px}.paper .cv-contact a{color:#235d70}.paper .paper-rule{border:0;border-top:2px solid #2b6270;margin:22px 0 26px}.cv-section{margin:0 0 23px}.cv-section h3{font:800 13px/1.4 ui-sans-serif,"Segoe UI",sans-serif;color:#245a69;text-transform:uppercase;letter-spacing:.09em;border-bottom:1px solid #dfe8eb;padding:0 0 6px;margin:0 0 12px}.cv-section p{font:12px/1.68 ui-sans-serif,"Segoe UI",sans-serif;margin:0 0 7px;white-space:pre-wrap}.cv-row{margin:0 0 15px;font:12px/1.55 ui-sans-serif,"Segoe UI",sans-serif}.cv-row strong{font-weight:760;color:#24364c}.cv-row .cv-meta{font-size:11px;color:#7e8d9c;margin-top:3px}.cv-row .cv-detail{margin-top:5px;white-space:pre-wrap}.cv-row ul{padding-left:20px;margin:5px 0 0}.cv-row li{margin-bottom:3px}.cv-name-placeholder{color:#bbc4ce!important}
+    .raw-head{display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line);padding:17px 22px}.raw-head strong{font-size:13px}.raw-head small{color:#91a0ad}.raw-code{border:0;padding:22px 25px;margin:0;max-height:650px;min-height:340px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.75 "SFMono-Regular",Consolas,monospace;color:#3e5363;background:#fcfdfe}
+    .submit-content{padding:35px 32px}.export-hero{border-radius:14px;padding:26px;background:#eaf4f3;display:flex;gap:17px;align-items:center;margin-bottom:26px}.export-emblem{width:54px;height:54px;flex:none;display:grid;place-items:center;background:#fff;border-radius:13px;font-size:26px}.export-hero h3{font:normal 23px Georgia,serif;margin:0 0 4px;color:#214958}.export-hero p{font-size:13px;color:#607f88;margin:0}.check-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:23px}.check-box{border:1px solid var(--line);border-radius:11px;padding:17px}.check-box strong{display:block;font-size:23px;color:#214d5c;font-family:Georgia,serif}.check-box span{font-size:12px;color:#8795a4}.callout{border-radius:10px;border:1px solid #e4eaf0;background:#f8fafb;padding:15px 18px;font-size:13px;color:#6e7f8f}.export-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .toast{position:fixed;bottom:26px;right:25px;z-index:50;background:#243c46;color:white;border-radius:11px;padding:12px 19px;box-shadow:0 8px 30px #17374735;font-size:13px;max-width:min(450px,calc(100vw - 30px));opacity:0;transform:translateY(12px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:translateY(0)}.page-foot{color:#a1acb7;text-align:right;font-size:11px;margin-top:20px}.hidden{display:none!important}
+    @media(max-width:1110px){.app{gap:25px;grid-template-columns:213px minmax(0,1fr)}h1{font-size:34px}.topbar{padding:0 22px}}@media(max-width:820px){.topbar{height:auto;min-height:72px;padding:12px 16px;position:relative}.saved{display:none}.top-actions .btn.light-import{display:none}.app{display:block;padding:24px 15px 55px}.sidebar{position:relative;top:auto;max-height:none;display:flex;overflow:auto;gap:7px;padding:0 0 8px;margin-bottom:22px;scrollbar-width:thin}.sidebar-title,.privacy-mini{display:none}.nav-link{white-space:nowrap;width:auto;flex:none;padding:8px 10px;background:#fff;border:1px solid var(--line);margin:0}.nav-icon{display:none}.nav-count{display:none}.intro h1{font-size:31px}.intro p{font-size:13px}.status-row{flex-wrap:wrap;gap:10px}.progress{min-width:120px}.view-switch{width:100%;order:2}.view-btn{flex:1}.panel-header{padding:22px}.panel-body{padding:20px}.footer-actions{padding:17px 20px}.only-mobile{display:inline-flex}.paper{padding:36px 28px;min-height:500px}.paper-container{padding:12px}}@media(max-width:500px){.brand-mark{height:36px;width:36px;font-size:18px}.brand-name{font-size:13px}.brand-sub{font-size:9px}.top-actions{gap:5px}.top-actions .btn{padding:8px 10px;font-size:11px;min-height:37px}.top-actions .hide-on-small{display:none}.fields{grid-template-columns:1fr;gap:14px}.panel-header h2{font-size:24px}.entry{padding:16px 13px}.entry-head{gap:7px}.entry-buttons{gap:3px}.check-grid{grid-template-columns:1fr}.paper{padding:28px 20px}.paper h1{font-size:26px}.footer-actions .btn{padding:8px 10px;font-size:12px}}
+    @media print{.topbar,.sidebar,.intro,.status-row,.form-panel,.markdown-panel,.submit-panel,.page-foot{display:none!important}.app{display:block;padding:0}.preview-panel{box-shadow:none;border:0}.paper-container{padding:0;background:white}.paper{padding:0;box-shadow:none;max-width:none;min-height:0}.cv-section{break-inside:avoid}body{background:white}}
+
+    /* Reference CV feature: the applicant form remains separate and blank. */
+    .reference-card{display:flex;align-items:center;gap:21px;border:1px solid #cfdfe3;border-radius:16px;background:linear-gradient(115deg,#edf5f4 0%,#f8fbfb 67%,#fff 100%);padding:20px 23px;margin:25px 0 2px;box-shadow:0 8px 30px #1e435609}
+    .reference-thumb{flex:0 0 104px;height:136px;display:block;background:#fff;overflow:hidden;border:1px solid #d2dade;border-radius:5px;box-shadow:0 4px 13px #162d2e19;position:relative}
+    .reference-thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+    .reference-info{min-width:0;flex:1}.reference-label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#397080;font-weight:850}.reference-info h2{font:normal 23px/1.2 Georgia,serif;margin:5px 0 6px;color:var(--ink)}
+    .reference-info p{margin:0 0 13px;color:#637786;font-size:13px;max-width:630px;line-height:1.55}.reference-actions{display:flex;gap:9px;flex-wrap:wrap}.reference-card .btn{min-height:36px}
+    .reference-note{font-size:11px;color:#6b8189;margin-top:9px}.reference-note strong{color:#325966}
+    .reference-dialog{position:fixed;inset:0;z-index:80;background:#172738bb;display:flex;align-items:center;justify-content:center;padding:18px}.reference-dialog[hidden]{display:none}
+    .reference-window{width:min(930px,100%);height:min(92vh,990px);display:flex;flex-direction:column;border-radius:14px;background:white;overflow:hidden;box-shadow:0 25px 85px #07172470}
+    .reference-dialog-bar{padding:13px 17px;display:flex;gap:12px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.reference-dialog-bar strong{font-size:14px}.reference-dialog-bar small{display:block;color:#738392;font-size:11px}.reference-dialog-actions{display:flex;gap:9px;align-items:center}
+    .reference-frame{width:100%;flex:1;border:0;background:#e7eaed}.reference-frame-fallback{padding:12px 17px;margin:0;font-size:12px;color:#6c7986;background:#f9fbfc}.reference-frame-fallback a{font-weight:700}
+    @media(max-width:640px){.reference-card{padding:16px;gap:12px;align-items:flex-start}.reference-thumb{flex-basis:73px;height:101px}.reference-info h2{font-size:19px}.reference-card .btn{font-size:12px}.reference-window{height:93vh}.reference-dialog-bar{align-items:flex-start}.reference-dialog-actions{flex-wrap:wrap;justify-content:flex-end}}
+    @media print{.reference-card,.reference-dialog{display:none!important}}
+
+    /* V2 guided wizard · self-contained, zero dependencies */
+    :root{--ink:#1c2835;--text:#3c4a58;--muted:#74818c;--bg:#f6f7f6;--line:#e5e8e7;--brand:#216c68;--brand-dark:#185853;--brand-soft:#e8f3f0;--gold:#dc9871;--radius:18px;--shadow:0 10px 32px rgba(23,43,42,.035)}
+    body{background:radial-gradient(ellipse at 80% 0%,rgba(226,239,235,.60),transparent 39%),#f7f8f6;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .topbar{height:76px;padding:0 max(28px,calc((100vw - 1632px)/2));border-bottom-color:#e9eeeb;box-shadow:0 2px 15px #152d2806}
+    .brand-name,.brand-sub{display:block}.brand-mark{background:#1b4f4a;border-radius:13px;height:41px;width:41px}.brand-name{font-size:14px;letter-spacing:-.01em}.brand-sub{letter-spacing:.105em}
+    .saved{color:#648476}.app{max-width:1632px;grid-template-columns:222px minmax(0,1fr);gap:32px;padding:39px 28px 60px}
+    .sidebar{top:105px;max-height:calc(100vh - 118px);padding:0 12px 10px 0}
+    .sidebar-intro{padding:0 9px 19px;border-bottom:1px solid #e4e9e5;margin-bottom:20px}.sidebar-intro .sidebar-eyebrow{font-size:10px;letter-spacing:.15em;font-weight:850;color:#879991}.sidebar-intro strong{display:block;font:500 21px/1.3 Georgia,serif;margin-top:5px}.sidebar-intro small{font-size:11px;color:#87928f}
+    .nav-link{min-height:56px;border-radius:12px;padding:10px 11px;gap:10px;margin-bottom:6px;transition:background .18s;color:#62726f;position:relative}
+    .nav-link.active{background:#e4f0eb;color:#175f5a}.nav-link:hover{background:#edf3ef}.nav-icon{font-weight:800;height:32px;width:32px;border-radius:10px;background:#fff;border:1px solid #e1e8e2;color:#758880;font-size:12px}.nav-link.active .nav-icon{background:#276f67;color:#fff;border-color:#276f67}.nav-link.done .nav-icon{background:#eff8f0;border-color:#d3e8d8;color:#2b8760}.nav-link.active.done .nav-icon{background:#276f67;color:#fff}
+    .nav-link-body{min-width:0;display:flex;flex-direction:column;gap:1px}.nav-link-body strong{font-size:12.5px;font-weight:800}.nav-link-body small{color:#9ca7a3;font-size:10px}.nav-link.active .nav-link-body small{color:#4c8c83}.nav-state{margin-left:auto;color:#45956c;font-weight:800;font-size:12px}
+    .sidebar .privacy-mini{padding:17px;border-radius:13px;margin:24px 0 0;background:#fff;line-height:1.65}.sidebar .privacy-mini strong{color:#2d6e62}
+    .intro{margin-bottom:24px}.eyebrow{font-size:10px;letter-spacing:.17em;color:#2b7d72;margin-bottom:8px;gap:7px}.eyebrow:before{display:none}.eyebrow-dot{display:inline-block;height:7px;width:7px;border-radius:100%;background:#e4a078}.intro h1{font:normal 39px/1.13 Georgia,"Times New Roman",serif;letter-spacing:-.048em;margin:0 0 10px;max-width:none}.heading-dot{color:#e5a17f}.intro p{font-size:13px;line-height:1.65;color:#839089;max-width:720px}
+    .reference-card{padding:13px 16px;gap:15px;border-color:#e5ebe6;background:linear-gradient(110deg,#f0f6f1 0,#fff 85%);border-radius:14px;margin:0 0 23px;box-shadow:none}.reference-thumb{flex-basis:44px;height:59px;border-radius:4px}.reference-label{font-size:9px;letter-spacing:.17em;color:#477c6d}.reference-info h2{font:700 13px/1.45 ui-sans-serif,"Segoe UI",sans-serif;margin:2px 0 2px;letter-spacing:-.01em}.reference-info p{font-size:11px;line-height:1.5;margin:0;color:#87968f}.reference-actions{margin-left:auto;white-space:nowrap}.reference-card .btn{font-size:11px;min-height:34px;padding:8px 11px}
+    .status-row{display:flex;margin:2px 0 19px;gap:14px;align-items:end}.status-left{flex:1;min-width:140px}.status-upper{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:9px}.status-upper strong{font-weight:800;color:#36544f;font-size:11px}.progress-label{font-size:10.5px;font-weight:650;color:#94a19b}.progress{max-width:none;background:#e6eae6;height:6px}.progress-fill{background:linear-gradient(90deg,#288779,#5bb09b);border-radius:99px}.view-switch{background:#edf1ee;margin-left:auto;border-radius:11px}.view-btn{padding:8px 12px;font-size:11px;border-radius:8px;white-space:nowrap}.view-btn.active{color:#205e59}
+    .builder-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(310px,360px);align-items:start;gap:18px}.editor-stack{min-width:0}.builder-layout[data-view="preview"],.builder-layout[data-view="markdown"]{grid-template-columns:minmax(0,1fr)}.builder-layout[data-view="preview"] .preview-panel{max-width:900px;margin:auto;width:100%}.builder-layout[data-view="markdown"] .markdown-panel{display:block}
+    .form-panel,.preview-panel,.markdown-panel,.submit-panel{border-color:#e5ebe7;box-shadow:var(--shadow);border-radius:17px}
+    .section-tabs{display:flex;gap:7px;margin:0 0 13px;flex-wrap:wrap}.section-tab{font-size:11px;color:#657e74;background:#fff;border:1px solid #e1e9e3;padding:8px 11px;border-radius:99px;font-weight:700;transition:all .12s;max-width:100%;white-space:nowrap}.section-tab:hover{background:#eff7f2}.section-tab.active{background:#216c68;color:#fff;border-color:#216c68}.section-tab .tab-count{font-size:9px;opacity:.78;margin-left:5px}
+    .panel-header{padding:23px 24px 20px;gap:8px}.panel-header h2{font:normal 27px/1.2 Georgia,serif;letter-spacing:-.03em}.panel-header p{font-size:12px;line-height:1.55;color:#8a9691}.step-label{color:#468577;font-size:10px;letter-spacing:.15em}.panel-body{padding:23px 24px 26px}.section-kicker{font-size:10px;color:#3b716a;letter-spacing:.11em}
+    .field label{font-size:11px;color:#3e5551}.field input,.field textarea,.field select{border-radius:10px;background:#fcfdfc;min-height:43px;border-color:#dfe7e2;font-size:12px}.field input::placeholder,.field textarea::placeholder{color:#a4afaa}.field input:focus,.field textarea:focus{border-color:#4d9e8f;box-shadow:0 0 0 3px #dcefe8}.field .hint{font-size:10px}.fields{gap:15px}.field label .optional{font-size:9px;color:#a9b2ad}
+    .entry{background:#fcfdfc;border-color:#e2ebe5;padding:16px}.entry-num{background:#e5f1eb;color:#26786b}.empty{padding:27px 12px;border-color:#d9e6dc;background:#fbfdfb}.empty-icon{background:#e8f2ec}.empty p{font-size:11px}
+    .footer-actions{padding:16px 24px;gap:7px;align-items:center;background:#fbfcfa}.footer-right{gap:8px}.footer-actions .btn{font-size:11px}.btn.primary{background:#216c68;border-color:#216c68}.btn.primary:hover{background:#164f4a;border-color:#164f4a}.btn.soft{background:#e8f3ed;color:#216359}.btn{border-color:#e0e8e2;border-radius:10px}.btn:focus-visible,.nav-link:focus-visible,.icon-btn:focus-visible,.section-tab:focus-visible{outline:3px solid #90cbbc;outline-offset:2px}
+    .skip-btn{border:0;background:transparent;color:#7b938a;font-size:11px;text-decoration:underline;text-underline-offset:3px;padding:9px 2px;font-weight:700}.skip-btn:hover{color:#235d58}
+    .tip{background:#f2f8f3;border-color:#dbeadf;color:#6c8477;border-radius:12px}.tip strong{color:#24695e}
+    .preview-panel{position:sticky;top:96px;overflow:hidden}.preview-top{display:flex;justify-content:space-between;align-items:center;padding:15px 16px;background:white;border-bottom:1px solid #e9efeb}.preview-heading{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.preview-heading strong{font-size:12px;color:#355951}.preview-heading small{font-size:10px;color:#9aaba1}.preview-live-dot{width:7px;height:7px;border-radius:50%;background:#4fb28d;box-shadow:0 0 0 4px #eff8f3}.preview-expand{background:#f3f7f3;border:0;border-radius:7px;color:#517b6e;font-size:16px;width:29px;height:29px;cursor:pointer}.preview-expand:hover{background:#e5f1eb}.preview-bottom{font-size:10px;color:#a0aea7;padding:12px 16px;border-top:1px solid #ecf0ec;background:white}
+    .preview-panel .paper-container{padding:13px;background:#f0f3ef;max-height:min(67vh,830px);overflow:auto}.preview-panel .paper{min-height:470px;box-shadow:0 4px 16px #1c392015;padding:30px 24px;max-width:100%;border:1px solid #e7ece7}.preview-panel .paper h1{font-size:22px;margin-bottom:5px;letter-spacing:-.04em}.preview-panel .paper .cv-contact{font-size:8px;gap:0 6px}.preview-panel .paper .cv-tagline{font-size:10px}.preview-panel .paper .paper-rule{margin:12px 0 15px}.preview-panel .cv-section{margin:0 0 12px}.preview-panel .cv-section h3{font-size:9px;padding-bottom:4px;margin-bottom:6px}.preview-panel .cv-section p,.preview-panel .cv-row{font-size:9px;line-height:1.55}.preview-panel .cv-row{margin-bottom:9px}.preview-panel .cv-row .cv-meta{font-size:8px}.preview-panel .cv-row ul{padding-left:13px}
+    .builder-layout[data-view="preview"] .preview-panel{position:static}.builder-layout[data-view="preview"] .preview-panel .paper-container{max-height:none;padding:24px}.builder-layout[data-view="preview"] .preview-panel .paper{padding:55px 60px;min-height:800px}.builder-layout[data-view="preview"] .preview-panel .paper h1{font-size:32px}.builder-layout[data-view="preview"] .preview-panel .cv-section{margin:0 0 23px}.builder-layout[data-view="preview"] .preview-panel .cv-section h3{font-size:12px}.builder-layout[data-view="preview"] .preview-panel .cv-row,.builder-layout[data-view="preview"] .preview-panel .cv-section p{font-size:12px}.builder-layout[data-view="preview"] .preview-panel .cv-row .cv-meta{font-size:11px}.builder-layout[data-view="preview"] .preview-panel .paper .cv-contact{font-size:11px}
+    .submit-content{padding:24px}.export-hero{padding:18px;margin-bottom:17px}.export-hero h3{font-size:19px}.export-hero p{font-size:11px}.export-emblem{height:44px;width:44px;font-size:22px}.check-grid{gap:8px;margin-bottom:14px}.check-box{padding:12px}.check-box strong{font-size:20px}.check-box span{font-size:10px}.callout{font-size:12px;padding:13px}.export-btns{gap:8px;margin-top:17px}.export-btns .btn{font-size:11px}
+    .page-foot{display:flex;gap:8px;justify-content:center;text-align:center;margin-top:28px;color:#99aaa1;font-size:10px}
+    @media(max-width:1400px){.app{grid-template-columns:205px minmax(0,1fr);gap:20px}.builder-layout{grid-template-columns:minmax(0,1fr) minmax(260px,315px);gap:13px}.preview-panel .paper{padding:22px 18px}.status-upper{flex-wrap:wrap;gap:1px 8px}}
+    @media(max-width:1100px){.app{grid-template-columns:185px minmax(0,1fr);gap:15px;padding:29px 18px}.builder-layout{grid-template-columns:minmax(0,1fr) 265px}.topbar{padding:0 18px}.panel-header,.panel-body{padding:19px}.footer-actions{padding:14px 19px}.reference-info p{display:none}.reference-card{gap:10px}.nav-link-body strong{font-size:11px}.nav-link{padding:8px 7px}.preview-panel .paper{padding:18px 15px}}
+    @media(max-width:920px){.topbar{position:relative;height:auto;min-height:72px;padding:12px 16px}.app{display:block;padding:22px 16px 55px}.sidebar{position:relative;top:auto;max-height:none;display:flex;overflow-x:auto;gap:7px;padding:0 0 8px;margin-bottom:17px;scrollbar-width:thin}.sidebar-intro,.sidebar .privacy-mini{display:none}.nav-link{flex:0 0 auto;min-height:44px;min-width:111px;background:#fff;border:1px solid #e0eae2;margin:0;padding:7px 9px}.nav-link-body small{display:none}.nav-link-body strong{font-size:11px}.nav-icon{height:25px;width:25px;border-radius:8px}.builder-layout{grid-template-columns:minmax(0,1fr) minmax(270px,37%)}.preview-panel .paper-container{max-height:min(72vh,790px)}.intro h1{font-size:34px}.reference-card{margin-bottom:17px}.saved{display:none}}
+    @media(max-width:720px){.builder-layout{grid-template-columns:minmax(0,1fr)}.builder-layout[data-view="edit"] .preview-panel{display:none}.reference-thumb{flex-basis:40px;height:53px}.reference-info h2{font-size:12px}.reference-card .btn{font-size:10px}.status-row{flex-wrap:wrap;gap:11px}.status-left{flex-basis:100%}.view-switch{width:100%}.view-btn{flex:1}.paper-container{padding:10px}.preview-panel{position:static}.builder-layout[data-view="preview"] .preview-panel .paper{padding:28px 22px;min-height:500px}.builder-layout[data-view="preview"] .preview-panel .paper h1{font-size:24px}.builder-layout[data-view="preview"] .preview-panel .cv-row,.builder-layout[data-view="preview"] .preview-panel .cv-section p{font-size:10px}.panel-header h2{font-size:25px}.section-tabs{overflow:auto;flex-wrap:nowrap;padding-bottom:4px}.section-tab{flex:none}}
+    @media(max-width:450px){.brand-mark{height:35px;width:35px;font-size:18px}.brand-name{font-size:12px}.brand-sub{font-size:8px}.top-actions{gap:5px}.top-actions .btn{padding:8px 9px;min-height:35px;font-size:10px}.top-actions .light-import{display:none}.intro h1{font-size:30px}.intro p{font-size:12px}.reference-card{padding:11px;gap:10px}.reference-info p{display:none}.reference-thumb{flex-basis:32px;height:45px}.reference-actions .btn{padding:7px 8px}.panel-header{padding:19px}.panel-body{padding:18px}.fields{grid-template-columns:1fr}.footer-actions{padding:13px 16px;gap:8px}.footer-actions .btn{font-size:10px;padding:8px}.footer-right{gap:5px}.skip-btn{font-size:10px}.check-grid{grid-template-columns:repeat(3,1fr)}.check-box{padding:9px}.check-box strong{font-size:17px}.check-box span{font-size:9px}.preview-heading small{display:none}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+    @media print{.app{display:block}.builder-layout{display:block}.builder-layout .preview-panel{display:block!important;position:static;box-shadow:none;border:0}.builder-layout .preview-panel .paper-container{max-height:none;overflow:visible;background:white;padding:0}.builder-layout .preview-panel .paper{min-height:0;max-width:none;box-shadow:none;border:0;padding:0}.preview-top,.preview-bottom,.reference-card,.editor-stack,.status-row,.markdown-panel,.page-foot{display:none!important}}
+  </style>
+</head>
+<body>
+<header class="topbar">
+  <a href="#" class="brand" id="logo" aria-label="Academic CV Intake home">
+    <span class="brand-mark">CV<span style="color:#98d0cd">.</span></span>
+    <span><span class="brand-name">Academic CV Intake</span><span class="brand-sub">Applicant questionnaire</span></span>
+  </a>
+  <div class="top-actions">
+    <span class="saved" id="saveStatus"><span class="saved-dot"></span><span id="saveLabel">Saved on this device</span></span>
+    <button class="btn light-import" type="button" id="sampleTop" data-open-reference="1">◧ &nbsp;Sample CV</button>
+    <button class="btn light-import" type="button" id="importBtn">↥ &nbsp;Import .md</button>
+    <button class="btn primary" type="button" id="downloadTop">↓ &nbsp;Download CV <span class="hide-on-small">(.md)</span></button>
+  </div>
+</header>
+<main class="app" id="mainApp">
+  <aside class="sidebar" id="sidebar" aria-label="Guided CV steps"></aside>
+  <div class="workspace">
+    <div class="intro">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR ACADEMIC CV, MADE SIMPLE</div>
+      <h1>Tell your academic story<span class="heading-dot">.</span></h1>
+      <p>A guided space to collect your experience, one step at a time. We'll organize everything into a Markdown file you can share with your CV editor.</p>
+    </div>
+    <section class="reference-card" aria-labelledby="referenceTitle">
+      <a class="reference-thumb" href="reference-academic-cv.pdf" target="_blank" rel="noopener" aria-label="Open the sample academic CV PDF"><img src="reference-cv-preview.webp" alt="First-page thumbnail of a two-page academic CV example"></a>
+      <div class="reference-info">
+        <span class="reference-label">A LITTLE INSPIRATION</span>
+        <h2 id="referenceTitle">Need an example? Explore a completed academic CV.</h2>
+        <p>See how education, research experience, projects and skills can be presented. Your form stays completely separate.</p>
+      </div>
+      <div class="reference-actions"><button class="btn soft" type="button" id="openReference" data-open-reference="1">View example <span aria-hidden="true">↗</span></button></div>
+    </section>
+    <div class="status-row">
+      <div class="status-left">
+        <div class="status-upper"><strong id="currentStepLabel">Step 1 of 7 · About you</strong><span class="progress-label" id="progressLabel">0 of 7 steps reviewed</span></div>
+        <div class="progress" role="progressbar" aria-label="Guided steps reviewed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+      <div class="view-switch" role="group" aria-label="Workspace view"><button class="view-btn active" type="button" data-view="edit" aria-pressed="true">✎ &nbsp; Editor</button><button class="view-btn" type="button" data-view="preview" aria-pressed="false">◫ &nbsp; Preview</button><button class="view-btn" type="button" data-view="markdown" aria-pressed="false">⌘ &nbsp; Markdown</button></div>
+    </div>
+    <div class="builder-layout" id="builderLayout" data-view="edit">
+      <div class="editor-stack" id="editorStack">
+        <nav class="section-tabs" id="sectionTabs" aria-label="Sections in this step"></nav>
+        <section id="formPanel" class="form-panel" aria-live="off"></section>
+        <section id="submitPanel" class="submit-panel hidden"></section>
+      </div>
+      <section id="previewPanel" class="preview-panel" aria-label="Live CV preview">
+        <div class="preview-top"><div class="preview-heading"><span class="preview-live-dot"></span><strong>Live CV preview</strong><small>Updates as you type</small></div><button type="button" class="preview-expand" data-view="preview" title="Expand CV preview" aria-label="Expand CV preview">⤢</button></div>
+        <div class="paper-container"><article class="paper" id="paper"></article></div>
+        <div class="preview-bottom">This is a content preview, not the final typeset CV.</div>
+      </section>
+      <section id="markdownPanel" class="markdown-panel hidden" aria-label="Markdown export"><div class="raw-head"><div><strong>Markdown output</strong><div><small>Human-readable preview (without re-import metadata)</small></div></div><button class="btn small" type="button" id="copyMarkdown">Copy Markdown</button></div><pre class="raw-code" id="markdownCode"></pre></section>
+    </div>
+    <div class="page-foot">Designed for academic applications <span>·</span> Private on your device <span>·</span> No accounts or uploads</div>
+  </div>
+</main>
+<div class="reference-dialog" id="referenceDialog" role="dialog" aria-modal="true" aria-labelledby="referenceDialogTitle" hidden>
+  <div class="reference-window">
+    <div class="reference-dialog-bar">
+      <div><strong id="referenceDialogTitle">Example academic CV</strong><small>Kamyab Safaei Baghbaderani · 2-page PDF · for reference only</small></div>
+      <div class="reference-dialog-actions"><a class="btn small" href="reference-academic-cv.pdf" target="_blank" rel="noopener">Open PDF ↗</a><button type="button" class="btn small" id="closeReference" aria-label="Close sample CV viewer">✕ &nbsp;Close</button></div>
+    </div>
+    <iframe class="reference-frame" title="Example academic CV PDF" data-src="reference-academic-cv.pdf#toolbar=1" loading="lazy"></iframe>
+    <p class="reference-frame-fallback">Can't see the PDF here? <a href="reference-academic-cv.pdf" target="_blank" rel="noopener">Open the original reference CV</a> in a new tab.</p>
+  </div>
+</div>
+<input id="importFile" type="file" accept=".md,.markdown,text/markdown,text/plain" hidden>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+'use strict';
+(() => {
+  const STORAGE_KEY = 'academic-cv-intake-v1';
+  const FIELD_SETS = {
+    education: [
+      ['degree','Degree / qualification','e.g. MSc in Chemical Engineering'],['institution','University / institution','e.g. Politecnico di Milano'],
+      ['field','Specialization / field','e.g. Chemical Process Design'],['location','Location','Milan, Italy'],
+      ['dates','Dates','2024 – Present'],['gpa','GPA / grade (optional)','e.g. 29/30'],
+      ['thesis','Thesis title (optional)','Your thesis or dissertation title','full'],['highlights','Achievements / relevant coursework','One achievement, course, or activity per line','full','textarea']
+    ],
+    research: [
+      ['role','Research role','Research Assistant'],['organization','Lab / institution','Department or research group'],['location','Location','City, country'],
+      ['dates','Dates','2024 – Present'],['supervisor','Supervisor (optional)','Prof. First Last'],['highlights','Contributions and results','One bullet per line. Mention methods, results, outputs, and your contribution.','full','textarea']
+    ],
+    employment: [
+      ['role','Job title','Process Engineering Intern'],['organization','Employer / organization','Company or institution'],['location','Location','City, country'],
+      ['dates','Dates','Jun 2024 – Sep 2024'],['highlights','Responsibilities and accomplishments','One achievement or responsibility per line','full','textarea']
+    ],
+    publications: [
+      ['authors','Authors','Last, F.; Last, F.'],['title','Publication title','Article, chapter, preprint, or manuscript title','full'],
+      ['venue','Journal / publisher / venue','Journal Name'],['year','Year','2026'],['status','Status','Published / Accepted / Under Review / Preprint / In Preparation'],
+      ['doi','DOI (optional)','10.xxxx/xxxxx'],['url','Article link (optional)','https://...','full']
+    ],
+    projects: [
+      ['title','Project name','AI-based molecular screening'],['organization','Institution / group','Research group or independent'],['dates','Dates','2025 – 2026'],
+      ['summary','Project description','What problem did you work on?','full','textarea'],['tools','Methods / tools','Python, GROMACS, PyTorch'],
+      ['url','Repository / project URL','https://github.com/...'],['highlights','Specific contributions / results','One bullet per line','full','textarea']
+    ],
+    teaching: [
+      ['role','Position','Teaching Assistant'],['course','Course / subject','Transport Phenomena'],['institution','Institution','University name'],
+      ['dates','Dates','Fall 2025'],['highlights','Contributions','One bullet per line','full','textarea']
+    ],
+    awards: [
+      ['title','Award / scholarship','Merit Scholarship'],['issuer','Awarding organization','University / Foundation'],['year','Year','2025'],
+      ['description','Details / selection criteria','Describe relevance or selectivity','full','textarea']
+    ],
+    conferences: [
+      ['title','Contribution / event title','Poster: Novel materials for drug delivery'],['event','Conference / seminar','Conference name'],
+      ['date','Date','May 2026'],['location','Location / mode','Berlin / Online'],['type','Participation type','Oral / Poster / Attendee / Organizer'],
+      ['url','Link (optional)','https://...','full']
+    ],
+    standardizedTests: [
+      ['name','Test / exam','GRE General Test — Quantitative Reasoning'],['score','Score / result','167/170'],['date','Date (optional)','2025'],['details','Additional details (optional)','Percentile, test ID, or other relevant information','full']
+    ],
+    skills: [
+      ['category','Skill category','Programming & data analysis'],['items','Skills / techniques','Python, MATLAB, scikit-learn, PyTorch','full','textarea']
+    ],
+    languages: [
+      ['language','Language','English'],['level','Proficiency','C1 / Fluent / Native / Intermediate']
+    ],
+    interests: [
+      ['activity','Interest / activity','Basketball, painting, volunteering, violin'],['details','Details (optional)','Digital and acrylic painting; playing violin since 2016','full']
+    ],
+    references: [
+      ['name','Referee name','Prof. First Last'],['role','Position / title','Associate Professor'],['organization','Institution','University name'],
+      ['email','Email (optional)','professor@university.edu'],['relationship','Relationship (optional)','Thesis supervisor']
+    ],
+    custom: [
+      ['heading','Section name','Professional Memberships'],['title','Entry title','Member, International Society of ...'],
+      ['organization','Organization / subtitle','Society name'],['dates','Dates (optional)','2024 – Present'],['details','Details (optional)','One bullet per line','full','textarea']
+    ]
+  };
+  const SECTIONS = [
+    {id:'profile',name:'Personal details',icon:'◉',description:'Introduce yourself and provide professional contact links.',group:'Start here'},
+    {id:'education',name:'Education',icon:'▤',description:'Degrees, universities, thesis topics, and relevant coursework.',group:'Academic background'},
+    {id:'research',name:'Research experience',icon:'⌕',description:'Research assistantships, labs, experiments, and findings.',group:'Academic background'},
+    {id:'employment',name:'Work experience',icon:'▣',description:'Internships, employment, and industry experience.',group:'Academic background'},
+    {id:'publications',name:'Publications',icon:'▧',description:'Articles, preprints, book chapters, and manuscripts.',group:'Research output'},
+    {id:'projects',name:'Research projects',icon:'◇',description:'Independent, academic, and collaborative projects.',group:'Research output'},
+    {id:'conferences',name:'Conferences',icon:'◈',description:'Talks, posters, seminars, presentations, and events.',group:'Research output'},
+    {id:'teaching',name:'Teaching',icon:'▥',description:'Teaching assistantships, tutoring, and mentoring.',group:'Additional experience'},
+    {id:'awards',name:'Awards & honors',icon:'✧',description:'Scholarships, honors, grants, and academic recognition.',group:'Additional experience'},
+    {id:'standardizedTests',name:'Standardized tests',icon:'▦',description:'GRE, TOEFL, IELTS, language tests and other official scores, if relevant.',group:'Additional experience'},
+    {id:'skills',name:'Technical skills',icon:'⌘',description:'Software, laboratory methods, languages, and technical skills.',group:'Additional experience'},
+    {id:'languages',name:'Languages',icon:'◎',description:'Spoken languages and levels of proficiency.',group:'Additional experience'},
+    {id:'interests',name:'Interests & activities',icon:'♡',description:'Optional interests, volunteer activities, and relevant hobbies.',group:'Additional experience'},
+    {id:'references',name:'References',icon:'♧',description:'Academic or professional referees (only with permission).',group:'Additional experience'},
+    {id:'custom',name:'Other sections',icon:'＋',description:'Create your own sections, e.g. service, memberships, or certifications.',group:'Additional experience'},
+    {id:'submit',name:'Finish & export',icon:'↓',description:'Review your details, then download the Markdown file.',group:'Finish'}
+  ];
+  const WIZARD_STEPS = [
+    {title:'About you',subtitle:'Profile & contact',icon:'01',sections:['profile']},
+    {title:'Education',subtitle:'Degrees & test scores',icon:'02',sections:['education','standardizedTests']},
+    {title:'Experience',subtitle:'Research & work',icon:'03',sections:['research','employment','teaching']},
+    {title:'Research output',subtitle:'Publications & projects',icon:'04',sections:['publications','projects','conferences']},
+    {title:'Skills',subtitle:'Technical & languages',icon:'05',sections:['skills','languages']},
+    {title:'More about you',subtitle:'Awards & other details',icon:'06',sections:['awards','interests','references','custom']},
+    {title:'Review & export',subtitle:'Download your file',icon:'07',sections:['submit']}
+  ];
+  const WIZARD_KEY = 'academic-cv-intake-wizard-v2';
+  const ENTRY_TITLES = {education:['degree','institution'],research:['role','organization'],employment:['role','organization'],publications:['title','venue'],projects:['title','organization'],conferences:['title','event'],teaching:['role','course'],awards:['title','issuer'],standardizedTests:['name','score'],skills:['category','items'],languages:['language','level'],interests:['activity','details'],references:['name','organization'],custom:['title','heading']};
+  const PROFILE_FIELDS = [
+    ['fullName','Full name','Your full name'],['headline','Academic title / current position','e.g. MSc Student in Chemical Engineering'],
+    ['email','Email address','name@example.com'],['phone','Phone number (optional)','+39 ...'],
+    ['location','City and country','Milan, Italy'],['website','Personal website','https://your-site.com'],
+    ['linkedin','LinkedIn URL','https://linkedin.com/in/...'],['orcid','ORCID URL / ID','https://orcid.org/0000-...'],
+    ['github','GitHub URL','https://github.com/...'],['scholar','Google Scholar URL','https://scholar.google.com/...'],
+    ['summary','Academic profile / short summary','Write 2–4 sentences about your academic background and goals.','full','textarea'],
+    ['researchInterests','Research interests','e.g. AI for drug discovery, molecular simulation, biomaterials','full','textarea']
+  ];
+  const emptyProfile=()=>Object.fromEntries(PROFILE_FIELDS.map(([k])=>[k,'']));
+  const blank=(id)=>Object.fromEntries(FIELD_SETS[id].map(([k])=>[k,'']));
+  const defaultState=()=>({version:1,profile:emptyProfile(),sections:Object.fromEntries(Object.keys(FIELD_SETS).map(k=>[k,[]]))});
+  function normalize(input){const clean=defaultState(); if(!input||typeof input!=='object')return clean;
+    for(const k of Object.keys(clean.profile))if(typeof input.profile?.[k]==='string')clean.profile[k]=input.profile[k].slice(0,50000);
+    for(const id of Object.keys(FIELD_SETS)){const records=input.sections?.[id];if(!Array.isArray(records))continue; clean.sections[id]=records.slice(0,150).map(item=>{let o=blank(id);if(item&&typeof item==='object')for(const k of Object.keys(o))if(typeof item[k]==='string')o[k]=item[k].slice(0,50000);return o;});}
+    return clean;
+  }
+  let state=defaultState(); try{let stored=localStorage.getItem(STORAGE_KEY);if(stored)state=normalize(JSON.parse(stored));}catch(_){}
+  let active='profile',view='edit',saveTimer=null,toastTimer=null;
+  let reviewedSteps=[];try{const x=JSON.parse(localStorage.getItem(WIZARD_KEY)||'[]');if(Array.isArray(x))reviewedSteps=x.filter(n=>Number.isInteger(n)&&n>=0&&n<7);}catch(_){}
+  const stepIndexOf=id=>WIZARD_STEPS.findIndex(step=>step.sections.includes(id));
+  const stepIndex=()=>stepIndexOf(active);
+  function recordReview(i){if(!reviewedSteps.includes(i)){reviewedSteps.push(i);try{localStorage.setItem(WIZARD_KEY,JSON.stringify(reviewedSteps));}catch(_){}}}
+  function stepHasContent(i){return WIZARD_STEPS[i].sections.some(id=>id==='profile'?Object.values(state.profile).some(filled):id!=='submit'&&items(id).length>0);}
+
+  const $=sel=>document.querySelector(sel), escapeHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const filled=s=>typeof s==='string'&&s.trim().length>0;
+  const hasEntry=e=>Object.values(e).some(filled);
+  const items=id=>(state.sections[id]||[]).filter(hasEntry);
+  const entryCount=()=>Object.keys(FIELD_SETS).reduce((n,k)=>n+items(k).length,0);
+  const sectionById=id=>SECTIONS.find(s=>s.id===id);
+  const textLine=t=>String(t||'').trim();
+  function setSaved(label='Saved on this device',warning=false){$('#saveLabel').textContent=label;$('#saveStatus').classList.toggle('warning',warning);}
+  function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));setSaved();}catch(_){setSaved('Local save unavailable',true);}}
+  function schedulePersist(){setSaved('Saving…');clearTimeout(saveTimer);saveTimer=setTimeout(persist,450);}
+  function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3800);}
+  function progress(){
+    const count=reviewedSteps.length, percent=Math.round(count/WIZARD_STEPS.length*100);
+    $('#progressFill').style.width=percent+'%';$('#progressTrack').setAttribute('aria-valuenow',String(percent));
+    $('#progressLabel').textContent=`${count} of ${WIZARD_STEPS.length} steps reviewed`;
+    $('#currentStepLabel').textContent=`Step ${stepIndex()+1} of ${WIZARD_STEPS.length} · ${WIZARD_STEPS[stepIndex()].title}`;
+    return percent;
+  }
+  function renderNav(){const nav=$('#sidebar');nav.replaceChildren();
+    const intro=node('div','sidebar-intro');intro.innerHTML='<span class="sidebar-eyebrow">YOUR JOURNEY</span><strong>Build with confidence</strong><small>7 short, flexible steps</small>';nav.append(intro);
+    WIZARD_STEPS.forEach((step,i)=>{
+      const b=node('button','nav-link'+(stepIndex()===i?' active':'')+(reviewedSteps.includes(i)?' done':''));b.type='button';b.dataset.step=String(i);b.setAttribute('aria-current',stepIndex()===i?'step':'false');
+      b.innerHTML=`<span class="nav-icon" aria-hidden="true">${reviewedSteps.includes(i)?'✓':step.icon}</span><span class="nav-link-body"><strong>${escapeHtml(step.title)}</strong><small>${escapeHtml(step.subtitle)}</small></span>${stepHasContent(i)&&!reviewedSteps.includes(i)?'<span class="nav-state" aria-hidden="true">•</span>':''}`;
+      nav.append(b);
+    });
+    const privacy=node('div','privacy-mini');privacy.innerHTML='<strong>◈ &nbsp;Your privacy matters</strong>No account. No uploads. Your entries stay in this browser until you decide to download and share them.';nav.append(privacy);
+  }
+  function renderTabs(){const tab=$('#sectionTabs');tab.replaceChildren();const step=WIZARD_STEPS[stepIndex()];
+    if(view!=='edit'||step.sections.length<2){tab.classList.add('hidden');return;}
+    tab.classList.remove('hidden');step.sections.forEach(id=>{const sec=sectionById(id),b=node('button','section-tab'+(active===id?' active':''));b.type='button';b.dataset.go=id;b.textContent=sec.name;
+      if(items(id).length){const c=node('span','tab-count',String(items(id).length));b.append(c);}b.setAttribute('aria-current',id===active?'true':'false');tab.append(b);});
+  }
+  function fieldMarkup(def,id,value){const [key,label,placeholder,layout,type]=def;const fid=`${id}-${key}`;const tag=type==='textarea'?`<textarea id="${escapeHtml(fid)}" data-field="${escapeHtml(key)}" placeholder="${escapeHtml(placeholder)}" rows="3">${escapeHtml(value)}</textarea>`:`<input id="${escapeHtml(fid)}" data-field="${escapeHtml(key)}" type="${key==='email'?'email':'text'}" placeholder="${escapeHtml(placeholder)}" value="${escapeHtml(value)}" autocomplete="off">`;
+    return `<div class="field ${layout==='full'?'full':''}"><label for="${escapeHtml(fid)}">${escapeHtml(label)} <span class="optional">${key==='fullName'||key==='email'?'· recommended':'· optional'}</span></label>${tag}${type==='textarea'&&(key==='highlights'||key==='details')?'<div class="hint">Each separate line becomes a bullet point in your CV.</div>':''}</div>`;
+  }
+  function entryMarkup(section,index,entry){let name=ENTRY_TITLES[section].map(k=>entry[k]).find(filled)||'Untitled entry';return `<div class="entry" data-section="${section}" data-index="${index}"><div class="entry-head"><span class="entry-num">${index+1}</span><span class="entry-title">${escapeHtml(name)}</span><div class="entry-buttons"><button class="icon-btn" title="Move up" aria-label="Move entry ${index+1} up" data-action="up" ${index===0?'disabled':''}>↑</button><button class="icon-btn" title="Move down" aria-label="Move entry ${index+1} down" data-action="down" ${index===state.sections[section].length-1?'disabled':''}>↓</button><button class="icon-btn remove" title="Remove entry" aria-label="Remove entry ${index+1}" data-action="remove">×</button></div></div><div class="fields">${FIELD_SETS[section].map(d=>fieldMarkup(d,section+'-'+index,entry[d[0]])).join('')}</div></div>`;}
+  function renderForm(){const sec=sectionById(active);if(active==='submit'){renderSubmit();return;}
+    $('#submitPanel').classList.add('hidden');const si=stepIndex(),stage=WIZARD_STEPS[si];
+    const header=`<div class="panel-header"><div><div class="step-label">STEP ${String(si+1).padStart(2,'0')} / ${WIZARD_STEPS.length} &nbsp;·&nbsp; ${escapeHtml(stage.title.toUpperCase())}</div><h2>${escapeHtml(sec.name)}</h2><p>${escapeHtml(sec.description)}</p></div>${active==='profile'?'':`<button type="button" class="btn soft small" data-add="${active}">+ Add entry</button>`}</div>`;
+    let body='';
+    if(active==='profile'){
+      body=`<div class="panel-body"><div class="section-kicker">Contact & identity</div><div class="fields" data-profile="yes">${PROFILE_FIELDS.slice(0,10).map(d=>fieldMarkup(d,'profile',state.profile[d[0]])).join('')}</div><div class="section-kicker" style="margin-top:31px">Academic overview</div><div class="fields" data-profile="yes">${PROFILE_FIELDS.slice(10).map(d=>fieldMarkup(d,'profile',state.profile[d[0]])).join('')}</div><div class="tip"><strong>Helpful tip:</strong> Use a professional email and concise research interests. A photo, date of birth, marital status and home address are not normally necessary for an academic CV.</div></div>`;
+    }else{const array=state.sections[active];body=`<div class="panel-body">${array.length?array.map((e,i)=>entryMarkup(active,i,e)).join(''):`<div class="empty"><div class="empty-icon">✦</div><strong>No ${escapeHtml(sec.name.toLowerCase())} yet</strong><p>Use “Add entry” if this section applies to you. It's perfectly fine to leave it empty.</p></div>`}<div class="section-actions"><button type="button" class="btn small" data-add="${active}">+ Add another entry</button><span class="subtle">Use ↑ and ↓ to arrange entries.</span></div>${active==='publications'?'<div class="tip"><strong>Publication tip:</strong> Always indicate whether your work is published, submitted, or in preparation. Include a DOI where applicable.</div>':''}${active==='references'?'<div class="tip"><strong>Privacy tip:</strong> Ask referees for permission before sharing their contact details. You may leave this section blank.</div>':''}</div>`;}
+    const nextTitle=WIZARD_STEPS[si+1]?.title||'Review & export';
+    $('#formPanel').innerHTML=header+body+`<div class="footer-actions"><button type="button" class="btn" data-prev-step="1" ${si===0?'disabled':''}>← Back</button><div class="footer-right">${si>0?'<button type="button" class="skip-btn" data-skip-step="1">Skip for now</button>':''}<button type="button" class="btn primary" data-next-step="1">${si===WIZARD_STEPS.length-2?'Review & export':`Continue <span aria-hidden="true">→</span>`}</button></div></div>`;
+  }
+  function renderSubmit(){const missing=[];if(!filled(state.profile.fullName))missing.push('full name');if(!filled(state.profile.email))missing.push('email');if(!items('education').length)missing.push('education');
+    $('#formPanel').classList.add('hidden');$('#submitPanel').classList.remove('hidden');$('#submitPanel').innerHTML=`<div class="panel-header"><div><div class="step-label">Final step</div><h2>Your CV information is ready to export</h2><p>Save a Markdown file and send it to your CV editor. You can download a partial CV, too.</p></div></div><div class="submit-content"><div class="export-hero"><span class="export-emblem">↓</span><div><h3>Export your academic profile</h3><p>Your file contains everything you entered, organized into clearly labeled sections.</p></div></div><div class="check-grid"><div class="check-box"><strong>${entryCount()}</strong><span>Completed entries</span></div><div class="check-box"><strong>${Object.keys(FIELD_SETS).filter(k=>items(k).length).length}</strong><span>Additional sections</span></div><div class="check-box"><strong>${Math.round(generateMarkdown(false).length/1000*10)/10} KB</strong><span>Approximate text size</span></div></div><div class="callout">${missing.length?`<strong>Optional checks:</strong> You haven't added ${escapeHtml(missing.join(', '))} yet. You can still export the file.`:'✓ Basic details are included. Check names, dates, emails, and publication statuses before sharing.'}<div style="margin-top:9px">Download <strong>.md</strong>, then attach the file to an email or message to your CV preparer. This page does not send it automatically.</div></div><div class="export-btns"><button class="btn" data-prev-step="1" type="button">← Back</button><button class="btn primary" id="downloadMain" type="button">↓ &nbsp;Download Markdown (.md)</button><button class="btn" id="previewMain" type="button">◉ &nbsp;Preview CV</button><button class="btn" id="importMain" type="button">↥ &nbsp;Reopen a previous .md</button><button class="btn danger" id="clearForm" type="button">Clear form</button></div><div class="tip"><strong>Need to change something later?</strong> Your draft is saved in this browser. You can also import a Markdown file exported by this website to restore its editable fields.</div></div>`;
+  }
+  function updateView(){
+    document.querySelectorAll('[data-view]').forEach(b=>{const isActive=b.dataset.view===view;b.classList.toggle('active',isActive);if(b.classList.contains('view-btn'))b.setAttribute('aria-pressed',String(isActive));});
+    const editing=view==='edit';$('#builderLayout').dataset.view=view;
+    $('#editorStack').classList.toggle('hidden',!editing);
+    $('#formPanel').classList.toggle('hidden',!editing||active==='submit');
+    $('#submitPanel').classList.toggle('hidden',!editing||active!=='submit');
+    $('#previewPanel').classList.toggle('hidden',view==='markdown');
+    $('#markdownPanel').classList.toggle('hidden',view!=='markdown');
+    renderTabs();
+    if(view!=='markdown')renderPreview();else $('#markdownCode').textContent=generateMarkdown(false);
+  }
+  function refresh(){renderNav();if(active==='submit')renderSubmit();else renderForm();progress();updateView();}
+  function go(id){if(!sectionById(id))return;persist();active=id;view='edit';refresh();const loc=$('.status-row');if(loc)loc.scrollIntoView({behavior:'smooth',block:'start'});}
+  function goStep(i,markCurrent=false){if(i<0||i>=WIZARD_STEPS.length)return;if(markCurrent)recordReview(stepIndex());go(WIZARD_STEPS[i].sections[0]);}
+  const mdEsc=s=>String(s||'').trim().replace(/\\/g,'\\\\').replace(/([`*_{}\[\]<>|])/g,'\\$1').replace(/\r?\n/g,'  \n');
+  const bullets=s=>String(s||'').split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  const urlValue=s=>{let u=String(s||'').trim();if(!u)return '';if(/^(?:www\.)/i.test(u))u='https://'+u;try{const parsed=new URL(u);return ['http:','https:'].includes(parsed.protocol)?parsed.href:'';}catch(_){return '';}};
+  const urlText=(label,s)=>{const u=urlValue(s);return u?`[${mdEsc(label)}](${u.replace(/\)/g,'%29')})`:mdEsc(s);};
+  const lineParts=(...parts)=>parts.map(x=>String(x||'').trim()).filter(Boolean).join(' · ');
+  function itemMarkdown(id,e){const x=k=>mdEsc(e[k]);let lines=[];const add=(s)=>{if(s)lines.push(s)};const addBullets=k=>{for(const b of bullets(e[k]))lines.push('- '+mdEsc(b));};
+    if(id==='education'){add(`**${x('degree')||x('field')||'Qualification'}**${filled(e.institution)?' — '+x('institution'):''}`);add(mdEsc(lineParts(e.location,e.dates,e.gpa?`GPA: ${e.gpa}`:'')));if(filled(e.field)&&filled(e.degree))add('Field: '+x('field'));if(filled(e.thesis))add('Thesis: '+x('thesis'));addBullets('highlights');}
+    if(id==='research'||id==='employment'){add(`**${x('role')||'Position'}**${filled(e.organization)?' — '+x('organization'):''}`);add(mdEsc(lineParts(e.location,e.dates)));if(id==='research'&&filled(e.supervisor))add('Supervisor: '+x('supervisor'));addBullets('highlights');}
+    if(id==='publications'){const title=x('title');const base=[x('authors'),title?`**${title}**`:'',e.venue?`*${x('venue')}*`:'',x('year')].filter(Boolean).join('. ').replace(/\.\./g,'.');add(base+(base&&!base.endsWith('.')?'.':''));if(e.status)add('Status: '+x('status'));if(e.doi)add('DOI: '+x('doi'));if(e.url)add('Link: '+urlText('Publication',e.url));}
+    if(id==='projects'){add(`**${x('title')||'Project'}**${e.organization?' — '+x('organization'):''}`);add(x('dates'));add(x('summary'));if(e.tools)add('Methods / tools: '+x('tools'));if(e.url)add('Project: '+urlText('Project link',e.url));addBullets('highlights');}
+    if(id==='teaching'){add(`**${x('role')||'Teaching role'}**${e.course?' — '+x('course'):''}`);add(mdEsc(lineParts(e.institution,e.dates)));addBullets('highlights');}
+    if(id==='awards'){add(`**${x('title')||'Award'}**${e.issuer?' — '+x('issuer'):''}`);add(x('year'));add(x('description'));}
+    if(id==='conferences'){add(`**${x('title')||'Contribution'}**${e.event?' — '+x('event'):''}`);add(mdEsc(lineParts(e.type,e.date,e.location)));if(e.url)add('Link: '+urlText('Event',e.url));}
+    if(id==='standardizedTests'){add(`**${x('name')||'Test'}:** ${x('score')}`);add(mdEsc(lineParts(e.date,e.details)));}
+    if(id==='interests')add(`**${x('activity')||'Activity'}**${e.details?' — '+x('details'):''}`);
+    if(id==='skills')add(`**${x('category')||'Skills'}:** ${x('items')}`);
+    if(id==='languages')add(`**${x('language')||'Language'}:** ${x('level')}`);
+    if(id==='references'){add(`**${x('name')||'Referee'}**${e.role?' — '+x('role'):''}`);add(mdEsc(lineParts(e.organization,e.email,e.relationship)));}
+    if(id==='custom'){add(`**${x('title')||'Entry'}**${e.organization?' — '+x('organization'):''}`);add(x('dates'));addBullets('details');}
+    return lines.filter(Boolean).join('\n');
+  }
+  const sectionLabels={education:'Education',research:'Research Experience',employment:'Professional Experience',publications:'Publications',projects:'Research Projects',conferences:'Conferences & Presentations',teaching:'Teaching & Mentoring',awards:'Awards & Honors',standardizedTests:'Standardized Tests',skills:'Technical Skills',languages:'Languages',interests:'Interests & Activities',references:'References'};
+  function generateMarkdown(includeData=true){const p=state.profile;const out=[];const line=t=>out.push(t);
+    line('# '+mdEsc(p.fullName||'Your Full Name'));if(p.headline)line('*'+mdEsc(p.headline)+'*');
+    const contact=[p.location,p.email,p.phone].filter(filled).map(mdEsc);if(contact.length)line(contact.join(' | '));
+    const links=[['Website',p.website],['LinkedIn',p.linkedin],['ORCID',p.orcid],['GitHub',p.github],['Google Scholar',p.scholar]].filter(a=>filled(a[1]));if(links.length)line(links.map(([label,v])=>urlText(label,v)).join(' | '));
+    if(p.summary){line('\n## Academic Profile\n');line(mdEsc(p.summary));}
+    if(p.researchInterests){line('\n## Research Interests\n');line(mdEsc(p.researchInterests));}
+    for(const id of Object.keys(sectionLabels)){const entries=items(id);if(!entries.length)continue;line('\n## '+sectionLabels[id]+'\n');for(const e of entries){line(itemMarkdown(id,e));line('');}}
+    const customs=items('custom');if(customs.length){const byHeading=new Map();for(const e of customs){const heading=e.heading.trim()||'Other Experience';if(!byHeading.has(heading))byHeading.set(heading,[]);byHeading.get(heading).push(e);}for(const [heading,entries]of byHeading){line('\n## '+mdEsc(heading)+'\n');for(const e of entries){line(itemMarkdown('custom',e));line('');}}}
+    let result=out.join('\n').replace(/\n{3,}/g,'\n\n').trim()+'\n';
+    if(includeData){const data=JSON.stringify(state);const bytes=new TextEncoder().encode(data);let binary='';for(let i=0;i<bytes.length;i+=8192)binary+=String.fromCharCode(...bytes.subarray(i,i+8192));const b64=btoa(binary);result+='\n<!-- CV_FORM_STATE:'+b64+' -->\n';}
+    return result;
+  }
+  function node(tag,cls='',t){const el=document.createElement(tag);if(cls)el.className=cls;if(t!==undefined)el.textContent=t;return el;}
+  function safeAnchor(label,u){const v=urlValue(u);if(!v)return node('span','',u);const a=node('a','',label);a.href=v;a.target='_blank';a.rel='noopener noreferrer';return a;}
+  function renderPreview(){const p=state.profile, paper=$('#paper');paper.replaceChildren();const name=node('h1',p.fullName?'':'cv-name-placeholder',p.fullName||'Your Full Name');paper.append(name);
+    if(p.headline)paper.append(node('p','cv-tagline',p.headline));const contact=node('div','cv-contact');for(const v of [p.location,p.email,p.phone].filter(filled)){contact.append(node('span','',v));}for(const [k,v] of [['Website',p.website],['LinkedIn',p.linkedin],['ORCID',p.orcid],['GitHub',p.github],['Google Scholar',p.scholar]])if(filled(v))contact.append(safeAnchor(k,v));paper.append(contact);paper.append(node('hr','paper-rule'));
+    const makeSection=(title)=>{const section=node('section','cv-section');section.append(node('h3','',title));paper.append(section);return section;};
+    if(filled(p.summary)){makeSection('Academic Profile').append(node('p','',p.summary));}if(filled(p.researchInterests)){makeSection('Research Interests').append(node('p','',p.researchInterests));}
+    const displayNames={education:e=>[e.degree||e.field,e.institution],research:e=>[e.role,e.organization],employment:e=>[e.role,e.organization],publications:e=>[e.title,e.venue],projects:e=>[e.title,e.organization],conferences:e=>[e.title,e.event],teaching:e=>[e.role,e.course],awards:e=>[e.title,e.issuer],standardizedTests:e=>[e.name,e.score],skills:e=>[e.category,e.items],languages:e=>[e.language,e.level],interests:e=>[e.activity,e.details],references:e=>[e.name,e.role],custom:e=>[e.title,e.organization]};
+    function addEntry(section,id,e){const row=node('div','cv-row');const namePieces=displayNames[id](e).filter(filled);row.append(node('strong','',namePieces.join(' — ')||'Entry'));
+      const metaMap={education:[e.location,e.dates,e.gpa?`GPA: ${e.gpa}`:''],research:[e.location,e.dates,e.supervisor?`Supervisor: ${e.supervisor}`:''],employment:[e.location,e.dates],publications:[e.authors,e.year,e.status,e.doi?`DOI: ${e.doi}`:''],projects:[e.dates,e.tools?`Tools: ${e.tools}`:''],conferences:[e.type,e.date,e.location],teaching:[e.institution,e.dates],awards:[e.issuer,e.year],standardizedTests:[e.score,e.date,e.details],skills:[],languages:[],interests:[],references:[e.organization,e.email,e.relationship],custom:[e.dates]};
+      const meta=(metaMap[id]||[]).filter(filled).join(' · ');if(meta)row.append(node('div','cv-meta',meta));
+      for(const str of id==='education'?[e.thesis?`Thesis: ${e.thesis}`:'']:id==='projects'?[e.summary]:id==='awards'?[e.description]:[]){if(filled(str))row.append(node('div','cv-detail',str));}
+      for(const k of ['highlights','details']){if(e[k]){const b=bullets(e[k]);if(b.length){const ul=node('ul');for(const item of b)ul.append(node('li','',item));row.append(ul);}}}
+      const url=id==='publications'?e.url:id==='projects'?e.url:id==='conferences'?e.url:'';if(filled(url)){const d=node('div','cv-meta');d.append(safeAnchor('View link ↗',url));row.append(d);}section.append(row);
+    }
+    for(const id of Object.keys(sectionLabels)){const entries=items(id);if(!entries.length)continue;const section=makeSection(sectionLabels[id]);for(const e of entries)addEntry(section,id,e);}
+    const custom=items('custom');if(custom.length){const groups=new Map();for(const e of custom){let h=e.heading||'Other Experience';if(!groups.has(h))groups.set(h,[]);groups.get(h).push(e);}for(const [h,entries] of groups){const sec=makeSection(h);for(const e of entries)addEntry(sec,'custom',e);}}
+    if(!paper.querySelector('.cv-section'))makeSection('Your academic details will appear here').append(node('p','','Start with your personal details, then add education, research, projects, and other relevant experience.'));
+  }
+  function filename(){const stem=(state.profile.fullName.trim()||'academic_cv').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^\p{L}\p{N}_-]+/gu,'_').replace(/^_+|_+$/g,'').slice(0,90)||'academic_cv';return stem.toLowerCase()+'_cv_information.md';}
+  function download(){recordReview(WIZARD_STEPS.length-1);persist();progress();renderNav();const text=generateMarkdown(true);const blob=new Blob([text],{type:'text/markdown;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename();document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2500);toast('Your .md file has been downloaded. Send it to your CV preparer.');}
+  async function importFile(file){if(!file)return;if(!/\.(md|markdown)$/i.test(file.name)&&file.type!=='text/markdown'){toast('Please select a .md or .markdown file.');return;}
+    try{const text=await file.text();const match=text.match(/<!--\s*CV_FORM_STATE:([A-Za-z0-9+/=]+)\s*-->/);if(!match)throw Error('This file cannot be reopened as a form. Please choose a .md exported from this website.');const bin=atob(match[1]);const bytes=Uint8Array.from(bin,ch=>ch.charCodeAt(0));const restored=JSON.parse(new TextDecoder().decode(bytes));if(restored.version!==1||!restored.profile||!restored.sections)throw Error('The saved form data is not compatible with this version.');
+      if((filled(state.profile.fullName)||entryCount())&&!confirm('Import this Markdown file? It will replace the current form on this device.'))return;
+      state=normalize(restored);reviewedSteps=[];try{localStorage.removeItem(WIZARD_KEY);}catch(_){}persist();active='profile';view='edit';refresh();toast('Imported successfully. You can edit every field again.');
+    }catch(err){toast(err.message||'Import failed. Try an exported .md file.');}}
+  function clear(){if(!confirm('Clear all fields and the saved draft on this device? This cannot be undone. Download your .md first if you need a copy.'))return;state=defaultState();reviewedSteps=[];try{localStorage.removeItem(WIZARD_KEY);}catch(_){}persist();active='profile';view='edit';refresh();toast('Form cleared.');}
+  document.addEventListener('input',ev=>{const field=ev.target.closest('[data-field]');if(!field)return;const entry=ev.target.closest('.entry');const key=field.dataset.field;if(entry){const section=entry.dataset.section,index=Number(entry.dataset.index);if(!state.sections[section]?.[index])return;state.sections[section][index][key]=field.value;const label=entry.querySelector('.entry-title');if(label)label.textContent=ENTRY_TITLES[section].map(k=>state.sections[section][index][k]).find(filled)||'Untitled entry';}else if(Object.hasOwn(state.profile,key))state.profile[key]=field.value;
+    schedulePersist();progress();renderNav();renderTabs();if(view==='markdown')$('#markdownCode').textContent=generateMarkdown(false);else renderPreview();});
+  document.addEventListener('click',ev=>{const btn=ev.target.closest('button,a');if(!btn)return;
+    if(btn.id==='downloadTop'||btn.id==='downloadMain'){download();return;}
+    if(btn.id==='clearForm'){clear();return;}
+    if(btn.id==='importBtn'||btn.id==='importMain'||btn.id==='importMobile'){$('#importFile').click();return;}
+    if(btn.id==='previewMain'){view='preview';updateView();return;}
+    if(btn.id==='copyMarkdown'){const content=generateMarkdown(false);if(navigator.clipboard?.writeText){navigator.clipboard.writeText(content).then(()=>toast('Markdown copied to clipboard.')).catch(()=>toast('Clipboard not available. Select the text manually.'));}else{toast('Clipboard unavailable. Select the Markdown text manually.');}return;}
+    if(btn.dataset.view){view=btn.dataset.view;updateView();return;}
+    if(btn.dataset.step!==undefined){goStep(Number(btn.dataset.step));return;}
+    if(btn.dataset.nextStep!==undefined){goStep(stepIndex()+1,true);return;}
+    if(btn.dataset.prevStep!==undefined){goStep(stepIndex()-1);return;}
+    if(btn.dataset.skipStep!==undefined){goStep(stepIndex()+1,true);return;}
+    if(btn.dataset.go){go(btn.dataset.go);return;}
+    if(btn.dataset.add){const id=btn.dataset.add;state.sections[id].push(blank(id));persist();renderForm();renderNav();progress();renderTabs();renderPreview();const entries=document.querySelectorAll('.entry');if(entries.length){const last=entries[entries.length-1];last.querySelector('input,textarea')?.focus();}return;}
+    if(btn.dataset.action){const parent=btn.closest('.entry');if(!parent)return;const id=parent.dataset.section,index=Number(parent.dataset.index),list=state.sections[id];if(btn.dataset.action==='remove'){list.splice(index,1);}else if(btn.dataset.action==='up'&&index>0){[list[index-1],list[index]]=[list[index],list[index-1]];}else if(btn.dataset.action==='down'&&index<list.length-1){[list[index+1],list[index]]=[list[index],list[index+1]];}persist();renderForm();renderNav();progress();renderTabs();renderPreview();return;}
+    if(btn.id==='logo'){ev.preventDefault();go('profile');}
+  });
+  const referenceDialog=$('#referenceDialog');
+  let referenceReturnFocus=null;
+  function showReference(trigger){referenceReturnFocus=trigger;referenceDialog.hidden=false;const frame=referenceDialog.querySelector('iframe');if(!frame.getAttribute('src'))frame.setAttribute('src',frame.dataset.src);$('#closeReference').focus();}
+  function hideReference(){referenceDialog.hidden=true;referenceReturnFocus?.focus();}
+  document.addEventListener('click',e=>{if(e.target.closest('[data-open-reference]'))showReference(e.target.closest('[data-open-reference]'));if(e.target.closest('#closeReference')||e.target===referenceDialog)hideReference();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!referenceDialog.hidden){e.preventDefault();hideReference();}});
+  $('#importFile').addEventListener('change',async e=>{await importFile(e.target.files[0]);e.target.value='';});
+  window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY&&e.newValue){toast('Your saved draft changed in another tab. Reload this page to view it.');}});
+  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();download();}});
+  refresh();
+  // Expose a tiny read-only diagnostic surface for offline smoke tests.
+  window.__cvIntakeTest={getMarkdown:()=>generateMarkdown(false),getFilename:filename,getSectionCount:id=>items(id).length};
+})();
+</script>
+</body>
+</html>
