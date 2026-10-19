@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Fill in your academic CV and download a Markdown file for professional formatting.">
+  <meta name="description" content="Prepare your academic resume with Kamyab Safaei. 699 Toman per resume, delivered directly to Telegram.">
   <title>Academic CV Studio · Guided CV Builder</title>
   <style>
     :root { --ink:#192943; --text:#36455c; --muted:#718096; --bg:#f6f8fa; --paper:#ffffff; --line:#e2e8ef; --brand:#235d70; --brand-dark:#174655; --brand-soft:#e7f2f2; --gold:#c19b60; --danger:#b44545; --shadow:0 12px 35px rgba(29,51,74,.055); --radius:16px; }
@@ -81,6 +81,7 @@
     @media(max-width:450px){.brand-mark{height:35px;width:35px;font-size:18px}.brand-name{font-size:12px}.brand-sub{font-size:8px}.top-actions{gap:5px}.top-actions .btn{padding:8px 9px;min-height:35px;font-size:10px}.top-actions .light-import{display:none}.intro h1{font-size:30px}.intro p{font-size:12px}.reference-card{padding:11px;gap:10px}.reference-info p{display:none}.reference-thumb{flex-basis:32px;height:45px}.reference-actions .btn{padding:7px 8px}.panel-header{padding:19px}.panel-body{padding:18px}.fields{grid-template-columns:1fr}.footer-actions{padding:13px 16px;gap:8px}.footer-actions .btn{font-size:10px;padding:8px}.footer-right{gap:5px}.skip-btn{font-size:10px}.check-grid{grid-template-columns:repeat(3,1fr)}.check-box{padding:9px}.check-box strong{font-size:17px}.check-box span{font-size:9px}.preview-heading small{display:none}}
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
     @media print{.app{display:block}.builder-layout{display:block}.builder-layout .preview-panel{display:block!important;position:static;box-shadow:none;border:0}.builder-layout .preview-panel .paper-container{max-height:none;overflow:visible;background:white;padding:0}.builder-layout .preview-panel .paper{min-height:0;max-width:none;box-shadow:none;border:0;padding:0}.preview-top,.preview-bottom,.reference-card,.editor-stack,.status-row,.markdown-panel,.page-foot{display:none!important}}
+  .contact-card{display:flex;align-items:center;justify-content:space-between;gap:24px;border:1px solid #dbe7df;background:#fff;border-radius:16px;padding:24px;margin-bottom:18px}.contact-card h2{font:normal 25px Georgia,serif;margin:8px 0}.contact-card p{font-size:13px;color:#60776b}.contact-card p strong{font-size:23px;color:#285e4a}.contact-card small{font-size:12px;font-weight:400}.qr-links{display:flex;gap:12px}.qr-links img{width:112px;height:auto;border-radius:10px;display:block}.send-status{margin-top:16px;font-size:14px;color:#285e4a}.consent{display:flex;gap:10px;margin-top:18px;font-size:13px;align-items:flex-start}.consent input{width:auto;margin-top:4px}@media(max-width:640px){.contact-card{flex-direction:column;align-items:flex-start}.qr-links img{width:95px}}@media print{.contact-card{display:none}}
   </style>
 </head>
 <body>
@@ -92,8 +93,7 @@
   <div class="top-actions">
     <span class="saved" id="saveStatus"><span class="saved-dot"></span><span id="saveLabel">Saved on this device</span></span>
     <button class="btn light-import" type="button" id="sampleTop" data-open-reference="1">◧ &nbsp;Sample CV</button>
-    <button class="btn light-import" type="button" id="importBtn">↥ &nbsp;Import .md</button>
-    <button class="btn primary" type="button" id="downloadTop">↓ &nbsp;Download CV <span class="hide-on-small">(.md)</span></button>
+    <button class="btn primary" type="button" id="reviewTop">Review &amp; send</button>
   </div>
 </header>
 <main class="app" id="mainApp">
@@ -101,9 +101,10 @@
   <div class="workspace">
     <div class="intro">
       <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR ACADEMIC CV, MADE SIMPLE</div>
-      <h1>Tell your academic story<span class="heading-dot">.</span></h1>
-      <p>A guided space to collect your experience, one step at a time. We'll organize everything into a Markdown file you can share with your CV editor.</p>
+      <h1>Welcome to Apply Europe CV<span class="heading-dot">.</span></h1>
+      <p>Welcome! I’m Kamyab Safaei. Let’s bring your education, research and experience together for your next academic application. Take your time—your draft is saved as you go. We’ll organize your answers and send your resume directly to Kamyab Safaei on Telegram.</p>
     </div>
+<section class="contact-card" aria-label="Resume service"><div><span class="reference-label">APPLY EUROPE · KAMYAB SAFAEI</span><h2>Your next chapter starts here.</h2><p><strong>699 Toman <small>per resume</small></strong></p><p>Complete the questionnaire, review your details, then send your .md file directly to Kamyab on Telegram.</p><div class="reference-actions"><a class="btn soft" href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">Contact @SafaeiKamyab ↗</a><a class="btn" href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer">Join Apply Europe ↗</a><a class="btn" href="https://kami80.github.io/CV-builder/" target="_blank" rel="noopener noreferrer">Our website ↗</a></div></div><div class="qr-links"><a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer"><img src="contact-qr.png" alt="Scan to contact @SafaeiKamyab" loading="lazy"></a><a href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer"><img src="group-qr.png" alt="Scan to join @ApplyEuropeIran" loading="lazy"></a></div></section>
     <section class="reference-card" aria-labelledby="referenceTitle">
       <a class="reference-thumb" href="reference-academic-cv.pdf" target="_blank" rel="noopener" aria-label="Open the sample academic CV PDF"><img src="reference-cv-preview.webp" alt="First-page thumbnail of a two-page academic CV example"></a>
       <div class="reference-info">
@@ -131,9 +132,9 @@
         <div class="paper-container"><article class="paper" id="paper"></article></div>
         <div class="preview-bottom">This is a content preview, not the final typeset CV.</div>
       </section>
-      <section id="markdownPanel" class="markdown-panel hidden" aria-label="Markdown export"><div class="raw-head"><div><strong>Markdown output</strong><div><small>Human-readable preview (without re-import metadata)</small></div></div><button class="btn small" type="button" id="copyMarkdown">Copy Markdown</button></div><pre class="raw-code" id="markdownCode"></pre></section>
+      <section id="markdownPanel" class="markdown-panel hidden" aria-label="Markdown export"><div class="raw-head"><div><strong>Markdown output</strong><div><small>Human-readable preview</small></div></div><button class="btn small" type="button" id="copyMarkdown">Copy Markdown</button></div><pre class="raw-code" id="markdownCode"></pre></section>
     </div>
-    <div class="page-foot">Designed for academic applications <span>·</span> Private on your device <span>·</span> No accounts or uploads</div>
+    <div class="page-foot">Designed for academic applications <span>·</span> Drafts saved on your device <span>·</span> Sent to Telegram with your consent</div>
   </div>
 </main>
 <div class="reference-dialog" id="referenceDialog" role="dialog" aria-modal="true" aria-labelledby="referenceDialogTitle" hidden>
@@ -142,11 +143,11 @@
       <div><strong id="referenceDialogTitle">Example academic CV</strong><small>Kamyab Safaei Baghbaderani · 2-page PDF · for reference only</small></div>
       <div class="reference-dialog-actions"><a class="btn small" href="reference-academic-cv.pdf" target="_blank" rel="noopener">Open PDF ↗</a><button type="button" class="btn small" id="closeReference" aria-label="Close sample CV viewer">✕ &nbsp;Close</button></div>
     </div>
-    <iframe class="reference-frame" title="Example academic CV PDF" data-src="reference-academic-cv.pdf#toolbar=1" loading="lazy"></iframe>
+    <iframe class="reference-frame" title="Example academic CV PDF" data-src="reference-academic-cv.pdf#toolbar=0" loading="lazy"></iframe>
     <p class="reference-frame-fallback">Can't see the PDF here? <a href="reference-academic-cv.pdf" target="_blank" rel="noopener">Open the original reference CV</a> in a new tab.</p>
   </div>
 </div>
-<input id="importFile" type="file" accept=".md,.markdown,text/markdown,text/plain" hidden>
+
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <script>
 'use strict';
@@ -227,7 +228,7 @@
     {id:'interests',name:'Interests & activities',icon:'♡',description:'Optional interests, volunteer activities, and relevant hobbies.',group:'Additional experience'},
     {id:'references',name:'References',icon:'♧',description:'Academic or professional referees (only with permission).',group:'Additional experience'},
     {id:'custom',name:'Other sections',icon:'＋',description:'Create your own sections, e.g. service, memberships, or certifications.',group:'Additional experience'},
-    {id:'submit',name:'Finish & export',icon:'↓',description:'Review your details, then download the Markdown file.',group:'Finish'}
+    {id:'submit',name:'Review & send',icon:'↓',description:'Review your details, then send the Markdown file to Kamyab.',group:'Finish'}
   ];
   const WIZARD_STEPS = [
     {title:'About you',subtitle:'Profile & contact',icon:'01',sections:['profile']},
@@ -236,7 +237,7 @@
     {title:'Research output',subtitle:'Publications & projects',icon:'04',sections:['publications','projects','conferences']},
     {title:'Skills',subtitle:'Technical & languages',icon:'05',sections:['skills','languages']},
     {title:'More about you',subtitle:'Awards & other details',icon:'06',sections:['awards','interests','references','custom']},
-    {title:'Review & export',subtitle:'Download your file',icon:'07',sections:['submit']}
+    {title:'Review & send',subtitle:'Send to Telegram',icon:'07',sections:['submit']}
   ];
   const WIZARD_KEY = 'academic-cv-intake-wizard-v2';
   const ENTRY_TITLES = {education:['degree','institution'],research:['role','organization'],employment:['role','organization'],publications:['title','venue'],projects:['title','organization'],conferences:['title','event'],teaching:['role','course'],awards:['title','issuer'],standardizedTests:['name','score'],skills:['category','items'],languages:['language','level'],interests:['activity','details'],references:['name','organization'],custom:['title','heading']};
@@ -290,7 +291,7 @@
       b.innerHTML=`<span class="nav-icon" aria-hidden="true">${reviewedSteps.includes(i)?'✓':step.icon}</span><span class="nav-link-body"><strong>${escapeHtml(step.title)}</strong><small>${escapeHtml(step.subtitle)}</small></span>${stepHasContent(i)&&!reviewedSteps.includes(i)?'<span class="nav-state" aria-hidden="true">•</span>':''}`;
       nav.append(b);
     });
-    const privacy=node('div','privacy-mini');privacy.innerHTML='<strong>◈ &nbsp;Your privacy matters</strong>No account. No uploads. Your entries stay in this browser until you decide to download and share them.';nav.append(privacy);
+    const privacy=node('div','privacy-mini');privacy.innerHTML='<strong>◈ &nbsp;Your privacy matters</strong>Your draft stays in this browser. When you send it, your CV is shared with Kamyab Safaei through Telegram.';nav.append(privacy);
   }
   function renderTabs(){const tab=$('#sectionTabs');tab.replaceChildren();const step=WIZARD_STEPS[stepIndex()];
     if(view!=='edit'||step.sections.length<2){tab.classList.add('hidden');return;}
@@ -308,11 +309,11 @@
     if(active==='profile'){
       body=`<div class="panel-body"><div class="section-kicker">Contact & identity</div><div class="fields" data-profile="yes">${PROFILE_FIELDS.slice(0,10).map(d=>fieldMarkup(d,'profile',state.profile[d[0]])).join('')}</div><div class="section-kicker" style="margin-top:31px">Academic overview</div><div class="fields" data-profile="yes">${PROFILE_FIELDS.slice(10).map(d=>fieldMarkup(d,'profile',state.profile[d[0]])).join('')}</div><div class="tip"><strong>Helpful tip:</strong> Use a professional email and concise research interests. A photo, date of birth, marital status and home address are not normally necessary for an academic CV.</div></div>`;
     }else{const array=state.sections[active];body=`<div class="panel-body">${array.length?array.map((e,i)=>entryMarkup(active,i,e)).join(''):`<div class="empty"><div class="empty-icon">✦</div><strong>No ${escapeHtml(sec.name.toLowerCase())} yet</strong><p>Use “Add entry” if this section applies to you. It's perfectly fine to leave it empty.</p></div>`}<div class="section-actions"><button type="button" class="btn small" data-add="${active}">+ Add another entry</button><span class="subtle">Use ↑ and ↓ to arrange entries.</span></div>${active==='publications'?'<div class="tip"><strong>Publication tip:</strong> Always indicate whether your work is published, submitted, or in preparation. Include a DOI where applicable.</div>':''}${active==='references'?'<div class="tip"><strong>Privacy tip:</strong> Ask referees for permission before sharing their contact details. You may leave this section blank.</div>':''}</div>`;}
-    const nextTitle=WIZARD_STEPS[si+1]?.title||'Review & export';
-    $('#formPanel').innerHTML=header+body+`<div class="footer-actions"><button type="button" class="btn" data-prev-step="1" ${si===0?'disabled':''}>← Back</button><div class="footer-right">${si>0?'<button type="button" class="skip-btn" data-skip-step="1">Skip for now</button>':''}<button type="button" class="btn primary" data-next-step="1">${si===WIZARD_STEPS.length-2?'Review & export':`Continue <span aria-hidden="true">→</span>`}</button></div></div>`;
+    const nextTitle=WIZARD_STEPS[si+1]?.title||'Review & send';
+    $('#formPanel').innerHTML=header+body+`<div class="footer-actions"><button type="button" class="btn" data-prev-step="1" ${si===0?'disabled':''}>← Back</button><div class="footer-right">${si>0?'<button type="button" class="skip-btn" data-skip-step="1">Skip for now</button>':''}<button type="button" class="btn primary" data-next-step="1">${si===WIZARD_STEPS.length-2?'Review & send':`Continue <span aria-hidden="true">→</span>`}</button></div></div>`;
   }
   function renderSubmit(){const missing=[];if(!filled(state.profile.fullName))missing.push('full name');if(!filled(state.profile.email))missing.push('email');if(!items('education').length)missing.push('education');
-    $('#formPanel').classList.add('hidden');$('#submitPanel').classList.remove('hidden');$('#submitPanel').innerHTML=`<div class="panel-header"><div><div class="step-label">Final step</div><h2>Your CV information is ready to export</h2><p>Save a Markdown file and send it to your CV editor. You can download a partial CV, too.</p></div></div><div class="submit-content"><div class="export-hero"><span class="export-emblem">↓</span><div><h3>Export your academic profile</h3><p>Your file contains everything you entered, organized into clearly labeled sections.</p></div></div><div class="check-grid"><div class="check-box"><strong>${entryCount()}</strong><span>Completed entries</span></div><div class="check-box"><strong>${Object.keys(FIELD_SETS).filter(k=>items(k).length).length}</strong><span>Additional sections</span></div><div class="check-box"><strong>${Math.round(generateMarkdown(false).length/1000*10)/10} KB</strong><span>Approximate text size</span></div></div><div class="callout">${missing.length?`<strong>Optional checks:</strong> You haven't added ${escapeHtml(missing.join(', '))} yet. You can still export the file.`:'✓ Basic details are included. Check names, dates, emails, and publication statuses before sharing.'}<div style="margin-top:9px">Download <strong>.md</strong>, then attach the file to an email or message to your CV preparer. This page does not send it automatically.</div></div><div class="export-btns"><button class="btn" data-prev-step="1" type="button">← Back</button><button class="btn primary" id="downloadMain" type="button">↓ &nbsp;Download Markdown (.md)</button><button class="btn" id="previewMain" type="button">◉ &nbsp;Preview CV</button><button class="btn" id="importMain" type="button">↥ &nbsp;Reopen a previous .md</button><button class="btn danger" id="clearForm" type="button">Clear form</button></div><div class="tip"><strong>Need to change something later?</strong> Your draft is saved in this browser. You can also import a Markdown file exported by this website to restore its editable fields.</div></div>`;
+    $('#formPanel').classList.add('hidden');$('#submitPanel').classList.remove('hidden');$('#submitPanel').innerHTML=`<div class="panel-header"><div><div class="step-label">Final step</div><h2>Send your resume to Kamyab</h2><p>Review your details before sharing. Partial resumes are welcome.</p></div></div><div class="submit-content"><div class="export-hero"><span class="export-emblem">↗</span><div><h3>699 Toman per resume</h3><p>Your answers will arrive as a .md file in Kamyab’s Telegram inbox.</p></div></div><div class="check-grid"><div class="check-box"><strong>${entryCount()}</strong><span>Completed entries</span></div><div class="check-box"><strong>${Object.keys(FIELD_SETS).filter(k=>items(k).length).length}</strong><span>Additional sections</span></div></div><div class="callout">${missing.length?`<strong>Optional checks:</strong> You haven't added ${escapeHtml(missing.join(', '))} yet.`:'✓ Basic details are included.'} Check names, dates, emails and publication statuses.<p>Contact <a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">@SafaeiKamyab</a> to arrange payment. Submitting this form does not charge you.</p></div><label class="consent"><input type="checkbox" id="sendConsent">I agree to share my CV details with Kamyab Safaei through Telegram and acknowledge the price of 699 Toman per resume.</label><div class="export-btns"><button class="btn" data-prev-step="1" type="button">← Back</button><button class="btn primary" id="sendMain" type="button">Send .md to Telegram ↗</button><button class="btn" id="previewMain" type="button">Preview CV</button><button class="btn danger" id="clearForm" type="button">Clear form</button></div><p id="sendStatus" class="send-status" role="status" aria-live="polite"></p><div class="tip">Your draft is saved in this browser so you can return to edit it later.</div></div>`;
   }
   function updateView(){
     document.querySelectorAll('[data-view]').forEach(b=>{const isActive=b.dataset.view===view;b.classList.toggle('active',isActive);if(b.classList.contains('view-btn'))b.setAttribute('aria-pressed',String(isActive));});
@@ -381,19 +382,23 @@
     if(!paper.querySelector('.cv-section'))makeSection('Your academic details will appear here').append(node('p','','Start with your personal details, then add education, research, projects, and other relevant experience.'));
   }
   function filename(){const stem=(state.profile.fullName.trim()||'academic_cv').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^\p{L}\p{N}_-]+/gu,'_').replace(/^_+|_+$/g,'').slice(0,90)||'academic_cv';return stem.toLowerCase()+'_cv_information.md';}
-  function download(){recordReview(WIZARD_STEPS.length-1);persist();progress();renderNav();const text=generateMarkdown(true);const blob=new Blob([text],{type:'text/markdown;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename();document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2500);toast('Your .md file has been downloaded. Send it to your CV preparer.');}
-  async function importFile(file){if(!file)return;if(!/\.(md|markdown)$/i.test(file.name)&&file.type!=='text/markdown'){toast('Please select a .md or .markdown file.');return;}
-    try{const text=await file.text();const match=text.match(/<!--\s*CV_FORM_STATE:([A-Za-z0-9+/=]+)\s*-->/);if(!match)throw Error('This file cannot be reopened as a form. Please choose a .md exported from this website.');const bin=atob(match[1]);const bytes=Uint8Array.from(bin,ch=>ch.charCodeAt(0));const restored=JSON.parse(new TextDecoder().decode(bytes));if(restored.version!==1||!restored.profile||!restored.sections)throw Error('The saved form data is not compatible with this version.');
-      if((filled(state.profile.fullName)||entryCount())&&!confirm('Import this Markdown file? It will replace the current form on this device.'))return;
-      state=normalize(restored);reviewedSteps=[];try{localStorage.removeItem(WIZARD_KEY);}catch(_){}persist();active='profile';view='edit';refresh();toast('Imported successfully. You can edit every field again.');
-    }catch(err){toast(err.message||'Import failed. Try an exported .md file.');}}
-  function clear(){if(!confirm('Clear all fields and the saved draft on this device? This cannot be undone. Download your .md first if you need a copy.'))return;state=defaultState();reviewedSteps=[];try{localStorage.removeItem(WIZARD_KEY);}catch(_){}persist();active='profile';view='edit';refresh();toast('Form cleared.');}
+  let sending=false;
+  async function sendResume(){
+    if(sending)return;
+    const status=$('#sendStatus');
+    if(!$('#sendConsent')?.checked){status.textContent='Please agree to share your CV before sending.';return;}
+    sending=true;const button=$('#sendMain');button.disabled=true;button.textContent='Sending…';status.textContent='Sending your resume securely…';
+    try{const response=await fetch(location.hostname==='kami80.github.io'?'https://apply-europe-cv-api.micioparla.workers.dev/api/resume':'/api/resume',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:filename(),markdown:generateMarkdown(false),consent:true}),signal:AbortSignal.timeout(25000)});const result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||'Delivery failed. Please try again.');recordReview(WIZARD_STEPS.length-1);persist();progress();renderNav();status.textContent='✓ Your .md file was delivered to Kamyab on Telegram. Contact @SafaeiKamyab to arrange payment.';toast('Resume delivered to Telegram.');}
+    catch(error){status.textContent=error.name==='TimeoutError'?'Delivery could not be confirmed. Contact @SafaeiKamyab before retrying.':error.message||'Unable to send. Your draft is safe; please try again.';}
+    finally{sending=false;button.disabled=false;button.textContent='Send .md to Telegram ↗';}
+  }
+  function clear(){if(!confirm('Clear all fields and the saved draft on this device? This cannot be undone.'))return;state=defaultState();reviewedSteps=[];try{localStorage.removeItem(WIZARD_KEY);}catch(_){}persist();active='profile';view='edit';refresh();toast('Form cleared.');}
   document.addEventListener('input',ev=>{const field=ev.target.closest('[data-field]');if(!field)return;const entry=ev.target.closest('.entry');const key=field.dataset.field;if(entry){const section=entry.dataset.section,index=Number(entry.dataset.index);if(!state.sections[section]?.[index])return;state.sections[section][index][key]=field.value;const label=entry.querySelector('.entry-title');if(label)label.textContent=ENTRY_TITLES[section].map(k=>state.sections[section][index][k]).find(filled)||'Untitled entry';}else if(Object.hasOwn(state.profile,key))state.profile[key]=field.value;
     schedulePersist();progress();renderNav();renderTabs();if(view==='markdown')$('#markdownCode').textContent=generateMarkdown(false);else renderPreview();});
   document.addEventListener('click',ev=>{const btn=ev.target.closest('button,a');if(!btn)return;
-    if(btn.id==='downloadTop'||btn.id==='downloadMain'){download();return;}
+    if(btn.id==='reviewTop'){go('submit');return;}
+    if(btn.id==='sendMain'){sendResume();return;}
     if(btn.id==='clearForm'){clear();return;}
-    if(btn.id==='importBtn'||btn.id==='importMain'||btn.id==='importMobile'){$('#importFile').click();return;}
     if(btn.id==='previewMain'){view='preview';updateView();return;}
     if(btn.id==='copyMarkdown'){const content=generateMarkdown(false);if(navigator.clipboard?.writeText){navigator.clipboard.writeText(content).then(()=>toast('Markdown copied to clipboard.')).catch(()=>toast('Clipboard not available. Select the text manually.'));}else{toast('Clipboard unavailable. Select the Markdown text manually.');}return;}
     if(btn.dataset.view){view=btn.dataset.view;updateView();return;}
@@ -412,9 +417,8 @@
   function hideReference(){referenceDialog.hidden=true;referenceReturnFocus?.focus();}
   document.addEventListener('click',e=>{if(e.target.closest('[data-open-reference]'))showReference(e.target.closest('[data-open-reference]'));if(e.target.closest('#closeReference')||e.target===referenceDialog)hideReference();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!referenceDialog.hidden){e.preventDefault();hideReference();}});
-  $('#importFile').addEventListener('change',async e=>{await importFile(e.target.files[0]);e.target.value='';});
   window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY&&e.newValue){toast('Your saved draft changed in another tab. Reload this page to view it.');}});
-  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();download();}});
+  document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();persist();toast('Draft saved on this device.');}});
   refresh();
   // Expose a tiny read-only diagnostic surface for offline smoke tests.
   window.__cvIntakeTest={getMarkdown:()=>generateMarkdown(false),getFilename:filename,getSectionCount:id=>items(id).length};

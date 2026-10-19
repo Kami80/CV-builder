@@ -1,63 +1,56 @@
-# Academic CV Studio — Guided Applicant Intake (V2)
+# Apply Europe Academic CV Intake
 
-A responsive, static, no-build academic CV questionnaire. Applicants complete a guided seven-step form, see a live preview, and download a Markdown (`.md`) document to send to their CV editor. The form **does not** email or submit their CV information for them.
+Guided seven-step academic resume questionnaire for Kamyab Safaei. Price: **699 Toman per resume**.
 
-## Quick start
+- Website: https://kami80.github.io/CV-builder/
+- Contact: https://t.me/SafaeiKamyab
+- Apply Europe group: https://t.me/ApplyEuropeIran
+- Hosted backend: https://apply-europe-cv-api.micioparla.workers.dev
 
-1. Extract the ZIP. Keep all files in one folder.
-2. Open **`index.html`** in a current browser. For reliable draft saving, hosting the site on a normal HTTPS static host is recommended.
-3. Fill out each step; use the small tabs within a step to switch between related sections. Add as many entries as needed. Optional steps can be skipped.
-4. Check the CV preview (right panel on desktop, **Preview** tab on mobile).
-5. Select **Review & export** or **Download CV (.md)**. Send the downloaded Markdown file to the CV preparer through email or chat.
-6. To revise later, **Import .md** to restore all editable fields from the last file exported by this site.
+Applicants review their CV, consent to sharing it, then send a Markdown document directly to the owner’s Telegram inbox. No resume download or import controls are provided. Payment is arranged with Kamyab; this site does not collect or verify payment.
 
-## The seven guided steps
+## Production architecture
 
-1. **About you** — name, contact links, short academic summary and research interests.
-2. **Education** — degrees, institutions, GPAs, thesis details and standardized tests.
-3. **Experience** — research, employment and teaching experience.
-4. **Research output** — publications, projects and conferences.
-5. **Skills** — technical skills and spoken languages.
-6. **More about you** — awards, interests, references and custom sections.
-7. **Review & export** — completion checks and final Markdown download.
+GitHub Pages serves `index.html` and the public image/PDF assets from the repository. When opened on `kami80.github.io`, the form sends submissions to the Cloudflare Worker’s `/api/resume` endpoint. On localhost it uses the local Node server instead.
 
-The left-side wizard keeps track of which steps you have **reviewed**, including steps you chose to skip. The bar does **not** validate whether the CV is objectively complete. The editor permits partial submissions.
+The Worker accepts browser submissions from `https://kami80.github.io`, checks consent and payload size, limits repeated submissions to three per minute per connection IP per Cloudflare location, and uploads a `.md` file to the fixed owner chat. Success is shown only after Telegram accepts the file. Applicant details are not saved in a database.
 
-## Publish as a website
+The Worker’s `/telegram/webhook` endpoint authenticates Telegram requests with a private webhook secret. Private `/start` commands receive the welcome message, price, contact and website buttons, even when the owner’s computer is off. Do not run a local welcome poller while this webhook is active.
 
-### GitHub Pages
+## Deployment
 
-Create a public repository and upload these files directly to the repository root: `index.html`, `reference-academic-cv.pdf`, and `reference-cv-preview.webp` (plus optional `README.md` and `example_completed_cv.md`). Enable GitHub Pages from the main branch and root folder in repository settings. Share the resulting site URL.
+The hosted Worker is `apply-europe-cv-api` in the account selected in `wrangler.jsonc`. Its bot token, owner chat ID and webhook secret are stored as private Cloudflare secrets. They are never included in the frontend or source control.
 
-### Netlify
+- Run `npm ci` to install dependencies.
+- Run `npm test` and `npm run check:backend` before deploying.
+- Run `npm run deploy:backend` while signed into the intended Cloudflare account. Existing Worker secrets are preserved.
+- Push frontend changes to `main` to update the existing GitHub Pages site.
+- If changing the backend URL, update the production endpoint in `index.html` and the Telegram webhook registration.
 
-Upload the **unzipped folder** using Netlify's static-site manual deployment. The site needs no build command, backend, database, or environment variables.
+For a fresh backend, provide `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` and a random `TELEGRAM_WEBHOOK_SECRET` through Cloudflare’s private secret settings or Wrangler’s secret input. Register `https://YOUR_BACKEND/telegram/webhook` using Telegram’s `setWebhook` method with the same `secret_token`. Never publish secret files. The ignored `.env.production.secrets.json` is a local deployment aid only.
 
-### Other hosts
+## Local development
 
-Upload the three website files together to any standard HTTPS static host. A local `index.html` file can also be opened directly, but some browsers limit local storage on `file://` pages; hosted HTTPS avoids that inconsistency.
+Requires Node.js 22.9 or newer.
 
-## Contents
+1. Copy `.env.example` to `.env`.
+2. Set the bot token and numeric chat ID privately. Start the bot from your personal Telegram account first.
+3. Keep `TELEGRAM_WELCOME_ENABLED=false` when the production webhook is active.
+4. If direct Telegram connections are blocked, set `TELEGRAM_PROXY_URL` to a working HTTP proxy. Leave it empty on hosts with direct access.
+5. Run `npm start`, then open http://localhost:3000.
 
-- `index.html` — all HTML, CSS and JavaScript bundled into one page.
-- `reference-academic-cv.pdf` — the provided two-page reference CV.
-- `reference-cv-preview.webp` — preview thumbnail for the reference card.
-- `example_completed_cv.md` — example applicant Markdown output, which can also be imported and edited.
-- `README.md` — these deployment and usage instructions.
+`node --env-file=.env setup-bot.mjs` updates the bot’s public description and command list. It does not change the production webhook.
 
-## Privacy and data handling
+## Privacy and limitations
 
-- The site needs no account and contains **no remote scripts, tracking, or backend upload**. All form handling stays in the visitor's browser.
-- Drafts are automatically saved to the current browser's `localStorage` where available. Data is **not** encrypted, synced, or backed up; other users of the same browser profile may be able to access it. Export a `.md` file for backup and avoid shared devices for sensitive information.
-- The exported Markdown includes the readable CV and a hidden `CV_FORM_STATE` HTML comment with base64-encoded full answers so that import can restore the form. **This is not encryption**; share the file only with trusted recipients.
-- The website does not submit anything automatically. The applicant must download the `.md` file and send it to the CV editor themselves.
-- **Important for the owner:** the reference PDF supplied with the site is an actual CV and contains the owner's email and GitHub URL. Anyone visiting a published website can access this document. Replace or remove the reference assets and links if you don't want those details public.
-- Applicants should ask their references for consent before sharing contact details.
+Drafts are saved unencrypted in the applicant’s browser. On explicit submission, the readable CV passes through the backend to Telegram and the owner. The application does not save CVs to disk or log their content. Telegram and the recipient retain delivered files under their own policies. Markdown submissions do not include the old hidden form-state payload. Ask references for permission before sharing their details.
 
-## Previous-version compatibility
+A timeout may mean delivery succeeded without confirmation; contact the owner before retrying. The IP-based limiter may be shared by visitors using a shared network. Origin checks and rate limits reduce misuse but do not authenticate applicants.
 
-The structured Markdown importer retains compatibility with Markdown files exported by the original V1 questionnaire. V2 preserves the V1 form schema (`version: 1`) and adds only local browser progress state for the guided wizard. The `.md` file exports use the same human-readable section style and include complete editable data for re-import.
+The reference PDF is public and contains the owner’s existing contact details. The supplied contact/group QR cards are public. Browsers may offer their own PDF save controls.
 
-## Customization
+## References
 
-Colors and layout are in the CSS at the top of `index.html`. The `WIZARD_STEPS` mapping controls stage grouping. `FIELD_SETS` and `PROFILE_FIELDS` control editable fields, while `generateMarkdown()` controls the export. Adding entirely new field types or sections may require editing the export and preview logic.
+- Telegram file delivery: https://core.telegram.org/bots/api#senddocument
+- Telegram webhooks: https://core.telegram.org/bots/api#setwebhook
+- Cloudflare secrets: https://developers.cloudflare.com/workers/configuration/secrets/

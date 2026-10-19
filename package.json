@@ -1,0 +1,20 @@
+{
+  "name": "apply-europe-cv-intake",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "test": "node --test",
+    "deploy:backend": "wrangler deploy",
+    "check:backend": "wrangler deploy --dry-run"
+  },
+  "engines": {
+    "node": ">=22.9"
+  },
+  "dependencies": {
+    "undici": "^8.12.2"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.2"
+  }
+}

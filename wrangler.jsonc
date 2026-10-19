@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "apply-europe-cv-api",
+  "account_id": "26cb5dfa430ee53b54c3cb7824c5f5d8",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-10-19",
+  "workers_dev": true,
+  "vars": {"ALLOWED_ORIGIN": "https://kami80.github.io"},
+  "ratelimits": [{"name": "RESUME_LIMITER", "namespace_id": "108707587", "simple": {"limit": 3, "period": 60}}],
+  "observability": {"enabled": true, "traces": {"enabled": true}}
+}
