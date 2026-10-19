@@ -3,14 +3,15 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import {telegramFetch,pollWelcome} from './telegram.mjs';
 import {FormData} from 'undici';
+import {verifyApplicant,applicantDocument,applicantCaption,applicantButtons} from './applicant-identity.mjs';
 
 const assets = new Map([['/', ['index.html','text/html; charset=utf-8']], ['/index.html',['index.html','text/html; charset=utf-8']], ...['contact-qr.png','group-qr.png','reference-cv-preview.webp','reference-academic-cv.pdf'].map(name=>['/'+name,[name,name.endsWith('.pdf')?'application/pdf':name.endsWith('.png')?'image/png':'image/webp']])]);
 
-export function createServer({token=process.env.TELEGRAM_BOT_TOKEN,chatId=process.env.TELEGRAM_CHAT_ID,send=telegramFetch}={}) {
+export function createServer({token=process.env.TELEGRAM_BOT_TOKEN,chatId=process.env.TELEGRAM_CHAT_ID,identitySecret=process.env.TELEGRAM_WEBHOOK_SECRET,send=telegramFetch}={}) {
   const attempts=new Map();
   return http.createServer(async(req,res)=>{
     const json=(code,body)=>{res.writeHead(code,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(body));};
-    if(req.url==='/api/resume'){
+    if(req.url==='/api/resume'||req.url==='/api/identity'){
       if(req.method!=='POST')return json(405,{error:'Use POST.'});
       if(req.headers.origin){try{if(new URL(req.headers.origin).host!==req.headers.host)return json(403,{error:'Origin not allowed.'});}catch{return json(403,{error:'Invalid origin.'});}}
       if(!token||!chatId)return json(503,{error:'Telegram delivery is not configured yet. Contact @SafaeiKamyab. Your draft is saved.'});
@@ -22,9 +23,12 @@ export function createServer({token=process.env.TELEGRAM_BOT_TOKEN,chatId=proces
       try{
         for await(const chunk of req){bytes+=chunk.length;if(bytes>256000)return json(413,{error:'Resume is too large. Please shorten your entries.'});chunks.push(chunk);}
         let body;try{body=JSON.parse(Buffer.concat(chunks).toString());}catch{return json(400,{error:'Invalid request.'});}
+        const applicant=await verifyApplicant(body?.telegramIdentity,identitySecret);
+        if(!applicant)return json(401,{error:'Please connect your Telegram account using the bot before submitting.'});
+        if(req.url==='/api/identity')return json(200,{ok:true,applicant:{id:applicant.id,username:applicant.username,expires:applicant.expires}});
         if(body.consent!==true||typeof body.markdown!=='string'||!body.markdown.trim()||typeof body.filename!=='string'||!/^[\p{L}\p{N}_.-]{1,150}\.md$/u.test(body.filename))return json(400,{error:'A resume, valid filename and consent are required.'});
         attempts.set(ip,now);
-        const form=new FormData();form.set('chat_id',chatId);form.set('caption','New resume · 699 Toman per resume · Payment not collected');form.set('document',new Blob([body.markdown],{type:'text/markdown;charset=utf-8'}),body.filename);
+        const form=new FormData();form.set('chat_id',chatId);form.set('caption',applicantCaption(applicant));form.set('reply_markup',JSON.stringify(applicantButtons(applicant)));form.set('document',new Blob([applicantDocument(body.markdown,applicant)],{type:'text/markdown;charset=utf-8'}),body.filename);
         const response=await send(`https://api.telegram.org/bot${token}/sendDocument`,{method:'POST',body:form,signal:AbortSignal.timeout(20000)});
         const result=await response.json();
         if(!response.ok||!result.ok)return json(502,{error:'Telegram could not accept the file. Please retry in a minute or contact @SafaeiKamyab.'});

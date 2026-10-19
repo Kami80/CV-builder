@@ -1,4 +1,6 @@
 import {welcome,welcomeButtons} from './bot-copy.mjs';
+import {website} from './bot-copy.mjs';
+import {signApplicant,verifyApplicant,applicantDocument,applicantCaption,applicantButtons} from './applicant-identity.mjs';
 
 const MAX_BYTES=256000;
 
@@ -29,9 +31,10 @@ export function createHandler(send=fetch){
    const result=await response.json();if(!response.ok||!result.ok)throw new Error('telegram');return result.result;
   };
   if(url.pathname==='/health'&&request.method==='GET')return json(200,{ok:true,service:'Apply Europe CV'});
-  if(!['/api/resume','/telegram/webhook'].includes(url.pathname))return json(404,{error:'Not found.'});
-  if(url.pathname==='/api/resume'&&!allowed)return json(403,{error:'Please submit from the Apply Europe CV website.'});
-  if(request.method==='OPTIONS'&&url.pathname==='/api/resume')return new Response(null,{status:204,headers});
+  const browserApi=['/api/resume','/api/identity'].includes(url.pathname);
+  if(!browserApi&&url.pathname!=='/telegram/webhook')return json(404,{error:'Not found.'});
+  if(browserApi&&!allowed)return json(403,{error:'Please submit from the Apply Europe CV website.'});
+  if(request.method==='OPTIONS'&&browserApi)return new Response(null,{status:204,headers});
   if(request.method!=='POST')return json(405,{error:'Use POST.'});
   if(!env.TELEGRAM_BOT_TOKEN||!env.TELEGRAM_CHAT_ID)return json(503,{error:'Delivery is temporarily unavailable. Your draft is saved.'});
   if(url.pathname==='/telegram/webhook'&&!await secretMatches(env.TELEGRAM_WEBHOOK_SECRET,request.headers.get('X-Telegram-Bot-Api-Secret-Token')))return json(403,{error:'Forbidden.'});
@@ -41,14 +44,22 @@ export function createHandler(send=fetch){
   if(url.pathname==='/telegram/webhook'){
    const message=body.message;
    if(message?.chat?.type==='private'&&/^\/start(?:@\w+)?(?:\s|$)/.test(message.text||'')){
-    try{await telegram('sendMessage',{chat_id:message.chat.id,text:welcome,reply_markup:welcomeButtons});}catch{return json(502,{error:'Welcome delivery unavailable.'});}
+    try{
+     if(!message.from||message.from.id!==message.chat.id||message.from.is_bot)return json(400,{error:'Invalid Telegram sender.'});
+     const token=await signApplicant(message.from,env.TELEGRAM_WEBHOOK_SECRET);
+     const buttons={inline_keyboard:[[{text:'Open your CV questionnaire',url:website+'#telegram='+token}],...welcomeButtons.inline_keyboard.slice(1)]};
+     await telegram('sendMessage',{chat_id:message.chat.id,text:welcome+'\n\nUse your personal questionnaire button below to include your verified Telegram contact with your resume. Keep this link private; it expires in 7 days.',reply_markup:buttons});
+    }catch{return json(502,{error:'Welcome delivery unavailable.'});}
    }
    return json(200,{ok:true});
   }
+  const applicant=await verifyApplicant(body.telegramIdentity,env.TELEGRAM_WEBHOOK_SECRET);
+  if(!applicant)return json(401,{error:'Please connect your Telegram account using the bot before submitting.'});
+  if(url.pathname==='/api/identity')return json(200,{ok:true,applicant:{id:applicant.id,username:applicant.username,expires:applicant.expires}});
   if(body.consent!==true||typeof body.markdown!=='string'||!body.markdown.trim()||typeof body.filename!=='string'||!/^[\p{L}\p{N}_.-]{1,150}\.md$/u.test(body.filename))return json(400,{error:'A resume, valid filename and consent are required.'});
   const ip=request.headers.get('CF-Connecting-IP')||'unknown';
-  if(!(await env.RESUME_LIMITER.limit({key:'resume:'+ip})).success)return json(429,{error:'Please wait one minute before sending again.'});
-  const form=new FormData();form.set('chat_id',env.TELEGRAM_CHAT_ID);form.set('caption','New resume · 699 Toman per resume · Payment not collected');form.set('document',new Blob([body.markdown],{type:'text/markdown;charset=utf-8'}),body.filename);
+  if(!(await env.RESUME_LIMITER.limit({key:'resume:'+applicant.id})).success||!(await env.RESUME_LIMITER.limit({key:'ip:'+ip})).success)return json(429,{error:'Please wait one minute before sending again.'});
+  const form=new FormData();form.set('chat_id',env.TELEGRAM_CHAT_ID);form.set('caption',applicantCaption(applicant));form.set('reply_markup',JSON.stringify(applicantButtons(applicant)));form.set('document',new Blob([applicantDocument(body.markdown,applicant)],{type:'text/markdown;charset=utf-8'}),body.filename);
   try{await telegram('sendDocument',form,true);return json(200,{ok:true});}
   catch{return json(502,{error:'Delivery could not be confirmed. Contact @SafaeiKamyab before retrying. Your draft is saved.'});}
  };

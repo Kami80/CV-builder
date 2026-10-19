@@ -54,3 +54,11 @@ The reference PDF is public and contains the owner’s existing contact details.
 - Telegram file delivery: https://core.telegram.org/bots/api#senddocument
 - Telegram webhooks: https://core.telegram.org/bots/api#setwebhook
 - Cloudflare secrets: https://developers.cloudflare.com/workers/configuration/secrets/
+
+## Applicant Telegram contact
+
+Applicants connect through https://t.me/ApplyEuropeCVBot?start=cv before sending. The bot reads their ID and optional username from Telegram’s authenticated private-message update and returns a personal questionnaire link. The backend signs that identity for seven days and verifies it again at submission. Manually supplied IDs or usernames are not trusted.
+
+The owner’s document and caption include the verified numeric ID and username (or “Not set”), with a Contact applicant button. Applicants receive no resume file. Telegram privacy settings may limit direct contact through an ID link when a username is unavailable.
+
+The personal link is a bearer credential: keep it private. Its token is placed in the URL fragment, removed from the address bar after capture, and saved separately in browser local storage. A Disconnect button removes it. It is never included in the resume or owner notification. If Telegram opens a different browser, applicants can paste their personal link into the original browser to keep their existing draft. After seven days they can press Start again for a fresh link. The UI asks for consent to share Telegram contact details with the resume.
