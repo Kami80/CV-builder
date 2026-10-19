@@ -38,3 +38,13 @@ test('connection gate starts closed, opens only for verified identity, and close
  context.telegramApplicant=null;vm.runInContext('updateTelegramConnection()',context);
  assert.equal(context.document.body.dataset.connected,'false');assert.equal($('#disconnectTelegram').hidden,true);
 });
+test('returning browser receives verified identity without a personal-link input',async()=>{
+ const html=await readFile(new URL('./index.html',import.meta.url),'utf8');
+ assert.doesNotMatch(html,/id="telegramLink"|id="connectTelegramLink"|copy that personal link/);
+ const fn=html.match(/  async function checkConnection\(\)\{[\s\S]*?\n  \}/)[0];
+ const session={id:'test-session',pollSecret:'private-proof',expires:Math.floor(Date.now()/1000)+60};
+ const status={};let received=null;
+ const context={pendingConnection:session,telegramApplicant:null,checkingConnection:false,connectionTimer:null,document:{hidden:false},Date,$:()=>status,clearTimeout(){},setTimeout(){throw Error('Connected browser should stop polling');},window:{scrollTo(){}},stopConnection(){},connectionRequest:async(path,body)=>{assert.equal(path,'/api/connect/status');assert.equal(body.pollSecret,session.pollSecret);return {telegramIdentity:'verified-token'};},connectTelegram:async token=>{received=token;context.telegramApplicant={id:123};context.pendingConnection=null;}};
+ vm.createContext(context);await vm.runInContext(fn+';checkConnection()',context);
+ assert.equal(received,'verified-token');assert.equal(context.checkingConnection,false);
+});

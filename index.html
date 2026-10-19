@@ -82,7 +82,7 @@
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
     @media print{.app{display:block}.builder-layout{display:block}.builder-layout .preview-panel{display:block!important;position:static;box-shadow:none;border:0}.builder-layout .preview-panel .paper-container{max-height:none;overflow:visible;background:white;padding:0}.builder-layout .preview-panel .paper{min-height:0;max-width:none;box-shadow:none;border:0;padding:0}.preview-top,.preview-bottom,.reference-card,.editor-stack,.status-row,.page-foot{display:none!important}}
   .contact-card{display:flex;align-items:center;justify-content:space-between;gap:24px;border:1px solid #dbe7df;background:#fff;border-radius:16px;padding:24px;margin-bottom:18px}.contact-card h2{font:normal 25px Georgia,serif;margin:8px 0}.contact-card p{font-size:13px;color:#60776b}.contact-card p strong{font-size:23px;color:#285e4a}.contact-card small{font-size:12px;font-weight:400}.qr-links{display:flex;gap:12px}.qr-links img{width:112px;height:auto;border-radius:10px;display:block}.send-status{margin-top:16px;font-size:14px;color:#285e4a}.consent{display:flex;gap:10px;margin-top:18px;font-size:13px;align-items:flex-start}.consent input{width:auto;margin-top:4px}@media(max-width:640px){.contact-card{flex-direction:column;align-items:flex-start}.qr-links img{width:95px}}@media print{.contact-card{display:none}}
-  [hidden]{display:none!important}body[data-connected="false"] [data-builder-only],body[data-connected="true"] [data-welcome-only]{display:none!important}body[data-connected="false"] .app{display:block;max-width:1100px;margin:0 auto;padding-top:32px}body[data-connected="false"] .workspace{width:100%}#telegramLink{display:block;width:100%;max-width:540px;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0 12px;font:inherit}#connectedTelegramStatus{max-width:230px;overflow-wrap:anywhere}@media(max-width:640px){#connectedTelegramStatus{display:none}}
+  [hidden]{display:none!important}body[data-connected="false"] [data-builder-only],body[data-connected="true"] [data-welcome-only]{display:none!important}body[data-connected="false"] .app{display:block;max-width:1100px;margin:0 auto;padding-top:32px}body[data-connected="false"] .workspace{width:100%}#connectedTelegramStatus{max-width:230px;overflow-wrap:anywhere}@media(max-width:640px){#connectedTelegramStatus{display:none}}
   </style>
 </head>
 <body data-connected="false">
@@ -106,7 +106,7 @@
       <p>Welcome! I’m Kamyab Safaei. Let’s bring your education, research and experience together for your next academic application. Take your time—your draft is saved as you go. We’ll organize your answers and send your resume directly to Kamyab Safaei on Telegram.</p>
     </div>
 <section class="contact-card" data-welcome-only aria-label="Resume service"><div><span class="reference-label">APPLY EUROPE · KAMYAB SAFAEI</span><h2>Your next chapter starts here.</h2><p><strong>699 Toman <small>per resume</small></strong></p><p>Complete the questionnaire, review your details, then send your resume directly to Kamyab on Telegram.</p><div class="reference-actions"><a class="btn soft" href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">Contact @SafaeiKamyab ↗</a><a class="btn" href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer">Join Apply Europe ↗</a><a class="btn" href="https://kami80.github.io/CV-builder/" target="_blank" rel="noopener noreferrer">Our website ↗</a></div></div><div class="qr-links"><a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer"><img src="contact-qr.png" alt="Scan to contact @SafaeiKamyab" loading="lazy"></a><a href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer"><img src="group-qr.png" alt="Scan to join @ApplyEuropeIran" loading="lazy"></a></div></section>
-<section class="contact-card" data-welcome-only aria-label="Your Telegram connection"><div><span class="reference-label">STAY IN TOUCH</span><h2>Connect your Telegram</h2><p>Connect before submitting so Kamyab can contact you about your resume. We’ll include your verified Telegram user ID and username, if you have one.</p><p id="telegramStatus" role="status" aria-live="polite">Not connected yet.</p><div class="reference-actions"><a class="btn soft" href="https://t.me/ApplyEuropeCVBot?start=cv" target="_blank" rel="noopener noreferrer">Connect through Telegram ↗</a></div><p>Press Start in the bot, then use its personal questionnaire button. If your draft is in another browser, copy that personal link and paste it below in your original browser.</p><label for="telegramLink">Personal questionnaire link</label><input id="telegramLink" type="password" autocomplete="off" placeholder="Paste the personal link from your bot"><button class="btn" type="button" id="connectTelegramLink">Connect this browser</button></div></section>
+<section class="contact-card" data-welcome-only aria-label="Your Telegram connection"><div><span class="reference-label">STAY IN TOUCH</span><h2>Connect your Telegram</h2><p>Connect before submitting so Kamyab can contact you about your resume. We’ll include your verified Telegram user ID and username, if you have one.</p><p id="telegramStatus" role="status" aria-live="polite">Not connected yet.</p><div class="reference-actions"><button class="btn soft" id="connectTelegram" type="button">Connect through Telegram ↗</button></div><p>Open Telegram and press <strong>Start</strong>, then return to this tab. Your CV builder will open automatically. You can also use the bot’s <strong>Open CV builder</strong> button.</p></div></section>
     <section data-builder-only class="reference-card" aria-labelledby="referenceTitle">
       <a class="reference-thumb" href="reference-academic-cv.pdf" target="_blank" rel="noopener" aria-label="Open the sample academic CV PDF"><img src="reference-cv-preview.webp" alt="First-page thumbnail of a two-page academic CV example"></a>
       <div class="reference-info">
@@ -396,21 +396,61 @@
   async function connectTelegram(value){
     try{
       let token=value.trim();if(token.includes('#'))token=new URLSearchParams(token.split('#')[1]).get('telegram')||'';
-      if(!token)throw new Error('Open the bot, press Start, then use your personal questionnaire link.');
+      if(!token)throw new Error('Open Telegram and press Start to connect.');
       $('#telegramStatus').textContent='Checking your Telegram connection…';
       const response=await fetch(apiBase+'/api/identity',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({telegramIdentity:token}),signal:AbortSignal.timeout(15000)});
-      const result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||'Unable to connect. Please use a new link from the bot.');
+      const result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||'Unable to connect. Please select Connect through Telegram again.');
       telegramIdentity=token;telegramApplicant=result.applicant;
       try{localStorage.setItem(identityKey,token);}catch(_){}
-      $('#telegramLink').value='';updateTelegramConnection();
+      stopConnection();updateTelegramConnection();
     }catch(error){telegramIdentity='';telegramApplicant=null;try{localStorage.removeItem(identityKey);}catch(_){}updateTelegramConnection();$('#telegramStatus').textContent=error.message||'Unable to connect to Telegram. Please try again.';}
+  }
+  const pendingConnectionKey='applyEuropePendingConnection';
+  let pendingConnection=null,connectionTimer=null,checkingConnection=false;
+  function stopConnection(){
+    pendingConnection=null;clearTimeout(connectionTimer);connectionTimer=null;
+    try{sessionStorage.removeItem(pendingConnectionKey);}catch(_){}
+  }
+  async function connectionRequest(path,body){
+    const response=await fetch(apiBase+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});
+    const result=await response.json();if(!response.ok||!result.ok){const error=new Error(result.error||'Unable to connect. Please try again.');error.status=response.status;throw error;}return result;
+  }
+  async function checkConnection(){
+    if(!pendingConnection||telegramApplicant||checkingConnection)return;
+    const current=pendingConnection;
+    if(current.expires*1000<=Date.now()){stopConnection();$('#telegramStatus').textContent='Connection expired. Select Connect through Telegram to try again.';return;}
+    if(document.hidden){clearTimeout(connectionTimer);connectionTimer=setTimeout(checkConnection,3000);return;}
+    checkingConnection=true;
+    try{
+      const result=await connectionRequest('/api/connect/status',{id:current.id,pollSecret:current.pollSecret});
+      if(pendingConnection!==current)return;
+      if(result.telegramIdentity){await connectTelegram(result.telegramIdentity);if(telegramApplicant)window.scrollTo({top:0,behavior:'smooth'});return;}
+      $('#telegramStatus').textContent='Waiting for Telegram… Press Start in the bot, then return here.';
+    }catch(error){
+      if(pendingConnection===current){if(error.status===410)stopConnection();$('#telegramStatus').textContent=error.message;}
+    }finally{checkingConnection=false;if(pendingConnection&&!telegramApplicant){clearTimeout(connectionTimer);connectionTimer=setTimeout(checkConnection,3000);}}
+  }
+  async function beginTelegramConnection(){
+    const button=$('#connectTelegram');button.disabled=true;
+    const popup=window.open('about:blank','_blank');if(popup)popup.opener=null;
+    try{
+      stopConnection();$('#telegramStatus').textContent='Opening Telegram…';
+      const result=await connectionRequest('/api/connect',{});pendingConnection=result.connection;
+      try{sessionStorage.setItem(pendingConnectionKey,JSON.stringify(pendingConnection));}catch(_){}
+      if(popup)popup.location.href=pendingConnection.botUrl;else window.location.href=pendingConnection.botUrl;
+      checkConnection();
+    }catch(error){if(popup)popup.close();$('#telegramStatus').textContent=error.message;}
+    finally{button.disabled=false;}
   }
   async function restoreTelegram(){
     const params=new URLSearchParams(location.hash.slice(1));let token=params.get('telegram');
     if(token)history.replaceState(null,'',location.pathname+location.search);
     else try{token=localStorage.getItem(identityKey);}catch(_){}
     if(token)await connectTelegram(token);else updateTelegramConnection();
+    if(!telegramApplicant){try{const pending=JSON.parse(sessionStorage.getItem(pendingConnectionKey));if(pending?.expires*1000>Date.now())pendingConnection=pending;else stopConnection();}catch(_){stopConnection();}checkConnection();}
   }
+  window.addEventListener('focus',()=>{clearTimeout(connectionTimer);checkConnection();});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){clearTimeout(connectionTimer);checkConnection();}});
   let sending=false;
   async function sendResume(){
     if(sending)return;
@@ -427,8 +467,8 @@
     schedulePersist();progress();renderNav();renderTabs();renderPreview();});
   document.addEventListener('click',ev=>{const btn=ev.target.closest('button,a');if(!btn)return;
     if(btn.id==='reviewTop'){go('submit');return;}
-    if(btn.id==='connectTelegramLink'){connectTelegram($('#telegramLink').value);return;}
-    if(btn.id==='disconnectTelegram'){telegramIdentity='';telegramApplicant=null;try{localStorage.removeItem(identityKey);}catch(_){}updateTelegramConnection();return;}
+    if(btn.id==='connectTelegram'){beginTelegramConnection();return;}
+    if(btn.id==='disconnectTelegram'){stopConnection();telegramIdentity='';telegramApplicant=null;try{localStorage.removeItem(identityKey);}catch(_){}updateTelegramConnection();return;}
     if(btn.id==='sendMain'){sendResume();return;}
     if(btn.id==='clearForm'){clear();return;}
     if(btn.id==='previewMain'){view='preview';updateView();return;}
@@ -448,7 +488,7 @@
   function hideReference(){referenceDialog.hidden=true;referenceReturnFocus?.focus();}
   document.addEventListener('click',e=>{if(e.target.closest('[data-open-reference]'))showReference(e.target.closest('[data-open-reference]'));if(e.target.closest('#closeReference')||e.target===referenceDialog)hideReference();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!referenceDialog.hidden){e.preventDefault();hideReference();}});
-  window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY&&e.newValue){toast('Your saved draft changed in another tab. Reload this page to view it.');}});
+  window.addEventListener('storage',e=>{if(e.key===identityKey){if(e.newValue)connectTelegram(e.newValue);else{stopConnection();telegramIdentity='';telegramApplicant=null;updateTelegramConnection();}return;}if(e.key===STORAGE_KEY&&e.newValue){toast('Your saved draft changed in another tab. Reload this page to view it.');}});
   document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();persist();toast('Draft saved on this device.');}});
   refresh();
   restoreTelegram();

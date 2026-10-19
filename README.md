@@ -61,4 +61,12 @@ Applicants connect through https://t.me/ApplyEuropeCVBot?start=cv before sending
 
 The owner’s document and caption include the verified numeric ID and username (or “Not set”), with a Contact applicant button. Applicants receive no resume file. Telegram privacy settings may limit direct contact through an ID link when a username is unavailable.
 
-The personal link is a bearer credential: keep it private. Its token is placed in the URL fragment, removed from the address bar after capture, and saved separately in browser local storage. A Disconnect button removes it. It is never included in the resume or owner notification. If Telegram opens a different browser, applicants can paste their personal link into the original browser to keep their existing draft. After seven days they can press Start again for a fresh link. The UI asks for consent to share Telegram contact details with the resume.
+The personal link is a bearer credential: keep it private. Its token is placed in the URL fragment, removed from the address bar after capture, and saved separately in browser local storage. A Disconnect button removes it. It is never included in the resume or owner notification. Applicants select Connect through Telegram, press Start in the bot, and return to the original tab. The browser checks its private connection request and unlocks automatically. The bot also provides an Open CV builder button. No link copying is required. After seven days they can press Start again for a fresh link. The UI asks for consent to share Telegram contact details with the resume.
+
+## Automatic Telegram connection
+
+`/api/connect` creates a ten-minute connection request. The browser keeps a separate private polling secret in session storage; the bot Start link contains only the request ID. The authenticated Telegram webhook binds the request to a verified applicant once. `/api/connect/status` releases the signed identity only to the original browser with the matching polling secret. Polling pauses while the tab is hidden and checks immediately on return. A bot button can alternatively open the verified questionnaire directly.
+
+Connection state lives in the Cloudflare D1 database `apply-europe-cv-connections`. It contains expiring identity tokens and hashed polling secrets, never CV content. Expired records are removed when creating connections and by a half-hourly cleanup trigger. Initialize a new database with `connection-schema.sql`; preserve the D1 binding in `wrangler.jsonc` when deploying.
+
+Telegram requires a user action to switch apps or open a bot button; a bot cannot forcibly redirect the Telegram app to an external browser. Returning to the original browser is sufficient to open the builder automatically.

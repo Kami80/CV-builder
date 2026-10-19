@@ -5,7 +5,9 @@
   "main": "worker.mjs",
   "compatibility_date": "2026-10-19",
   "workers_dev": true,
+  "triggers": {"crons": ["*/30 * * * *"]},
+  "d1_databases": [{"binding":"CONNECTIONS","database_name":"apply-europe-cv-connections","database_id":"170f9c37-dc56-4ede-9d36-86955b5c1c4f"}],
   "vars": {"ALLOWED_ORIGIN": "https://kami80.github.io"},
-  "ratelimits": [{"name": "RESUME_LIMITER", "namespace_id": "108707587", "simple": {"limit": 3, "period": 60}}],
+  "ratelimits": [{"name":"CONNECTION_LIMITER","namespace_id":"108707588","simple":{"limit":10,"period":60}},{"name": "RESUME_LIMITER", "namespace_id": "108707587", "simple": {"limit": 3, "period": 60}}],
   "observability": {"enabled": true, "traces": {"enabled": true}}
 }

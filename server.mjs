@@ -11,6 +11,14 @@ export function createServer({token=process.env.TELEGRAM_BOT_TOKEN,chatId=proces
   const attempts=new Map();
   return http.createServer(async(req,res)=>{
     const json=(code,body)=>{res.writeHead(code,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(body));};
+    if(['/api/connect','/api/connect/status'].includes(req.url)){
+      if(req.method!=='POST')return json(405,{error:'Use POST.'});
+      if(req.headers.origin){try{if(new URL(req.headers.origin).host!==req.headers.host)return json(403,{error:'Origin not allowed.'});}catch{return json(403,{error:'Invalid origin.'});}}
+      try{let size=0;const chunks=[];for await(const chunk of req){size+=chunk.length;if(size>4096)return json(413,{error:'Invalid connection request.'});chunks.push(chunk);}
+       const response=await telegramFetch('https://apply-europe-cv-api.micioparla.workers.dev'+req.url,{method:'POST',headers:{Origin:'https://kami80.github.io','Content-Type':'application/json'},body:Buffer.concat(chunks),signal:AbortSignal.timeout(15000)});
+       return json(response.status,await response.json());
+      }catch{return json(503,{error:'Unable to connect to Telegram. Please try again.'});}
+    }
     if(req.url==='/api/resume'||req.url==='/api/identity'){
       if(req.method!=='POST')return json(405,{error:'Use POST.'});
       if(req.headers.origin){try{if(new URL(req.headers.origin).host!==req.headers.host)return json(403,{error:'Origin not allowed.'});}catch{return json(403,{error:'Invalid origin.'});}}

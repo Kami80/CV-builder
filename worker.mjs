@@ -1,6 +1,7 @@
 import {welcome,welcomeButtons} from './bot-copy.mjs';
 import {website} from './bot-copy.mjs';
 import {signApplicant,verifyApplicant,applicantDocument,applicantCaption,applicantButtons} from './applicant-identity.mjs';
+import {startConnection,connectionStatus,completeConnection} from './connection.mjs';
 
 const MAX_BYTES=256000;
 
@@ -31,7 +32,7 @@ export function createHandler(send=fetch){
    const result=await response.json();if(!response.ok||!result.ok)throw new Error('telegram');return result.result;
   };
   if(url.pathname==='/health'&&request.method==='GET')return json(200,{ok:true,service:'Apply Europe CV'});
-  const browserApi=['/api/resume','/api/identity'].includes(url.pathname);
+  const browserApi=['/api/resume','/api/identity','/api/connect','/api/connect/status'].includes(url.pathname);
   if(!browserApi&&url.pathname!=='/telegram/webhook')return json(404,{error:'Not found.'});
   if(browserApi&&!allowed)return json(403,{error:'Please submit from the Apply Europe CV website.'});
   if(request.method==='OPTIONS'&&browserApi)return new Response(null,{status:204,headers});
@@ -47,11 +48,22 @@ export function createHandler(send=fetch){
     try{
      if(!message.from||message.from.id!==message.chat.id||message.from.is_bot)return json(400,{error:'Invalid Telegram sender.'});
      const token=await signApplicant(message.from,env.TELEGRAM_WEBHOOK_SECRET);
-     const buttons={inline_keyboard:[[{text:'Open your CV questionnaire',url:website+'#telegram='+token}],...welcomeButtons.inline_keyboard.slice(1)]};
-     await telegram('sendMessage',{chat_id:message.chat.id,text:welcome+'\n\nUse your personal questionnaire button below to include your verified Telegram contact with your resume. Keep this link private; it expires in 7 days.',reply_markup:buttons});
+     const connectionId=message.text.match(/^\/start(?:@\w+)?\s+c_([a-f0-9]{48})$/)?.[1];
+     let connected=false;
+     if(connectionId){connected=await completeConnection(env.CONNECTIONS,connectionId,token);if(!connected){await telegram('sendMessage',{chat_id:message.chat.id,text:'This connection request has expired or was already used. Return to the website and select Connect through Telegram again.'});return json(200,{ok:true});}}
+     const buttons={inline_keyboard:[[{text:'Open CV builder',url:website+'#telegram='+token}],...welcomeButtons.inline_keyboard.slice(1)]};
+     await telegram('sendMessage',{chat_id:message.chat.id,text:welcome+(connected?'\n\n✅ Telegram connected! Return to your browser—the CV builder opens automatically. You can also tap Open CV builder below.':'\n\nTap Open CV builder below to begin. Your Telegram contact is connected automatically.'),reply_markup:buttons});
     }catch{return json(502,{error:'Welcome delivery unavailable.'});}
    }
    return json(200,{ok:true});
+  }
+  if(url.pathname==='/api/connect'){
+   const ip=request.headers.get('CF-Connecting-IP')||'unknown';
+   if(!(await env.CONNECTION_LIMITER.limit({key:'connect:'+ip})).success)return json(429,{error:'Please wait a minute before connecting again.'});
+   try{return json(200,{ok:true,connection:await startConnection(env.CONNECTIONS)});}catch{return json(503,{error:'Telegram connection is temporarily unavailable. Please try again.'});}
+  }
+  if(url.pathname==='/api/connect/status'){
+   try{const connection=await connectionStatus(env.CONNECTIONS,body);if(!connection)return json(410,{error:'Connection expired. Please connect through Telegram again.'});return json(200,{ok:true,pending:!connection.identity,...(connection.identity?{telegramIdentity:connection.identity}:{})});}catch{return json(503,{error:'Unable to check Telegram connection. Please try again.'});}
   }
   const applicant=await verifyApplicant(body.telegramIdentity,env.TELEGRAM_WEBHOOK_SECRET);
   if(!applicant)return json(401,{error:'Please connect your Telegram account using the bot before submitting.'});
@@ -65,4 +77,7 @@ export function createHandler(send=fetch){
  };
 }
 
-export default {fetch:(request,env)=>createHandler()(request,env)};
+export default {
+ fetch:(request,env)=>createHandler()(request,env),
+ scheduled(controller,env,ctx){ctx.waitUntil(env.CONNECTIONS.prepare('DELETE FROM telegram_connections WHERE expires < ?1').bind(Math.floor(Date.now()/1000)).run());}
+};
