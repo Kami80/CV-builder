@@ -82,31 +82,32 @@
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
     @media print{.app{display:block}.builder-layout{display:block}.builder-layout .preview-panel{display:block!important;position:static;box-shadow:none;border:0}.builder-layout .preview-panel .paper-container{max-height:none;overflow:visible;background:white;padding:0}.builder-layout .preview-panel .paper{min-height:0;max-width:none;box-shadow:none;border:0;padding:0}.preview-top,.preview-bottom,.reference-card,.editor-stack,.status-row,.page-foot{display:none!important}}
   .contact-card{display:flex;align-items:center;justify-content:space-between;gap:24px;border:1px solid #dbe7df;background:#fff;border-radius:16px;padding:24px;margin-bottom:18px}.contact-card h2{font:normal 25px Georgia,serif;margin:8px 0}.contact-card p{font-size:13px;color:#60776b}.contact-card p strong{font-size:23px;color:#285e4a}.contact-card small{font-size:12px;font-weight:400}.qr-links{display:flex;gap:12px}.qr-links img{width:112px;height:auto;border-radius:10px;display:block}.send-status{margin-top:16px;font-size:14px;color:#285e4a}.consent{display:flex;gap:10px;margin-top:18px;font-size:13px;align-items:flex-start}.consent input{width:auto;margin-top:4px}@media(max-width:640px){.contact-card{flex-direction:column;align-items:flex-start}.qr-links img{width:95px}}@media print{.contact-card{display:none}}
+  [hidden]{display:none!important}body[data-connected="false"] [data-builder-only],body[data-connected="true"] [data-welcome-only]{display:none!important}body[data-connected="false"] .app{display:block;max-width:1100px;margin:0 auto;padding-top:32px}body[data-connected="false"] .workspace{width:100%}#telegramLink{display:block;width:100%;max-width:540px;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:8px 0 12px;font:inherit}#connectedTelegramStatus{max-width:230px;overflow-wrap:anywhere}@media(max-width:640px){#connectedTelegramStatus{display:none}}
   </style>
 </head>
-<body>
-<header class="topbar">
+<body data-connected="false">
+<header class="topbar" data-builder-only>
   <a href="#" class="brand" id="logo" aria-label="Academic CV Intake home">
     <span class="brand-mark">CV<span style="color:#98d0cd">.</span></span>
     <span><span class="brand-name">Academic CV Intake</span><span class="brand-sub">Applicant questionnaire</span></span>
   </a>
-  <div class="top-actions">
+  <div class="top-actions"><span id="connectedTelegramStatus" class="subtle"></span><button class="btn" type="button" id="disconnectTelegram" hidden>Disconnect Telegram</button>
     <span class="saved" id="saveStatus"><span class="saved-dot"></span><span id="saveLabel">Saved on this device</span></span>
     <button class="btn light-import" type="button" id="sampleTop" data-open-reference="1">◧ &nbsp;Sample CV</button>
     <button class="btn primary" type="button" id="reviewTop">Review &amp; send</button>
   </div>
 </header>
 <main class="app" id="mainApp">
-  <aside class="sidebar" id="sidebar" aria-label="Guided CV steps"></aside>
+  <aside data-builder-only class="sidebar" id="sidebar" aria-label="Guided CV steps"></aside>
   <div class="workspace">
-    <div class="intro">
+    <div class="intro" data-builder-only>
       <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR ACADEMIC CV, MADE SIMPLE</div>
       <h1>Welcome to Apply Europe CV<span class="heading-dot">.</span></h1>
       <p>Welcome! I’m Kamyab Safaei. Let’s bring your education, research and experience together for your next academic application. Take your time—your draft is saved as you go. We’ll organize your answers and send your resume directly to Kamyab Safaei on Telegram.</p>
     </div>
-<section class="contact-card" aria-label="Resume service"><div><span class="reference-label">APPLY EUROPE · KAMYAB SAFAEI</span><h2>Your next chapter starts here.</h2><p><strong>699 Toman <small>per resume</small></strong></p><p>Complete the questionnaire, review your details, then send your resume directly to Kamyab on Telegram.</p><div class="reference-actions"><a class="btn soft" href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">Contact @SafaeiKamyab ↗</a><a class="btn" href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer">Join Apply Europe ↗</a><a class="btn" href="https://kami80.github.io/CV-builder/" target="_blank" rel="noopener noreferrer">Our website ↗</a></div></div><div class="qr-links"><a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer"><img src="contact-qr.png" alt="Scan to contact @SafaeiKamyab" loading="lazy"></a><a href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer"><img src="group-qr.png" alt="Scan to join @ApplyEuropeIran" loading="lazy"></a></div></section>
-<section class="contact-card" aria-label="Your Telegram connection"><div><span class="reference-label">STAY IN TOUCH</span><h2>Connect your Telegram</h2><p>Connect before submitting so Kamyab can contact you about your resume. We’ll include your verified Telegram user ID and username, if you have one.</p><p id="telegramStatus" role="status" aria-live="polite">Not connected yet.</p><div class="reference-actions"><a class="btn soft" href="https://t.me/ApplyEuropeCVBot?start=cv" target="_blank" rel="noopener noreferrer">Connect through Telegram ↗</a><button class="btn" type="button" id="disconnectTelegram" hidden>Disconnect</button></div><p>Press Start in the bot, then use its personal questionnaire button. If your draft is in another browser, copy that personal link and paste it below in your original browser.</p><label for="telegramLink">Personal questionnaire link</label><input id="telegramLink" type="password" autocomplete="off" placeholder="Paste the personal link from your bot"><button class="btn" type="button" id="connectTelegramLink">Connect this browser</button></div></section>
-    <section class="reference-card" aria-labelledby="referenceTitle">
+<section class="contact-card" data-welcome-only aria-label="Resume service"><div><span class="reference-label">APPLY EUROPE · KAMYAB SAFAEI</span><h2>Your next chapter starts here.</h2><p><strong>699 Toman <small>per resume</small></strong></p><p>Complete the questionnaire, review your details, then send your resume directly to Kamyab on Telegram.</p><div class="reference-actions"><a class="btn soft" href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">Contact @SafaeiKamyab ↗</a><a class="btn" href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer">Join Apply Europe ↗</a><a class="btn" href="https://kami80.github.io/CV-builder/" target="_blank" rel="noopener noreferrer">Our website ↗</a></div></div><div class="qr-links"><a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer"><img src="contact-qr.png" alt="Scan to contact @SafaeiKamyab" loading="lazy"></a><a href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer"><img src="group-qr.png" alt="Scan to join @ApplyEuropeIran" loading="lazy"></a></div></section>
+<section class="contact-card" data-welcome-only aria-label="Your Telegram connection"><div><span class="reference-label">STAY IN TOUCH</span><h2>Connect your Telegram</h2><p>Connect before submitting so Kamyab can contact you about your resume. We’ll include your verified Telegram user ID and username, if you have one.</p><p id="telegramStatus" role="status" aria-live="polite">Not connected yet.</p><div class="reference-actions"><a class="btn soft" href="https://t.me/ApplyEuropeCVBot?start=cv" target="_blank" rel="noopener noreferrer">Connect through Telegram ↗</a></div><p>Press Start in the bot, then use its personal questionnaire button. If your draft is in another browser, copy that personal link and paste it below in your original browser.</p><label for="telegramLink">Personal questionnaire link</label><input id="telegramLink" type="password" autocomplete="off" placeholder="Paste the personal link from your bot"><button class="btn" type="button" id="connectTelegramLink">Connect this browser</button></div></section>
+    <section data-builder-only class="reference-card" aria-labelledby="referenceTitle">
       <a class="reference-thumb" href="reference-academic-cv.pdf" target="_blank" rel="noopener" aria-label="Open the sample academic CV PDF"><img src="reference-cv-preview.webp" alt="First-page thumbnail of a two-page academic CV example"></a>
       <div class="reference-info">
         <span class="reference-label">A LITTLE INSPIRATION</span>
@@ -115,14 +116,14 @@
       </div>
       <div class="reference-actions"><button class="btn soft" type="button" id="openReference" data-open-reference="1">View example <span aria-hidden="true">↗</span></button></div>
     </section>
-    <div class="status-row">
+    <div class="status-row" data-builder-only>
       <div class="status-left">
         <div class="status-upper"><strong id="currentStepLabel">Step 1 of 7 · About you</strong><span class="progress-label" id="progressLabel">0 of 7 steps reviewed</span></div>
         <div class="progress" role="progressbar" aria-label="Guided steps reviewed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
       </div>
       <div class="view-switch" role="group" aria-label="Workspace view"><button class="view-btn active" type="button" data-view="edit" aria-pressed="true">✎ &nbsp; Editor</button><button class="view-btn" type="button" data-view="preview" aria-pressed="false">◫ &nbsp; Preview</button></div>
     </div>
-    <div class="builder-layout" id="builderLayout" data-view="edit">
+    <div data-builder-only class="builder-layout" id="builderLayout" data-view="edit">
       <div class="editor-stack" id="editorStack">
         <nav class="section-tabs" id="sectionTabs" aria-label="Sections in this step"></nav>
         <section id="formPanel" class="form-panel" aria-live="off"></section>
@@ -134,7 +135,7 @@
         <div class="preview-bottom">This is a content preview, not the final typeset CV.</div>
       </section>
     </div>
-    <div class="page-foot">Designed for academic applications <span>·</span> Drafts saved on your device <span>·</span> Sent to Telegram with your consent</div>
+    <div class="page-foot" data-builder-only>Designed for academic applications <span>·</span> Drafts saved on your device <span>·</span> Sent to Telegram with your consent</div>
   </div>
 </main>
 <div class="reference-dialog" id="referenceDialog" role="dialog" aria-modal="true" aria-labelledby="referenceDialogTitle" hidden>
@@ -386,6 +387,8 @@
   let telegramIdentity='',telegramApplicant=null;
   function telegramConnectionText(){return telegramApplicant?`Connected: ${telegramApplicant.username?'@'+telegramApplicant.username:'Telegram account'} · User ID ${telegramApplicant.id}`:'Connect your Telegram account before sending your resume.';}
   function updateTelegramConnection(){
+    document.body.dataset.connected=telegramApplicant?'true':'false';
+    $('#connectedTelegramStatus').textContent=telegramApplicant?(telegramApplicant.username?'@'+telegramApplicant.username:'Telegram ID '+telegramApplicant.id):'';
     $('#telegramStatus').textContent=telegramConnectionText();
     $('#disconnectTelegram').hidden=!telegramApplicant;
     const summary=$('#telegramSubmitStatus');if(summary)summary.textContent=telegramConnectionText();
