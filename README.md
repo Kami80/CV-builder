@@ -7,7 +7,7 @@ Guided seven-step academic resume questionnaire for Kamyab Safaei. Price: **699 
 - Apply Europe group: https://t.me/ApplyEuropeIran
 - Hosted backend: https://apply-europe-cv-api.micioparla.workers.dev
 
-Applicants review their CV, consent to sharing it, then send a Markdown document directly to the owner’s Telegram inbox. No resume download or import controls are provided. Payment is arranged with Kamyab; this site does not collect or verify payment.
+Applicants review their CV, consent to sharing it, then send a Markdown document directly to the owner’s Telegram inbox. No resume download, import, Markdown preview or Markdown copy controls are provided. Applicants see only the form and formatted CV preview. Payment is arranged with Kamyab; this site does not collect or verify payment.
 
 ## Production architecture
 

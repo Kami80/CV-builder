@@ -104,7 +104,7 @@
       <h1>Welcome to Apply Europe CV<span class="heading-dot">.</span></h1>
       <p>Welcome! I’m Kamyab Safaei. Let’s bring your education, research and experience together for your next academic application. Take your time—your draft is saved as you go. We’ll organize your answers and send your resume directly to Kamyab Safaei on Telegram.</p>
     </div>
-<section class="contact-card" aria-label="Resume service"><div><span class="reference-label">APPLY EUROPE · KAMYAB SAFAEI</span><h2>Your next chapter starts here.</h2><p><strong>699 Toman <small>per resume</small></strong></p><p>Complete the questionnaire, review your details, then send your .md file directly to Kamyab on Telegram.</p><div class="reference-actions"><a class="btn soft" href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">Contact @SafaeiKamyab ↗</a><a class="btn" href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer">Join Apply Europe ↗</a><a class="btn" href="https://kami80.github.io/CV-builder/" target="_blank" rel="noopener noreferrer">Our website ↗</a></div></div><div class="qr-links"><a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer"><img src="contact-qr.png" alt="Scan to contact @SafaeiKamyab" loading="lazy"></a><a href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer"><img src="group-qr.png" alt="Scan to join @ApplyEuropeIran" loading="lazy"></a></div></section>
+<section class="contact-card" aria-label="Resume service"><div><span class="reference-label">APPLY EUROPE · KAMYAB SAFAEI</span><h2>Your next chapter starts here.</h2><p><strong>699 Toman <small>per resume</small></strong></p><p>Complete the questionnaire, review your details, then send your resume directly to Kamyab on Telegram.</p><div class="reference-actions"><a class="btn soft" href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">Contact @SafaeiKamyab ↗</a><a class="btn" href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer">Join Apply Europe ↗</a><a class="btn" href="https://kami80.github.io/CV-builder/" target="_blank" rel="noopener noreferrer">Our website ↗</a></div></div><div class="qr-links"><a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer"><img src="contact-qr.png" alt="Scan to contact @SafaeiKamyab" loading="lazy"></a><a href="https://t.me/ApplyEuropeIran" target="_blank" rel="noopener noreferrer"><img src="group-qr.png" alt="Scan to join @ApplyEuropeIran" loading="lazy"></a></div></section>
     <section class="reference-card" aria-labelledby="referenceTitle">
       <a class="reference-thumb" href="reference-academic-cv.pdf" target="_blank" rel="noopener" aria-label="Open the sample academic CV PDF"><img src="reference-cv-preview.webp" alt="First-page thumbnail of a two-page academic CV example"></a>
       <div class="reference-info">
@@ -119,7 +119,7 @@
         <div class="status-upper"><strong id="currentStepLabel">Step 1 of 7 · About you</strong><span class="progress-label" id="progressLabel">0 of 7 steps reviewed</span></div>
         <div class="progress" role="progressbar" aria-label="Guided steps reviewed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
       </div>
-      <div class="view-switch" role="group" aria-label="Workspace view"><button class="view-btn active" type="button" data-view="edit" aria-pressed="true">✎ &nbsp; Editor</button><button class="view-btn" type="button" data-view="preview" aria-pressed="false">◫ &nbsp; Preview</button><button class="view-btn" type="button" data-view="markdown" aria-pressed="false">⌘ &nbsp; Markdown</button></div>
+      <div class="view-switch" role="group" aria-label="Workspace view"><button class="view-btn active" type="button" data-view="edit" aria-pressed="true">✎ &nbsp; Editor</button><button class="view-btn" type="button" data-view="preview" aria-pressed="false">◫ &nbsp; Preview</button></div>
     </div>
     <div class="builder-layout" id="builderLayout" data-view="edit">
       <div class="editor-stack" id="editorStack">
@@ -132,7 +132,6 @@
         <div class="paper-container"><article class="paper" id="paper"></article></div>
         <div class="preview-bottom">This is a content preview, not the final typeset CV.</div>
       </section>
-      <section id="markdownPanel" class="markdown-panel hidden" aria-label="Markdown export"><div class="raw-head"><div><strong>Markdown output</strong><div><small>Human-readable preview</small></div></div><button class="btn small" type="button" id="copyMarkdown">Copy Markdown</button></div><pre class="raw-code" id="markdownCode"></pre></section>
     </div>
     <div class="page-foot">Designed for academic applications <span>·</span> Drafts saved on your device <span>·</span> Sent to Telegram with your consent</div>
   </div>
@@ -313,7 +312,7 @@
     $('#formPanel').innerHTML=header+body+`<div class="footer-actions"><button type="button" class="btn" data-prev-step="1" ${si===0?'disabled':''}>← Back</button><div class="footer-right">${si>0?'<button type="button" class="skip-btn" data-skip-step="1">Skip for now</button>':''}<button type="button" class="btn primary" data-next-step="1">${si===WIZARD_STEPS.length-2?'Review & send':`Continue <span aria-hidden="true">→</span>`}</button></div></div>`;
   }
   function renderSubmit(){const missing=[];if(!filled(state.profile.fullName))missing.push('full name');if(!filled(state.profile.email))missing.push('email');if(!items('education').length)missing.push('education');
-    $('#formPanel').classList.add('hidden');$('#submitPanel').classList.remove('hidden');$('#submitPanel').innerHTML=`<div class="panel-header"><div><div class="step-label">Final step</div><h2>Send your resume to Kamyab</h2><p>Review your details before sharing. Partial resumes are welcome.</p></div></div><div class="submit-content"><div class="export-hero"><span class="export-emblem">↗</span><div><h3>699 Toman per resume</h3><p>Your answers will arrive as a .md file in Kamyab’s Telegram inbox.</p></div></div><div class="check-grid"><div class="check-box"><strong>${entryCount()}</strong><span>Completed entries</span></div><div class="check-box"><strong>${Object.keys(FIELD_SETS).filter(k=>items(k).length).length}</strong><span>Additional sections</span></div></div><div class="callout">${missing.length?`<strong>Optional checks:</strong> You haven't added ${escapeHtml(missing.join(', '))} yet.`:'✓ Basic details are included.'} Check names, dates, emails and publication statuses.<p>Contact <a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">@SafaeiKamyab</a> to arrange payment. Submitting this form does not charge you.</p></div><label class="consent"><input type="checkbox" id="sendConsent">I agree to share my CV details with Kamyab Safaei through Telegram and acknowledge the price of 699 Toman per resume.</label><div class="export-btns"><button class="btn" data-prev-step="1" type="button">← Back</button><button class="btn primary" id="sendMain" type="button">Send .md to Telegram ↗</button><button class="btn" id="previewMain" type="button">Preview CV</button><button class="btn danger" id="clearForm" type="button">Clear form</button></div><p id="sendStatus" class="send-status" role="status" aria-live="polite"></p><div class="tip">Your draft is saved in this browser so you can return to edit it later.</div></div>`;
+    $('#formPanel').classList.add('hidden');$('#submitPanel').classList.remove('hidden');$('#submitPanel').innerHTML=`<div class="panel-header"><div><div class="step-label">Final step</div><h2>Send your resume to Kamyab</h2><p>Review your details before sharing. Partial resumes are welcome.</p></div></div><div class="submit-content"><div class="export-hero"><span class="export-emblem">↗</span><div><h3>699 Toman per resume</h3><p>Your resume will be sent privately to Kamyab’s Telegram inbox.</p></div></div><div class="check-grid"><div class="check-box"><strong>${entryCount()}</strong><span>Completed entries</span></div><div class="check-box"><strong>${Object.keys(FIELD_SETS).filter(k=>items(k).length).length}</strong><span>Additional sections</span></div></div><div class="callout">${missing.length?`<strong>Optional checks:</strong> You haven't added ${escapeHtml(missing.join(', '))} yet.`:'✓ Basic details are included.'} Check names, dates, emails and publication statuses.<p>Contact <a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">@SafaeiKamyab</a> to arrange payment. Submitting this form does not charge you.</p></div><label class="consent"><input type="checkbox" id="sendConsent">I agree to share my CV details with Kamyab Safaei through Telegram and acknowledge the price of 699 Toman per resume.</label><div class="export-btns"><button class="btn" data-prev-step="1" type="button">← Back</button><button class="btn primary" id="sendMain" type="button">Send resume to Kamyab ↗</button><button class="btn" id="previewMain" type="button">Preview CV</button><button class="btn danger" id="clearForm" type="button">Clear form</button></div><p id="sendStatus" class="send-status" role="status" aria-live="polite"></p><div class="tip">Your draft is saved in this browser so you can return to edit it later.</div></div>`;
   }
   function updateView(){
     document.querySelectorAll('[data-view]').forEach(b=>{const isActive=b.dataset.view===view;b.classList.toggle('active',isActive);if(b.classList.contains('view-btn'))b.setAttribute('aria-pressed',String(isActive));});
@@ -321,10 +320,9 @@
     $('#editorStack').classList.toggle('hidden',!editing);
     $('#formPanel').classList.toggle('hidden',!editing||active==='submit');
     $('#submitPanel').classList.toggle('hidden',!editing||active!=='submit');
-    $('#previewPanel').classList.toggle('hidden',view==='markdown');
-    $('#markdownPanel').classList.toggle('hidden',view!=='markdown');
+    $('#previewPanel').classList.remove('hidden');
     renderTabs();
-    if(view!=='markdown')renderPreview();else $('#markdownCode').textContent=generateMarkdown(false);
+    renderPreview();
   }
   function refresh(){renderNav();if(active==='submit')renderSubmit();else renderForm();progress();updateView();}
   function go(id){if(!sectionById(id))return;persist();active=id;view='edit';refresh();const loc=$('.status-row');if(loc)loc.scrollIntoView({behavior:'smooth',block:'start'});}
@@ -388,19 +386,18 @@
     const status=$('#sendStatus');
     if(!$('#sendConsent')?.checked){status.textContent='Please agree to share your CV before sending.';return;}
     sending=true;const button=$('#sendMain');button.disabled=true;button.textContent='Sending…';status.textContent='Sending your resume securely…';
-    try{const response=await fetch(location.hostname==='kami80.github.io'?'https://apply-europe-cv-api.micioparla.workers.dev/api/resume':'/api/resume',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:filename(),markdown:generateMarkdown(false),consent:true}),signal:AbortSignal.timeout(25000)});const result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||'Delivery failed. Please try again.');recordReview(WIZARD_STEPS.length-1);persist();progress();renderNav();status.textContent='✓ Your .md file was delivered to Kamyab on Telegram. Contact @SafaeiKamyab to arrange payment.';toast('Resume delivered to Telegram.');}
+    try{const response=await fetch(location.hostname==='kami80.github.io'?'https://apply-europe-cv-api.micioparla.workers.dev/api/resume':'/api/resume',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:filename(),markdown:generateMarkdown(false),consent:true}),signal:AbortSignal.timeout(25000)});const result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||'Delivery failed. Please try again.');recordReview(WIZARD_STEPS.length-1);persist();progress();renderNav();status.textContent='✓ Your resume was delivered to Kamyab on Telegram. Contact @SafaeiKamyab to arrange payment.';toast('Resume delivered to Telegram.');}
     catch(error){status.textContent=error.name==='TimeoutError'?'Delivery could not be confirmed. Contact @SafaeiKamyab before retrying.':error.message||'Unable to send. Your draft is safe; please try again.';}
-    finally{sending=false;button.disabled=false;button.textContent='Send .md to Telegram ↗';}
+    finally{sending=false;button.disabled=false;button.textContent='Send resume to Kamyab ↗';}
   }
   function clear(){if(!confirm('Clear all fields and the saved draft on this device? This cannot be undone.'))return;state=defaultState();reviewedSteps=[];try{localStorage.removeItem(WIZARD_KEY);}catch(_){}persist();active='profile';view='edit';refresh();toast('Form cleared.');}
   document.addEventListener('input',ev=>{const field=ev.target.closest('[data-field]');if(!field)return;const entry=ev.target.closest('.entry');const key=field.dataset.field;if(entry){const section=entry.dataset.section,index=Number(entry.dataset.index);if(!state.sections[section]?.[index])return;state.sections[section][index][key]=field.value;const label=entry.querySelector('.entry-title');if(label)label.textContent=ENTRY_TITLES[section].map(k=>state.sections[section][index][k]).find(filled)||'Untitled entry';}else if(Object.hasOwn(state.profile,key))state.profile[key]=field.value;
-    schedulePersist();progress();renderNav();renderTabs();if(view==='markdown')$('#markdownCode').textContent=generateMarkdown(false);else renderPreview();});
+    schedulePersist();progress();renderNav();renderTabs();renderPreview();});
   document.addEventListener('click',ev=>{const btn=ev.target.closest('button,a');if(!btn)return;
     if(btn.id==='reviewTop'){go('submit');return;}
     if(btn.id==='sendMain'){sendResume();return;}
     if(btn.id==='clearForm'){clear();return;}
     if(btn.id==='previewMain'){view='preview';updateView();return;}
-    if(btn.id==='copyMarkdown'){const content=generateMarkdown(false);if(navigator.clipboard?.writeText){navigator.clipboard.writeText(content).then(()=>toast('Markdown copied to clipboard.')).catch(()=>toast('Clipboard not available. Select the text manually.'));}else{toast('Clipboard unavailable. Select the Markdown text manually.');}return;}
     if(btn.dataset.view){view=btn.dataset.view;updateView();return;}
     if(btn.dataset.step!==undefined){goStep(Number(btn.dataset.step));return;}
     if(btn.dataset.nextStep!==undefined){goStep(stepIndex()+1,true);return;}
@@ -420,8 +417,6 @@
   window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY&&e.newValue){toast('Your saved draft changed in another tab. Reload this page to view it.');}});
   document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();persist();toast('Draft saved on this device.');}});
   refresh();
-  // Expose a tiny read-only diagnostic surface for offline smoke tests.
-  window.__cvIntakeTest={getMarkdown:()=>generateMarkdown(false),getFilename:filename,getSectionCount:id=>items(id).length};
 })();
 </script>
 </body>
