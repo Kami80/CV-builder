@@ -2,6 +2,24 @@ const encoder=new TextEncoder();
 const MAX_AGE=7*24*60*60;
 const base64url=bytes=>btoa(String.fromCharCode(...bytes)).replaceAll('+','-').replaceAll('/','_').replace(/=+$/,'');
 const decode=value=>Uint8Array.from(atob(value.replaceAll('-','+').replaceAll('_','/')),c=>c.charCodeAt(0));
+export async function verifyMiniApp(initData,botToken,now=Math.floor(Date.now()/1000)){
+ try{
+  if(!botToken||typeof initData!=='string'||initData.length>16384)return null;
+  const params=new URLSearchParams(initData);
+  if([...new Set(params.keys())].some(name=>params.getAll(name).length!==1))return null;
+  const received=params.get('hash');if(!/^[a-f0-9]{64}$/i.test(received||''))return null;
+  params.delete('hash');params.sort();
+  const check=[...params].map(([name,value])=>name+'='+value).join('\n');
+  const root=await crypto.subtle.importKey('raw',encoder.encode('WebAppData'),{name:'HMAC',hash:'SHA-256'},false,['sign']);
+  const secret=await crypto.subtle.sign('HMAC',root,encoder.encode(botToken));
+  const hmac=await crypto.subtle.importKey('raw',secret,{name:'HMAC',hash:'SHA-256'},false,['verify']);
+  const signature=Uint8Array.from(received.match(/../g),hex=>parseInt(hex,16));
+  if(!await crypto.subtle.verify('HMAC',hmac,signature,encoder.encode(check)))return null;
+  const date=Number(params.get('auth_date'));if(!Number.isSafeInteger(date)||date>now+60||date<now-86400)return null;
+  const user=JSON.parse(params.get('user'));if(!Number.isSafeInteger(user?.id)||user.id<=0||user.is_bot)return null;
+  return user;
+ }catch{return null;}
+}
 async function key(secret,usage){return crypto.subtle.importKey('raw',encoder.encode('cv-applicant-identity:'+secret),{name:'HMAC',hash:'SHA-256'},false,[usage]);}
 
 export async function signApplicant(user,secret,now=Math.floor(Date.now()/1000)){

@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import {telegramFetch,pollWelcome} from './telegram.mjs';
 import {FormData} from 'undici';
-import {verifyApplicant,applicantDocument,applicantCaption,applicantButtons} from './applicant-identity.mjs';
+import {verifyApplicant,verifyMiniApp,signApplicant,applicantDocument,applicantCaption,applicantButtons} from './applicant-identity.mjs';
 
 const assets = new Map([['/', ['index.html','text/html; charset=utf-8']], ['/index.html',['index.html','text/html; charset=utf-8']], ...['contact-qr.png','group-qr.png','reference-cv-preview.webp','reference-academic-cv.pdf'].map(name=>['/'+name,[name,name.endsWith('.pdf')?'application/pdf':name.endsWith('.png')?'image/png':'image/webp']])]);
 
@@ -19,7 +19,7 @@ export function createServer({token=process.env.TELEGRAM_BOT_TOKEN,chatId=proces
        return json(response.status,await response.json());
       }catch{return json(503,{error:'Unable to connect to Telegram. Please try again.'});}
     }
-    if(req.url==='/api/resume'||req.url==='/api/identity'){
+    if(req.url==='/api/resume'||req.url==='/api/identity'||req.url==='/api/telegram'){
       if(req.method!=='POST')return json(405,{error:'Use POST.'});
       if(req.headers.origin){try{if(new URL(req.headers.origin).host!==req.headers.host)return json(403,{error:'Origin not allowed.'});}catch{return json(403,{error:'Invalid origin.'});}}
       if(!token||!chatId)return json(503,{error:'Telegram delivery is not configured yet. Contact @SafaeiKamyab. Your draft is saved.'});
@@ -31,6 +31,11 @@ export function createServer({token=process.env.TELEGRAM_BOT_TOKEN,chatId=proces
       try{
         for await(const chunk of req){bytes+=chunk.length;if(bytes>256000)return json(413,{error:'Resume is too large. Please shorten your entries.'});chunks.push(chunk);}
         let body;try{body=JSON.parse(Buffer.concat(chunks).toString());}catch{return json(400,{error:'Invalid request.'});}
+        if(req.url==='/api/telegram'){
+         const user=await verifyMiniApp(body?.initData,token);if(!user||!identitySecret)return json(401,{error:'Please reopen the CV builder from Telegram.'});
+         const signed=await signApplicant(user,identitySecret),verified=await verifyApplicant(signed,identitySecret);
+         return json(200,{ok:true,telegramIdentity:signed,applicant:{id:verified.id,username:verified.username,expires:verified.expires}});
+        }
         const applicant=await verifyApplicant(body?.telegramIdentity,identitySecret);
         if(!applicant)return json(401,{error:'Please connect your Telegram account using the bot before submitting.'});
         if(req.url==='/api/identity')return json(200,{ok:true,applicant:{id:applicant.id,username:applicant.username,expires:applicant.expires}});

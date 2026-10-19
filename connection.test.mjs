@@ -31,7 +31,7 @@ test('Start links the original browser, returns verified identity and sends no a
  const update={message:{text:'/start c_'+connection.id,from:{id:123,username:'Applicant',is_bot:false},chat:{id:123,type:'private'}}};
  assert.equal((await handler(request('/telegram/webhook',update,{'X-Telegram-Bot-Api-Secret-Token':'wrong'}),env)).status,403);
  assert.equal((await handler(request('/telegram/webhook',update,{'X-Telegram-Bot-Api-Secret-Token':'secret'}),env)).status,200);
- assert.match(messages[0].text,/CV builder opens automatically/);assert.equal(messages[0].reply_markup.inline_keyboard[0][0].text,'Open CV builder');
+ assert.match(messages[0].text,/original browser is also connected/);assert.equal(messages[0].reply_markup.inline_keyboard[0][0].text,'Open CV builder');
  const status=await(await handler(request('/api/connect/status',connection),env)).json();assert.equal(status.pending,false);
  const identity=await verifyApplicant(status.telegramIdentity,env.TELEGRAM_WEBHOOK_SECRET);assert.equal(identity.id,123);assert.equal(identity.username,'Applicant');
  assert.equal((await handler(request('/api/connect',{}, {Origin:'https://other.example'}),env)).status,403);

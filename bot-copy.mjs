@@ -8,4 +8,5 @@ Price: 699 Toman per resume. Payment is arranged directly with Kamyab.
 Start here: ${website}
 Contact: @SafaeiKamyab
 Apply Europe group: https://t.me/ApplyEuropeIran`;
-export const welcomeButtons={inline_keyboard:[[{text:'Open CV questionnaire',url:website}],[{text:'Contact Kamyab',url:'https://t.me/SafaeiKamyab'}]]};
+export const miniAppUrl=website+'?telegram=1';
+export const welcomeButtons={inline_keyboard:[[{text:'Open CV builder',web_app:{url:miniAppUrl}}],[{text:'Contact Kamyab',url:'https://t.me/SafaeiKamyab'}]]};

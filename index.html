@@ -6,6 +6,7 @@
   <meta name="color-scheme" content="light">
   <meta name="description" content="Prepare your academic resume with Kamyab Safaei. 699 Toman per resume, delivered directly to Telegram.">
   <title>Academic CV Studio · Guided CV Builder</title>
+  <script src="https://telegram.org/js/telegram-web-app.js?64"></script>
   <style>
     :root { --ink:#192943; --text:#36455c; --muted:#718096; --bg:#f6f8fa; --paper:#ffffff; --line:#e2e8ef; --brand:#235d70; --brand-dark:#174655; --brand-soft:#e7f2f2; --gold:#c19b60; --danger:#b44545; --shadow:0 12px 35px rgba(29,51,74,.055); --radius:16px; }
     *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.56 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer} a{color:var(--brand)}
@@ -83,6 +84,17 @@
     @media print{.app{display:block}.builder-layout{display:block}.builder-layout .preview-panel{display:block!important;position:static;box-shadow:none;border:0}.builder-layout .preview-panel .paper-container{max-height:none;overflow:visible;background:white;padding:0}.builder-layout .preview-panel .paper{min-height:0;max-width:none;box-shadow:none;border:0;padding:0}.preview-top,.preview-bottom,.reference-card,.editor-stack,.status-row,.page-foot{display:none!important}}
   .contact-card{display:flex;align-items:center;justify-content:space-between;gap:24px;border:1px solid #dbe7df;background:#fff;border-radius:16px;padding:24px;margin-bottom:18px}.contact-card h2{font:normal 25px Georgia,serif;margin:8px 0}.contact-card p{font-size:13px;color:#60776b}.contact-card p strong{font-size:23px;color:#285e4a}.contact-card small{font-size:12px;font-weight:400}.qr-links{display:flex;gap:12px}.qr-links img{width:112px;height:auto;border-radius:10px;display:block}.send-status{margin-top:16px;font-size:14px;color:#285e4a}.consent{display:flex;gap:10px;margin-top:18px;font-size:13px;align-items:flex-start}.consent input{width:auto;margin-top:4px}@media(max-width:640px){.contact-card{flex-direction:column;align-items:flex-start}.qr-links img{width:95px}}@media print{.contact-card{display:none}}
   [hidden]{display:none!important}body[data-connected="false"] [data-builder-only],body[data-connected="true"] [data-welcome-only]{display:none!important}body[data-connected="false"] .app{display:block;max-width:1100px;margin:0 auto;padding-top:32px}body[data-connected="false"] .workspace{width:100%}#connectedTelegramStatus{max-width:230px;overflow-wrap:anywhere}@media(max-width:640px){#connectedTelegramStatus{display:none}}
+
+  body.telegram-mini{--bg:var(--tg-theme-secondary-bg-color,#f3f5f6);--paper:var(--tg-theme-bg-color,#fff);--ink:var(--tg-theme-text-color,#192943);--text:var(--tg-theme-text-color,#36455c);--muted:var(--tg-theme-hint-color,#697b86);--brand:var(--tg-theme-button-color,#287b68);--brand-dark:var(--tg-theme-button-color,#287b68);--line:color-mix(in srgb,var(--ink) 14%,transparent);--shadow:none;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);padding-top:var(--tg-content-safe-area-inset-top,0px);color-scheme:var(--tg-color-scheme,light)}
+  .telegram-mini .app{display:block!important;max-width:680px;padding:16px 16px calc(110px + env(safe-area-inset-bottom,0px))!important;margin:auto}.telegram-mini .sidebar,.telegram-mini .reference-card,.telegram-mini .intro,.telegram-mini #sampleTop,.telegram-mini #reviewTop,.telegram-mini #disconnectTelegram,.telegram-mini .brand-mark,.telegram-mini .brand-sub,.telegram-mini .page-foot,.telegram-mini .preview-expand{display:none!important}
+  .telegram-mini .topbar{height:auto;min-height:64px;padding:14px 16px;background:var(--paper);border-color:var(--line);position:relative}.telegram-mini .brand-name{font-size:17px;color:var(--ink)}.telegram-mini #connectedTelegramStatus{display:block;max-width:160px;color:var(--muted);font-size:12px}.telegram-mini .top-actions{gap:0}.telegram-mini .saved{display:none}
+  .telegram-mini .status-row{margin:0 0 16px;display:block}.telegram-mini .status-upper{display:block}.telegram-mini .status-upper strong{display:block;color:var(--ink);font-size:14px}.telegram-mini .progress-label{display:block;font-size:12px;color:var(--muted)}.telegram-mini .progress{max-width:none;margin:8px 0 14px;background:var(--line)}.telegram-mini .view-switch{display:flex;width:100%;background:var(--line);margin:0}.telegram-mini .view-btn{flex:1;min-height:44px;font-size:14px;color:var(--muted)}.telegram-mini .view-btn.active{background:var(--paper);color:var(--ink)}
+  .telegram-mini .builder-layout{display:block}.telegram-mini .builder-layout[data-view="edit"] .preview-panel{display:none}.telegram-mini .section-tabs{display:flex;overflow:auto;flex-wrap:nowrap;gap:8px;padding-bottom:8px}.telegram-mini .section-tabs:empty{display:none}.telegram-mini .section-tab{flex-shrink:0;min-height:44px;font-size:13px;background:var(--paper);color:var(--muted);border:1px solid var(--line)}.telegram-mini .section-tab.active{color:var(--ink);border-color:var(--brand)}
+  .telegram-mini .form-panel,.telegram-mini .submit-panel{background:var(--paper);border:1px solid var(--line);border-radius:16px}.telegram-mini .panel-header,.telegram-mini .panel-body,.telegram-mini .submit-content{padding:20px}.telegram-mini .panel-header{border-color:var(--line)}.telegram-mini .panel-header h2{font:650 24px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}.telegram-mini .panel-header p,.telegram-mini .subtle,.telegram-mini .hint,.telegram-mini .field label .optional,.telegram-mini .tip,.telegram-mini .empty p{color:var(--muted);font-size:13px}.telegram-mini .step-label{display:none}.telegram-mini .fields{grid-template-columns:1fr;gap:20px}.telegram-mini .field label{font-size:14px;color:var(--ink)}.telegram-mini .field input,.telegram-mini .field textarea{font-size:16px;min-height:48px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:12px;border-radius:12px}.telegram-mini .field textarea{min-height:100px}.telegram-mini input::placeholder,.telegram-mini textarea::placeholder{color:var(--muted)}
+  .telegram-mini .btn,.telegram-mini .btn.small,.telegram-mini .icon-btn{min-height:44px;font-size:14px;border-color:var(--line);background:var(--paper);color:var(--ink);padding:10px 14px}.telegram-mini .icon-btn{min-width:44px;padding:6px}.telegram-mini .btn.primary{background:var(--brand);color:var(--tg-theme-button-text-color,#fff);border-color:var(--brand)}.telegram-mini .btn.danger{color:#d74a4a}.telegram-mini .btn.soft{background:var(--bg);color:var(--ink)}.telegram-mini .entry{background:var(--paper);border-color:var(--line);padding:16px 12px}.telegram-mini .entry-title,.telegram-mini .section-kicker,.telegram-mini .empty strong{color:var(--ink)}.telegram-mini .entry-head{flex-wrap:wrap}.telegram-mini .entry-buttons{margin-left:auto}.telegram-mini .entry-num{background:var(--bg);color:var(--ink)}
+  .telegram-mini .footer-actions{position:fixed;bottom:0;left:0;right:0;z-index:30;max-width:680px;margin:0 auto;padding:12px 16px calc(12px + max(env(safe-area-inset-bottom,0px),var(--tg-content-safe-area-inset-bottom,0px)));background:var(--paper);border-top:1px solid var(--line)}.telegram-mini .footer-actions>button{display:none}.telegram-mini .footer-right{display:flex;width:100%;gap:16px}.telegram-mini .footer-right .primary{flex:1}.telegram-mini .skip-btn{font-size:13px;min-height:44px;color:var(--muted)}.telegram-mini .tip,.telegram-mini .callout,.telegram-mini .export-hero{background:var(--bg);border-color:var(--line);color:var(--muted)}.telegram-mini .tip strong,.telegram-mini .export-hero h3,.telegram-mini .check-box strong{color:var(--ink)}.telegram-mini .export-hero p{font-size:13px;color:var(--muted)}.telegram-mini .export-hero h3{font:650 20px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.telegram-mini .check-grid{display:none}.telegram-mini .consent{font-size:14px;color:var(--ink);gap:12px;line-height:1.6}.telegram-mini .consent input{min-width:22px;min-height:22px;accent-color:var(--brand)}.telegram-mini .export-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px}.telegram-mini #sendMain{grid-column:1/-1;min-height:50px}.telegram-mini .export-btns [data-prev-step]{display:none}.telegram-mini #telegramSubmitStatus{font-size:13px}.telegram-mini .send-status{color:var(--ink)}.telegram-mini .preview-panel{position:static;background:#fff;color:#192943}.telegram-mini .preview-panel .paper{color:#192943}.telegram-mini .preview-panel .paper-container{max-height:none}.telegram-mini .preview-panel .paper h1{font-size:26px}.telegram-mini .preview-panel .cv-row,.telegram-mini .preview-panel .cv-section p{font-size:12px}.telegram-mini .preview-panel .cv-section h3{font-size:12px}.telegram-mini .preview-panel .cv-meta{font-size:11px}.telegram-mini a{color:var(--tg-theme-link-color,var(--brand))}.telegram-mini .mini-save{display:block;margin:0 0 16px;font-size:12px;color:var(--muted)}
+  .mini-save{display:none}
+  .telegram-mini [aria-label="Resume service"],.telegram-mini .panel-header [data-add]{display:none!important}.telegram-mini .optional-links{margin-top:20px;border:1px solid var(--line);border-radius:12px;padding:12px 16px;color:var(--muted)}.telegram-mini .optional-links summary{min-height:32px;cursor:pointer;font-size:14px}.telegram-mini .optional-links .fields{margin-top:16px}
   </style>
 </head>
 <body data-connected="false">
@@ -116,12 +128,13 @@
       </div>
       <div class="reference-actions"><button class="btn soft" type="button" id="openReference" data-open-reference="1">View example <span aria-hidden="true">↗</span></button></div>
     </section>
+    <p class="mini-save" id="miniSave" data-builder-only>Saved on this device · 699 Toman per resume</p>
     <div class="status-row" data-builder-only>
       <div class="status-left">
         <div class="status-upper"><strong id="currentStepLabel">Step 1 of 7 · About you</strong><span class="progress-label" id="progressLabel">0 of 7 steps reviewed</span></div>
         <div class="progress" role="progressbar" aria-label="Guided steps reviewed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack"><div class="progress-fill" id="progressFill"></div></div>
       </div>
-      <div class="view-switch" role="group" aria-label="Workspace view"><button class="view-btn active" type="button" data-view="edit" aria-pressed="true">✎ &nbsp; Editor</button><button class="view-btn" type="button" data-view="preview" aria-pressed="false">◫ &nbsp; Preview</button></div>
+      <div class="view-switch" role="group" aria-label="Workspace view"><button class="view-btn active" type="button" data-view="edit" aria-pressed="true">✎ &nbsp; Details</button><button class="view-btn" type="button" data-view="preview" aria-pressed="false">◫ &nbsp; Preview</button></div>
     </div>
     <div data-builder-only class="builder-layout" id="builderLayout" data-view="edit">
       <div class="editor-stack" id="editorStack">
@@ -274,7 +287,7 @@
   const entryCount=()=>Object.keys(FIELD_SETS).reduce((n,k)=>n+items(k).length,0);
   const sectionById=id=>SECTIONS.find(s=>s.id===id);
   const textLine=t=>String(t||'').trim();
-  function setSaved(label='Saved on this device',warning=false){$('#saveLabel').textContent=label;$('#saveStatus').classList.toggle('warning',warning);}
+  function setSaved(label='Saved on this device',warning=false){$('#saveLabel').textContent=label;$('#miniSave').textContent=label+' · 699 Toman per resume';$('#saveStatus').classList.toggle('warning',warning);}
   function persist(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));setSaved();}catch(_){setSaved('Local save unavailable',true);}}
   function schedulePersist(){setSaved('Saving…');clearTimeout(saveTimer);saveTimer=setTimeout(persist,450);}
   function toast(msg){const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3800);}
@@ -308,13 +321,13 @@
     const header=`<div class="panel-header"><div><div class="step-label">STEP ${String(si+1).padStart(2,'0')} / ${WIZARD_STEPS.length} &nbsp;·&nbsp; ${escapeHtml(stage.title.toUpperCase())}</div><h2>${escapeHtml(sec.name)}</h2><p>${escapeHtml(sec.description)}</p></div>${active==='profile'?'':`<button type="button" class="btn soft small" data-add="${active}">+ Add entry</button>`}</div>`;
     let body='';
     if(active==='profile'){
-      body=`<div class="panel-body"><div class="section-kicker">Contact & identity</div><div class="fields" data-profile="yes">${PROFILE_FIELDS.slice(0,10).map(d=>fieldMarkup(d,'profile',state.profile[d[0]])).join('')}</div><div class="section-kicker" style="margin-top:31px">Academic overview</div><div class="fields" data-profile="yes">${PROFILE_FIELDS.slice(10).map(d=>fieldMarkup(d,'profile',state.profile[d[0]])).join('')}</div><div class="tip"><strong>Helpful tip:</strong> Use a professional email and concise research interests. A photo, date of birth, marital status and home address are not normally necessary for an academic CV.</div></div>`;
+      body=`<div class="panel-body"><div class="section-kicker">Contact & identity</div><div class="fields" data-profile="yes">${PROFILE_FIELDS.slice(0,inMiniApp?5:10).map(d=>fieldMarkup(d,'profile',state.profile[d[0]])).join('')}</div>${inMiniApp?`<details class="optional-links"><summary>Website & professional links (optional)</summary><div class="fields">${PROFILE_FIELDS.slice(5,10).map(d=>fieldMarkup(d,'profile',state.profile[d[0]])).join('')}</div></details>`:''}<div class="section-kicker" style="margin-top:31px">Academic overview</div><div class="fields" data-profile="yes">${PROFILE_FIELDS.slice(10).map(d=>fieldMarkup(d,'profile',state.profile[d[0]])).join('')}</div><div class="tip"><strong>Helpful tip:</strong> Use a professional email and concise research interests. A photo, date of birth, marital status and home address are not normally necessary for an academic CV.</div></div>`;
     }else{const array=state.sections[active];body=`<div class="panel-body">${array.length?array.map((e,i)=>entryMarkup(active,i,e)).join(''):`<div class="empty"><div class="empty-icon">✦</div><strong>No ${escapeHtml(sec.name.toLowerCase())} yet</strong><p>Use “Add entry” if this section applies to you. It's perfectly fine to leave it empty.</p></div>`}<div class="section-actions"><button type="button" class="btn small" data-add="${active}">+ Add another entry</button><span class="subtle">Use ↑ and ↓ to arrange entries.</span></div>${active==='publications'?'<div class="tip"><strong>Publication tip:</strong> Always indicate whether your work is published, submitted, or in preparation. Include a DOI where applicable.</div>':''}${active==='references'?'<div class="tip"><strong>Privacy tip:</strong> Ask referees for permission before sharing their contact details. You may leave this section blank.</div>':''}</div>`;}
     const nextTitle=WIZARD_STEPS[si+1]?.title||'Review & send';
-    $('#formPanel').innerHTML=header+body+`<div class="footer-actions"><button type="button" class="btn" data-prev-step="1" ${si===0?'disabled':''}>← Back</button><div class="footer-right">${si>0?'<button type="button" class="skip-btn" data-skip-step="1">Skip for now</button>':''}<button type="button" class="btn primary" data-next-step="1">${si===WIZARD_STEPS.length-2?'Review & send':`Continue <span aria-hidden="true">→</span>`}</button></div></div>`;
+    $('#formPanel').innerHTML=header+body+`<div class="footer-actions"><button type="button" class="btn" data-prev-step="1" ${si===0?'disabled':''}>← Back</button><div class="footer-right">${si>0?'<button type="button" class="skip-btn" data-skip-step="1">Skip for now</button>':''}<button type="button" class="btn primary" data-next-step="1">${inMiniApp&&stage.sections.indexOf(active)<stage.sections.length-1?'Next: '+escapeHtml(sectionById(stage.sections[stage.sections.indexOf(active)+1]).name):si===WIZARD_STEPS.length-2?'Review & send':`Continue <span aria-hidden="true">→</span>`}</button></div></div>`;
   }
   function renderSubmit(){const missing=[];if(!filled(state.profile.fullName))missing.push('full name');if(!filled(state.profile.email))missing.push('email');if(!items('education').length)missing.push('education');
-    $('#formPanel').classList.add('hidden');$('#submitPanel').classList.remove('hidden');$('#submitPanel').innerHTML=`<div class="panel-header"><div><div class="step-label">Final step</div><h2>Send your resume to Kamyab</h2><p>Review your details before sharing. Partial resumes are welcome.</p></div></div><div class="submit-content"><div class="export-hero"><span class="export-emblem">↗</span><div><h3>699 Toman per resume</h3><p>Your resume will be sent privately to Kamyab’s Telegram inbox.</p></div></div><div class="check-grid"><div class="check-box"><strong>${entryCount()}</strong><span>Completed entries</span></div><div class="check-box"><strong>${Object.keys(FIELD_SETS).filter(k=>items(k).length).length}</strong><span>Additional sections</span></div></div><div class="callout">${missing.length?`<strong>Optional checks:</strong> You haven't added ${escapeHtml(missing.join(', '))} yet.`:'✓ Basic details are included.'} Check names, dates, emails and publication statuses.<p>Contact <a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">@SafaeiKamyab</a> to arrange payment. Submitting this form does not charge you.</p></div><div class="callout" id="telegramSubmitStatus">${escapeHtml(telegramConnectionText())}</div><label class="consent"><input type="checkbox" id="sendConsent">I agree to share my CV details, Telegram user ID and username with Kamyab Safaei through Telegram and acknowledge the price of 699 Toman per resume.</label><div class="export-btns"><button class="btn" data-prev-step="1" type="button">← Back</button><button class="btn primary" id="sendMain" type="button">Send resume to Kamyab ↗</button><button class="btn" id="previewMain" type="button">Preview CV</button><button class="btn danger" id="clearForm" type="button">Clear form</button></div><p id="sendStatus" class="send-status" role="status" aria-live="polite"></p><div class="tip">Your draft is saved in this browser so you can return to edit it later.</div></div>`;
+    $('#formPanel').classList.add('hidden');$('#submitPanel').classList.remove('hidden');$('#submitPanel').innerHTML=`<div class="panel-header"><div><div class="step-label">Final step</div><h2>Send your resume to Kamyab</h2><p>Review your details before sharing. Partial resumes are welcome.</p></div></div><div class="submit-content"><div class="export-hero"><span class="export-emblem">↗</span><div><h3>699 Toman per resume</h3><p>Your resume will be sent privately to Kamyab’s Telegram inbox.</p></div></div><div class="check-grid"><div class="check-box"><strong>${entryCount()}</strong><span>Completed entries</span></div><div class="check-box"><strong>${Object.keys(FIELD_SETS).filter(k=>items(k).length).length}</strong><span>Additional sections</span></div></div><div class="callout">${missing.length?`<strong>Optional checks:</strong> You haven't added ${escapeHtml(missing.join(', '))} yet.`:'✓ Basic details are included.'} Check names, dates, emails and publication statuses.<p>Contact <a href="https://t.me/SafaeiKamyab" target="_blank" rel="noopener noreferrer">@SafaeiKamyab</a> to arrange payment. Submitting this form does not charge you.</p></div><div class="callout" id="telegramSubmitStatus">${escapeHtml(telegramConnectionText())}</div><label class="consent"><input type="checkbox" id="sendConsent">I agree to share my CV details, Telegram user ID and username with Kamyab Safaei through Telegram and acknowledge the price of 699 Toman per resume.</label><div class="export-btns"><button class="btn" data-prev-step="1" type="button">← Back</button><button class="btn primary" id="sendMain" type="button" ${resumeSent?'disabled':''}>${resumeSent?'Resume sent ✓':'Send resume to Kamyab ↗'}</button><button class="btn" id="previewMain" type="button">Preview CV</button><button class="btn danger" id="clearForm" type="button">Clear form</button></div><p id="sendStatus" class="send-status" role="status" aria-live="polite"></p><div class="tip">Your draft is saved in this browser so you can return to edit it later.</div></div>`;
   }
   function updateView(){
     document.querySelectorAll('[data-view]').forEach(b=>{const isActive=b.dataset.view===view;b.classList.toggle('active',isActive);if(b.classList.contains('view-btn'))b.setAttribute('aria-pressed',String(isActive));});
@@ -325,6 +338,7 @@
     $('#previewPanel').classList.remove('hidden');
     renderTabs();
     renderPreview();
+    syncMiniAppNavigation();
   }
   function refresh(){renderNav();if(active==='submit')renderSubmit();else renderForm();progress();updateView();}
   function go(id){if(!sectionById(id))return;persist();active=id;view='edit';refresh();const loc=$('.status-row');if(loc)loc.scrollIntoView({behavior:'smooth',block:'start'});}
@@ -384,8 +398,32 @@
   function filename(){const stem=(state.profile.fullName.trim()||'academic_cv').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^\p{L}\p{N}_-]+/gu,'_').replace(/^_+|_+$/g,'').slice(0,90)||'academic_cv';return stem.toLowerCase()+'_cv_information.md';}
   const apiBase=location.hostname==='kami80.github.io'?'https://apply-europe-cv-api.micioparla.workers.dev':'';
   const identityKey='applyEuropeTelegramIdentity';
+  const telegramApp=window.Telegram?.WebApp;
+  const inMiniApp=Boolean(telegramApp?.initData);
+  let resumeSent=false;
   let telegramIdentity='',telegramApplicant=null;
   function telegramConnectionText(){return telegramApplicant?`Connected: ${telegramApplicant.username?'@'+telegramApplicant.username:'Telegram account'} · User ID ${telegramApplicant.id}`:'Connect your Telegram account before sending your resume.';}
+  function syncMiniAppNavigation(){
+    if(!inMiniApp||!telegramApp.BackButton)return;
+    if(view==='preview'||stepIndex()>0)telegramApp.BackButton.show();else telegramApp.BackButton.hide();
+  }
+  function setupMiniApp(){
+    if(!inMiniApp)return;
+    document.body.classList.add('telegram-mini');
+    telegramApp.ready();telegramApp.expand();
+    $('#telegramStatus').textContent='Connecting your Telegram account…';
+    document.querySelector('[aria-label="Your Telegram connection"] h2').textContent='Welcome to your CV builder';
+    document.querySelector('[aria-label="Your Telegram connection"] .reference-actions').hidden=true;
+    document.querySelector('[aria-label="Your Telegram connection"] p:last-child').textContent='Your Telegram account connects automatically. If it cannot connect, close this view and reopen it from the bot’s Open CV builder button.';
+    if(telegramApp.isVersionAtLeast?.('6.1')){telegramApp.setHeaderColor('bg_color');telegramApp.setBackgroundColor('secondary_bg_color');}
+    telegramApp.BackButton?.onClick(()=>{if(view==='preview'){view='edit';updateView();}else{const si=stepIndex(),sections=WIZARD_STEPS[si].sections,index=sections.indexOf(active);if(index>0)go(sections[index-1]);else if(si>0)go(WIZARD_STEPS[si-1].sections.at(-1));}});
+    telegramApp.onEvent?.('themeChanged',()=>{document.documentElement.style.colorScheme=telegramApp.colorScheme;});
+  }
+  function acceptTelegram(token,applicant){
+    telegramIdentity=token;telegramApplicant=applicant;
+    try{localStorage.setItem(identityKey,token);}catch(_){}
+    stopConnection();updateTelegramConnection();
+  }
   function updateTelegramConnection(){
     document.body.dataset.connected=telegramApplicant?'true':'false';
     $('#connectedTelegramStatus').textContent=telegramApplicant?(telegramApplicant.username?'@'+telegramApplicant.username:'Telegram ID '+telegramApplicant.id):'';
@@ -400,9 +438,7 @@
       $('#telegramStatus').textContent='Checking your Telegram connection…';
       const response=await fetch(apiBase+'/api/identity',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({telegramIdentity:token}),signal:AbortSignal.timeout(15000)});
       const result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||'Unable to connect. Please select Connect through Telegram again.');
-      telegramIdentity=token;telegramApplicant=result.applicant;
-      try{localStorage.setItem(identityKey,token);}catch(_){}
-      stopConnection();updateTelegramConnection();
+      acceptTelegram(token,result.applicant);
     }catch(error){telegramIdentity='';telegramApplicant=null;try{localStorage.removeItem(identityKey);}catch(_){}updateTelegramConnection();$('#telegramStatus').textContent=error.message||'Unable to connect to Telegram. Please try again.';}
   }
   const pendingConnectionKey='applyEuropePendingConnection';
@@ -443,6 +479,12 @@
     finally{button.disabled=false;}
   }
   async function restoreTelegram(){
+    if(inMiniApp){
+      $('#telegramStatus').textContent='Connecting your Telegram account…';
+      try{const result=await connectionRequest('/api/telegram',{initData:telegramApp.initData});acceptTelegram(result.telegramIdentity,result.applicant);}
+      catch(error){$('#telegramStatus').textContent=error.message;}
+      return;
+    }
     const params=new URLSearchParams(location.hash.slice(1));let token=params.get('telegram');
     if(token)history.replaceState(null,'',location.pathname+location.search);
     else try{token=localStorage.getItem(identityKey);}catch(_){}
@@ -453,17 +495,17 @@
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){clearTimeout(connectionTimer);checkConnection();}});
   let sending=false;
   async function sendResume(){
-    if(sending)return;
+    if(sending||resumeSent)return;
     const status=$('#sendStatus');
     if(!telegramApplicant||!telegramIdentity){status.textContent='Please connect your Telegram account using the bot before sending.';$('#telegramStatus').scrollIntoView({behavior:'smooth',block:'center'});return;}
     if(!$('#sendConsent')?.checked){status.textContent='Please agree to share your CV before sending.';return;}
     sending=true;const button=$('#sendMain');button.disabled=true;button.textContent='Sending…';status.textContent='Sending your resume securely…';
-    try{const response=await fetch(apiBase+'/api/resume',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:filename(),markdown:generateMarkdown(false),consent:true,telegramIdentity}),signal:AbortSignal.timeout(25000)});const result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||'Delivery failed. Please try again.');recordReview(WIZARD_STEPS.length-1);persist();progress();renderNav();status.textContent='✓ Your resume was delivered to Kamyab on Telegram. Contact @SafaeiKamyab to arrange payment.';toast('Resume delivered to Telegram.');}
+    try{const response=await fetch(apiBase+'/api/resume',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:filename(),markdown:generateMarkdown(false),consent:true,telegramIdentity}),signal:AbortSignal.timeout(25000)});const result=await response.json();if(!response.ok||!result.ok)throw new Error(result.error||'Delivery failed. Please try again.');resumeSent=true;telegramApp?.HapticFeedback?.notificationOccurred?.('success');recordReview(WIZARD_STEPS.length-1);persist();progress();renderNav();status.textContent='✓ Your resume was delivered to Kamyab on Telegram. Contact @SafaeiKamyab to arrange payment.';toast('Resume delivered to Telegram.');}
     catch(error){status.textContent=error.name==='TimeoutError'?'Delivery could not be confirmed. Contact @SafaeiKamyab before retrying.':error.message||'Unable to send. Your draft is safe; please try again.';}
-    finally{sending=false;button.disabled=false;button.textContent='Send resume to Kamyab ↗';}
+    finally{sending=false;button.disabled=resumeSent;button.textContent=resumeSent?'Resume sent ✓':'Send resume to Kamyab ↗';}
   }
-  function clear(){if(!confirm('Clear all fields and the saved draft on this device? This cannot be undone.'))return;state=defaultState();reviewedSteps=[];try{localStorage.removeItem(WIZARD_KEY);}catch(_){}persist();active='profile';view='edit';refresh();toast('Form cleared.');}
-  document.addEventListener('input',ev=>{const field=ev.target.closest('[data-field]');if(!field)return;const entry=ev.target.closest('.entry');const key=field.dataset.field;if(entry){const section=entry.dataset.section,index=Number(entry.dataset.index);if(!state.sections[section]?.[index])return;state.sections[section][index][key]=field.value;const label=entry.querySelector('.entry-title');if(label)label.textContent=ENTRY_TITLES[section].map(k=>state.sections[section][index][k]).find(filled)||'Untitled entry';}else if(Object.hasOwn(state.profile,key))state.profile[key]=field.value;
+  function clear(){if(!confirm('Clear all fields and the saved draft on this device? This cannot be undone.'))return;resumeSent=false;state=defaultState();reviewedSteps=[];try{localStorage.removeItem(WIZARD_KEY);}catch(_){}persist();active='profile';view='edit';refresh();toast('Form cleared.');}
+  document.addEventListener('input',ev=>{const field=ev.target.closest('[data-field]');if(!field)return;const entry=ev.target.closest('.entry');resumeSent=false;const key=field.dataset.field;if(entry){const section=entry.dataset.section,index=Number(entry.dataset.index);if(!state.sections[section]?.[index])return;state.sections[section][index][key]=field.value;const label=entry.querySelector('.entry-title');if(label)label.textContent=ENTRY_TITLES[section].map(k=>state.sections[section][index][k]).find(filled)||'Untitled entry';}else if(Object.hasOwn(state.profile,key))state.profile[key]=field.value;
     schedulePersist();progress();renderNav();renderTabs();renderPreview();});
   document.addEventListener('click',ev=>{const btn=ev.target.closest('button,a');if(!btn)return;
     if(btn.id==='reviewTop'){go('submit');return;}
@@ -474,7 +516,7 @@
     if(btn.id==='previewMain'){view='preview';updateView();return;}
     if(btn.dataset.view){view=btn.dataset.view;updateView();return;}
     if(btn.dataset.step!==undefined){goStep(Number(btn.dataset.step));return;}
-    if(btn.dataset.nextStep!==undefined){goStep(stepIndex()+1,true);return;}
+    if(btn.dataset.nextStep!==undefined){const sections=WIZARD_STEPS[stepIndex()].sections,index=sections.indexOf(active);if(inMiniApp&&index<sections.length-1)go(sections[index+1]);else goStep(stepIndex()+1,true);return;}
     if(btn.dataset.prevStep!==undefined){goStep(stepIndex()-1);return;}
     if(btn.dataset.skipStep!==undefined){goStep(stepIndex()+1,true);return;}
     if(btn.dataset.go){go(btn.dataset.go);return;}
@@ -490,6 +532,7 @@
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!referenceDialog.hidden){e.preventDefault();hideReference();}});
   window.addEventListener('storage',e=>{if(e.key===identityKey){if(e.newValue)connectTelegram(e.newValue);else{stopConnection();telegramIdentity='';telegramApplicant=null;updateTelegramConnection();}return;}if(e.key===STORAGE_KEY&&e.newValue){toast('Your saved draft changed in another tab. Reload this page to view it.');}});
   document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();persist();toast('Draft saved on this device.');}});
+  setupMiniApp();
   refresh();
   restoreTelegram();
 })();

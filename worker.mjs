@@ -1,6 +1,5 @@
 import {welcome,welcomeButtons} from './bot-copy.mjs';
-import {website} from './bot-copy.mjs';
-import {signApplicant,verifyApplicant,applicantDocument,applicantCaption,applicantButtons} from './applicant-identity.mjs';
+import {signApplicant,verifyApplicant,verifyMiniApp,applicantDocument,applicantCaption,applicantButtons} from './applicant-identity.mjs';
 import {startConnection,connectionStatus,completeConnection} from './connection.mjs';
 
 const MAX_BYTES=256000;
@@ -32,7 +31,7 @@ export function createHandler(send=fetch){
    const result=await response.json();if(!response.ok||!result.ok)throw new Error('telegram');return result.result;
   };
   if(url.pathname==='/health'&&request.method==='GET')return json(200,{ok:true,service:'Apply Europe CV'});
-  const browserApi=['/api/resume','/api/identity','/api/connect','/api/connect/status'].includes(url.pathname);
+  const browserApi=['/api/resume','/api/identity','/api/telegram','/api/connect','/api/connect/status'].includes(url.pathname);
   if(!browserApi&&url.pathname!=='/telegram/webhook')return json(404,{error:'Not found.'});
   if(browserApi&&!allowed)return json(403,{error:'Please submit from the Apply Europe CV website.'});
   if(request.method==='OPTIONS'&&browserApi)return new Response(null,{status:204,headers});
@@ -51,11 +50,17 @@ export function createHandler(send=fetch){
      const connectionId=message.text.match(/^\/start(?:@\w+)?\s+c_([a-f0-9]{48})$/)?.[1];
      let connected=false;
      if(connectionId){connected=await completeConnection(env.CONNECTIONS,connectionId,token);if(!connected){await telegram('sendMessage',{chat_id:message.chat.id,text:'This connection request has expired or was already used. Return to the website and select Connect through Telegram again.'});return json(200,{ok:true});}}
-     const buttons={inline_keyboard:[[{text:'Open CV builder',url:website+'#telegram='+token}],...welcomeButtons.inline_keyboard.slice(1)]};
-     await telegram('sendMessage',{chat_id:message.chat.id,text:welcome+(connected?'\n\n✅ Telegram connected! Return to your browser—the CV builder opens automatically. You can also tap Open CV builder below.':'\n\nTap Open CV builder below to begin. Your Telegram contact is connected automatically.'),reply_markup:buttons});
+     await telegram('sendMessage',{chat_id:message.chat.id,text:welcome+(connected?'\n\n✅ Connected! Tap Open CV builder to complete your resume right here in Telegram. Your original browser is also connected.':'\n\nTap Open CV builder to complete your resume right here in Telegram. Your Telegram account is connected automatically.'),reply_markup:welcomeButtons});
     }catch{return json(502,{error:'Welcome delivery unavailable.'});}
    }
    return json(200,{ok:true});
+  }
+  if(url.pathname==='/api/telegram'){
+   const user=await verifyMiniApp(body.initData,env.TELEGRAM_BOT_TOKEN);
+   if(!user)return json(401,{error:'Please reopen the CV builder using the button in your Telegram bot chat.'});
+   const token=await signApplicant(user,env.TELEGRAM_WEBHOOK_SECRET);
+   const applicant=await verifyApplicant(token,env.TELEGRAM_WEBHOOK_SECRET);
+   return json(200,{ok:true,telegramIdentity:token,applicant:{id:applicant.id,username:applicant.username,expires:applicant.expires}});
   }
   if(url.pathname==='/api/connect'){
    const ip=request.headers.get('CF-Connecting-IP')||'unknown';

@@ -70,3 +70,11 @@ The personal link is a bearer credential: keep it private. Its token is placed i
 Connection state lives in the Cloudflare D1 database `apply-europe-cv-connections`. It contains expiring identity tokens and hashed polling secrets, never CV content. Expired records are removed when creating connections and by a half-hourly cleanup trigger. Initialize a new database with `connection-schema.sql`; preserve the D1 binding in `wrangler.jsonc` when deploying.
 
 Telegram requires a user action to switch apps or open a bot button; a bot cannot forcibly redirect the Telegram app to an external browser. Returning to the original browser is sufficient to open the builder automatically.
+
+## Telegram Mini App
+
+The bot’s Open CV builder button and Build my CV menu open the questionnaire inside Telegram. The official Telegram SDK supplies signed `initData`; `/api/telegram` validates Telegram’s HMAC, rejects stale or forged data, then issues the same verified applicant identity used for submissions. The client never trusts `initDataUnsafe` for authentication.
+
+Inside Telegram the UI shows one column, larger touch controls, collapsible optional links, light/dark theme colors, safe-area spacing, fixed Continue controls and Telegram’s Back button. Continue visits each section within a step; Preview remains available. The price and local draft status stay visible. The browser connection path remains available for visitors who use the public website.
+
+Run `node --env-file=.env setup-bot.mjs` to set the bot’s web-app menu button. No Main Mini App setup in BotFather is needed for the inline button and menu integration used here. Native Telegram opening and device behavior should also be checked on a Telegram phone client; automated browser checks simulate the Telegram SDK.
